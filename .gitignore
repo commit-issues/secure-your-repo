@@ -1,0 +1,37 @@
+# MkDocs build output — never commit this
+site/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+*.egg-info/
+
+# Environment
+.env
+.env.*
+*.key
+*.pem
+
+# Dependencies
+venv/
+.venv/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor noise
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Secrets baseline
+.secrets.baseline
+
+# Logs
+*.log
+logs/
