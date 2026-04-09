@@ -44,6 +44,7 @@ nav:
     - Securing Your Account: setup/account.md
     - SSH Keys: setup/ssh.md
     - Starting a New Repository: setup/new-repo.md
+    - Troubleshooting & Recovery: setup/troubleshooting.md
   - Hardening Your Repo:
     - GitHub Settings: hardening/settings.md
     - Branch Protection: hardening/rulesets.md
