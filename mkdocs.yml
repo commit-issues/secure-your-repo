@@ -38,6 +38,40 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
 
+nav:
+  - Home: index.md
+  - Setup:
+    - Securing Your Account: setup/account.md
+    - SSH Keys: setup/ssh.md
+    - Starting a New Repository: setup/new-repo.md
+  - Hardening Your Repo:
+    - GitHub Settings: hardening/settings.md
+    - Branch Protection: hardening/rulesets.md
+    - Advanced Security: hardening/advanced-security.md
+    - Day One Checklist: hardening/checklist.md
+  - Writing Secure Code:
+    - Credential Management: code/credentials.md
+    - Input Validation: code/input-validation.md
+    - Dependency Security: code/dependencies.md
+    - Network Security: code/network.md
+    - Database Security: code/database.md
+    - Logging & Auditing: code/logging.md
+  - Threats & Awareness:
+    - OSINT & Identity Leakage: threats/osint.md
+    - AI-Assisted Attacks: threats/ai-attacks.md
+    - Forking & Attribution: threats/forking.md
+    - Supply Chain Security: threats/supply-chain.md
+    - When Your Project Gets Stolen: threats/stolen.md
+    - Repo Visibility & Access: threats/visibility.md
+  - Maintenance:
+    - Data Freshness: maintenance/freshness.md
+    - Backup & Recovery: maintenance/backups.md
+    - Email Security: maintenance/email.md
+    - Security Debt: maintenance/debt.md
+    - Cron & Automation: maintenance/cron.md
+    - Dependency Intelligence: maintenance/dependencies.md
+    - Notifications: maintenance/notifications.md
+
 extra:
   social:
     - icon: fontawesome/brands/github
