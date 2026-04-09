@@ -1,0 +1,36 @@
+.md-typeset {
+  font-size: 0.75rem;
+}
+
+.md-typeset h1 {
+  font-size: 1.6rem;
+}
+
+.md-typeset h2 {
+  font-size: 1.2rem;
+}
+
+.md-typeset h3 {
+  font-size: 1rem;
+}
+
+.md-typeset p,
+.md-typeset li {
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: 0.65rem;
+}
+
+.md-typeset .admonition p,
+.md-typeset .admonition li {
+  font-size: 0.65rem;
+  line-height: 1.6;
+}
+
+.md-typeset .admonition-title {
+  font-size: 0.7rem;
+}

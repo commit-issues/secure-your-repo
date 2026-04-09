@@ -4,18 +4,17 @@
 
 ---
 
-## TL;DR
+!!! abstract "TL;DR"
+    - Create a dedicated email for GitHub — not your personal, not your work address.
+    - Use a passkey if available. If not, use an authenticator app. Never SMS only.
+    - Do not use Google Authenticator — if you lose your phone, you lose your codes.
+    - Save your backup codes offline the moment you enable 2FA.
+    - Set your commit email to your GitHub noreply address before your first commit.
+    - Enable Vigilant Mode so unsigned commits are visibly flagged.
+    - Audit SSH keys and third-party app access — revoke anything you don't recognize.
+    - If your account has public visibility, you are a higher-value target. Act like it.
 
-- Create a dedicated email for GitHub — not your personal, not your work address.
-- Use a passkey if available. If not, use an authenticator app. Never SMS only.
-- Do not use Google Authenticator — if you lose your phone, you lose your codes.
-- Save your backup codes offline the moment you enable 2FA.
-- Set your commit email to your GitHub noreply address before your first commit.
-- Enable Vigilant Mode so unsigned commits are visibly flagged.
-- Audit SSH keys and third-party app access — revoke anything you don't recognize.
-- If your account has public visibility, you are a higher-value target. Act like it.
-
-> Already locked down? Jump to [Starting a New Repository](02-starting-a-new-repo.md)
+    Already locked down? Jump to [Starting a New Repository](../setup/new-repo.md)
 
 ---
 
@@ -32,8 +31,8 @@ Before you create or harden your GitHub account, set it up with an email address
 - Secure the email account itself with 2FA before using it for GitHub.
 - If your GitHub account gets targeted, this email being separate means the attacker cannot pivot to your personal inbox.
 
-> ⚠️ **If you skip this**
-> Your personal email tied to GitHub means one phishing email, one breach of any service that shares that address, and an attacker has a direct path to your account. Separation is the defense.
+!!! warning "If you skip this"
+    Your personal email tied to GitHub means one phishing email, one breach of any service that shares that address, and an attacker has a direct path to your account. Separation is the defense.
 
 ---
 
@@ -55,11 +54,11 @@ Enable 2FA immediately. But how you enable it matters as much as whether you ena
    Do not rely on this alone.
 ```
 
-> ⚠️ **Why not SMS?**
-> SIM swapping is an attack where someone convinces your carrier to transfer your phone number to a SIM they control. Once they have your number, they receive your SMS codes. This attack is well-documented and is used specifically against developers and creators with public profiles. The more visible your account, the more attractive the target.
+!!! warning "Why not SMS?"
+    SIM swapping is an attack where someone convinces your carrier to transfer your phone number to a SIM they control. Once they have your number, they receive your SMS codes. This attack is well-documented and is used specifically against developers and creators with public profiles. The more visible your account, the more attractive the target.
 
-> ⚠️ **Why not Google Authenticator?**
-> Google Authenticator has no encrypted backup or export. If you lose or break your phone, your codes are gone and you are locked out of every account that uses it. Use an app that supports encrypted backup — Aegis on Android, Ente Auth or Raivo on iOS.
+!!! warning "Why not Google Authenticator?"
+    Google Authenticator has no encrypted backup or export. If you lose or break your phone, your codes are gone and you are locked out of every account that uses it. Use an app that supports encrypted backup — Aegis on Android, Ente Auth or Raivo on iOS.
 
 ```
 Where to enable:
@@ -67,8 +66,8 @@ GitHub → Settings → Password and authentication
 → Two-factor authentication → Enable
 ```
 
-> 💡 **New to authenticator apps?**
-> An authenticator app generates a new 6-digit code every 30 seconds. When you log in, GitHub asks for that code alongside your password. Even if someone has your password, they cannot log in without the current code from your physical device.
+!!! tip "New to authenticator apps?"
+    An authenticator app generates a new 6-digit code every 30 seconds. When you log in, GitHub asks for that code alongside your password. Even if someone has your password, they cannot log in without the current code from your physical device.
 
 ---
 
@@ -81,8 +80,8 @@ The moment you enable 2FA, GitHub gives you a set of one-time backup codes. Thes
 - Do not store them in your email, notes app, or anywhere cloud-synced.
 - Treat each code like a physical key to your account — because that is exactly what it is.
 
-> ⚠️ **If you skip this**
-> Lose your phone with no backup codes and you are locked out of your own account. GitHub account recovery is not instant — depending on your account history and verification options, it can take days or fail entirely.
+!!! warning "If you skip this"
+    Lose your phone with no backup codes and you are locked out of your own account. GitHub account recovery is not instant — depending on your account history and verification options, it can take days or fail entirely.
 
 ---
 
@@ -113,11 +112,11 @@ Step 3 — Confirm it was applied:
 git config user.email
 ```
 
-> ⚠️ **If you skip this**
-> Your personal email in public commit history is a permanent, harvestable data point. It can be used to find your other accounts, correlate your identity across platforms, and target you directly. Removing it retroactively requires rewriting git history across every affected repo — covered in the OSINT & Identity Leakage section.
+!!! warning "If you skip this"
+    Your personal email in public commit history is a permanent, harvestable data point. It can be used to find your other accounts, correlate your identity across platforms, and target you directly. Removing it retroactively requires rewriting git history across every affected repo — covered in the OSINT & Identity Leakage section.
 
-> 🔵 **Already committed with your real email?**
-> Fix the config now so the damage stops here. Then head to the OSINT & Identity Leakage section for the full history rewrite process using git filter-repo.
+!!! info "Already committed with your real email?"
+    Fix the config now so the damage stops here. Then head to the OSINT & Identity Leakage section for the full history rewrite process using git filter-repo.
 
 ---
 
@@ -131,8 +130,8 @@ GitHub → Settings → SSH and GPG keys
 → Vigilant mode → "Flag unsigned commits as unverified"
 ```
 
-> 💡 **What does signing a commit mean?**
-> Signing a commit uses your SSH or GPG key to cryptographically prove that a specific commit came from you and was not tampered with after the fact. GitHub shows a green "Verified" badge on signed commits. We cover setting this up in the Starting a New Repository section.
+!!! tip "What does signing a commit mean?"
+    Signing a commit uses your SSH or GPG key to cryptographically prove that a specific commit came from you and was not tampered with after the fact. GitHub shows a green "Verified" badge on signed commits. We cover setting this up in the Starting a New Repository section.
 
 ---
 
@@ -161,8 +160,8 @@ For each app ask:
 Revoke anything unnecessary.
 ```
 
-> ⚠️ **If you skip this**
-> A third-party app with repo access that gets compromised or sold has access to your code. You will not be notified. The access does not expire on its own.
+!!! warning "If you skip this"
+    A third-party app with repo access that gets compromised or sold has access to your code. You will not be notified. The access does not expire on its own.
 
 ---
 
@@ -187,5 +186,4 @@ New account or existing — run through this before moving on.
 
 ---
 
-*Secure Your Repo — [@sudochef](https://instagram.com/sudochef) | [github.com/commit-issues](https://github.com/commit-issues)*
-*Build like you're the target. Because you are.*
+*[@sudochef](https://instagram.com/sudochef) — Build like you're the target. Because you are.*
