@@ -49,6 +49,7 @@ nav:
     - GitHub Settings: hardening/settings.md
     - Branch Protection: hardening/rulesets.md
     - Advanced Security: hardening/advanced-security.md
+    - Git History Auditing: hardening/history.md
     - Day One Checklist: hardening/checklist.md
   - Writing Secure Code:
     - Credential Management: code/credentials.md
