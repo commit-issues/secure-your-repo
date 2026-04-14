@@ -1,0 +1,2863 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A field guide for securing your GitHub presence, repositories, identity, and code.">
+      
+      
+        <meta name="author" content="SudoChef">
+      
+      
+        <link rel="canonical" href="https://commit-issues.github.io/secure-your-repo/code/vibe-coding/">
+      
+      
+        <link rel="prev" href="../../hardening/checklist/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Vibe Coding & AI Dev - Secure Your Repo</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vibe-coding-ai-assisted-development" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Secure Your Repo" class="md-header__button md-logo" aria-label="Secure Your Repo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Secure Your Repo
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Vibe Coding & AI Dev
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../setup/account/" class="md-tabs__link">
+          
+  
+  
+  Setup
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../hardening/settings/" class="md-tabs__link">
+          
+  
+  
+  Hardening Your Repo
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Writing Secure Code
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../threats/osint.md" class="md-tabs__link">
+          
+  
+  
+  Threats & Awareness
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../maintenance/freshness.md" class="md-tabs__link">
+          
+  
+  
+  Maintenance
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Secure Your Repo" class="md-nav__button md-logo" aria-label="Secure Your Repo" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Secure Your Repo
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Securing Your Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH Keys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/new-repo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starting a New Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting & Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardening Your Repo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardening Your Repo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/rulesets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch Protection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/advanced-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git History Auditing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day One Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing Secure Code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Writing Secure Code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vibe Coding & AI Dev
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vibe Coding & AI Dev
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-write-a-single-line-plan-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before You Write a Single Line — Plan First
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-vibe-coding-actually-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Vibe Coding Actually Is
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-ai-cannot-know-when-it-writes-your-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What AI Cannot Know When It Writes Your Code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-complete-beginners-it-works-is-not-the-finish-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Complete Beginners — "It Works" Is Not the Finish Line
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-experienced-developers-the-new-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Experienced Developers — The New Challenge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-ai-slop-looks-like-how-to-spot-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What AI Slop Looks Like — How to Spot It
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-top-technical-failures-what-goes-wrong-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Top Technical Failures — What Goes Wrong and Why
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Top Technical Failures — What Goes Wrong and Why">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rate-limiting-why-your-app-dies-at-10-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rate Limiting — Why Your App Dies at 10 Users
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardcoded-api-keys-and-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardcoded API Keys and Secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missing-authentication-and-authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing Authentication and Authorization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insecure-webhooks-no-signature-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Insecure Webhooks — No Signature Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-input-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No Input Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-grep-is-and-how-to-use-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What grep Is and How to Use It
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-tools-what-they-do-cost-and-how-hard-to-set-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Tools — What They Do, Cost, and How Hard to Set Up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-fix-tools-and-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Fix — Tools and Commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-source-tools-the-danger-nobody-talks-about" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open Source Tools — The Danger Nobody Talks About
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-bottom-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Bottom Line
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../credentials.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credential Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input-validation.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dependencies.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependency Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logging.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging & Auditing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threats & Awareness
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Threats & Awareness
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/osint.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSINT & Identity Leakage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/ai-attacks.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI-Assisted Attacks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/forking.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forking & Attribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/supply-chain.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supply Chain Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/stolen.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    When Your Project Gets Stolen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/visibility.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repo Visibility & Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintenance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maintenance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/freshness.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Freshness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/backups.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup & Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/email.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Email Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/debt.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Debt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/cron.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cron & Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/dependencies.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependency Intelligence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/notifications.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-write-a-single-line-plan-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before You Write a Single Line — Plan First
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-vibe-coding-actually-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Vibe Coding Actually Is
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-ai-cannot-know-when-it-writes-your-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What AI Cannot Know When It Writes Your Code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-complete-beginners-it-works-is-not-the-finish-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Complete Beginners — "It Works" Is Not the Finish Line
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#for-experienced-developers-the-new-challenge" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        For Experienced Developers — The New Challenge
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-ai-slop-looks-like-how-to-spot-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What AI Slop Looks Like — How to Spot It
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-top-technical-failures-what-goes-wrong-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Top Technical Failures — What Goes Wrong and Why
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Top Technical Failures — What Goes Wrong and Why">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rate-limiting-why-your-app-dies-at-10-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rate Limiting — Why Your App Dies at 10 Users
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hardcoded-api-keys-and-secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hardcoded API Keys and Secrets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#missing-authentication-and-authorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing Authentication and Authorization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insecure-webhooks-no-signature-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Insecure Webhooks — No Signature Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#no-input-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        No Input Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-grep-is-and-how-to-use-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What grep Is and How to Use It
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-tools-what-they-do-cost-and-how-hard-to-set-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Tools — What They Do, Cost, and How Hard to Set Up
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-fix-tools-and-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Fix — Tools and Commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#open-source-tools-the-danger-nobody-talks-about" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Open Source Tools — The Danger Nobody Talks About
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-bottom-line" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Bottom Line
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="vibe-coding-ai-assisted-development">Vibe Coding &amp; AI-Assisted Development</h1>
+<blockquote>
+<p>AI is not trained to secure your product. That is your job.</p>
+</blockquote>
+<hr />
+<div class="admonition abstract">
+<p class="admonition-title">TL;DR</p>
+<ul>
+<li>AI generates code that works. Working is not the same as secure.</li>
+<li>This section is long because this topic deserves the full treatment.</li>
+<li>If you want to skip to fixes, tools, and commands: <a href="#the-fix-tools-and-commands">Jump to The Fix →</a></li>
+<li>Plan before you build. Security and privacy first. User experience above all.</li>
+<li>Every AI-generated code block needs human review before it ships.</li>
+<li>The tools in this section automate what your eyes miss.</li>
+</ul>
+</div>
+<hr />
+<p>AI-assisted development is not the problem. Shipping AI-generated code without understanding it is the reason most security incidents happen in projects built this way. Not in the GitHub settings. Not in the deployment pipeline. In the code itself — written fast, accepted without review, and pushed to production before it is secured and deemed safe — leaving it wide open to vulnerabilities</p>
+<p>This section is long, and that is for good reason. The setup steps, the hardening, the branch protection — all of that protects the container. This section is about what goes inside the container and how to make it functional and secure.</p>
+<hr />
+<h2 id="before-you-write-a-single-line-plan-first">Before You Write a Single Line — Plan First</h2>
+<p>The single most underrated security practice is also the most basic one: knowing what you are building before you start building it. AI makes it tempting to skip this step entirely — you describe an idea, code appears, it runs, you ship. That pipeline produces working software and terrible security posture simultaneously.</p>
+<p>Before you start building, consider pseudocode — and if you have never heard of it, pay attention because this matters.</p>
+<p>Pseudocode is plain-language planning written before any real code exists. It describes what your program will do, step by step, in human language — not Python, not JavaScript, not any specific syntax. It is the architectural blueprint before the walls go up. Large companies use pseudocode to plan, confirm, align teams, implement correctly, and protect a project from scope creep and hidden assumptions. It forces you to think through the logic before you commit to an implementation.</p>
+<p>Most people who vibe code have never encountered the concept because AI will just start writing code the moment you describe an idea. That speed feels productive. It is often the opposite — you are building before you know what you are building.</p>
+<p>The author of this guide produces content and code under the name SudoCode — and the online presence and username across platforms is SudoChef. The GitHub handle is commit-issues, which says something too: not that commits are a problem, but that there are always too many of them because something is always being improved. In Unix and Linux systems, <code>sudo</code> grants superuser permissions — the ability to execute commands with root access, the highest level of system control. Even if you do not have those permissions by default, sudo is how you get them. That is the standard to hold yourself to: approach your code with that level of authority, ownership, and responsibility. Know what you are building. Own every decision in it. Have root-level understanding of your own project. That is what pseudocode enables.</p>
+<p>Not planning is pure laziness, and it will reflect in the finished product. A project built without a plan is a project that grows unpredictably, breaks in unexpected places, and accumulates security debt in the dark.</p>
+<p><strong>What to define before you write any code:</strong></p>
+<div class="highlight"><pre><span></span><code>1. What does this actually do?
+   Write one sentence. If you cannot, you are not ready to build.
+   &quot;A tool that lets users upload photos and applies filters&quot;
+   is a sentence. &quot;A platform&quot; is not.
+   If your one sentence needs ten qualifiers, break it into 
+   smaller projects first.
+
+2. Who uses it?
+   Just you? A small team? The public? Children? Healthcare workers?
+   The answer changes everything — authentication requirements,
+   rate limiting, data handling obligations, accessibility needs,
+   and the entire threat model shift based on who your user is.
+
+3. What data does it touch?
+   Does it store user data? Names, emails, locations?
+   Payment details? Health records? Biometric data?
+   Government IDs? Children&#39;s data?
+   Each category has legal implications and security requirements
+   that are not optional — regardless of whether you knew about
+   them when you started building.
+
+4. What can go wrong?
+   If someone malicious used this, what would they try to do?
+   If it crashed at peak usage, what would break?
+   If it leaked data, whose data would it be and what would 
+   happen to them as a result?
+   If someone submitted garbage input, would it crash or continue?
+
+5. What does success look like at scale?
+   10 users? 10,000? 10 million?
+   &quot;It works&quot; at 10 users means nothing at 10,000.
+   Rate limiting, database indexing, connection pooling, caching,
+   CDN — these are not features you add later.
+   They are architecture decisions you make at the start.
+
+6. What are the contingencies?
+   What happens if the third-party API you depend on goes down?
+   What happens if your database is unavailable for 30 minutes?
+   What happens if a user submits malformed or malicious input?
+   What happens if your cloud provider has an outage?
+   These are not edge cases. They are production reality.
+   Plan for them before they happen.
+
+7. Who owns this and who is responsible for it?
+   Solo project? Team? If a user&#39;s data is breached, who answers 
+   for it? If the app goes down and people are depending on it,
+   who fixes it and how fast?
+   Responsibility does not disappear because you did not plan for it.
+
+8. What is the monetization or sustainability model?
+   Free forever? Freemium? Paid? API costs money.
+   Server costs money. Storage costs money.
+   A tool that works at zero users may bankrupt you at 10,000
+   if you did not model the costs.
+
+9. What are the legal and regulatory requirements?
+   GDPR applies if you have users in the European Union.
+   CCPA applies if you have users in California.
+   HIPAA applies if you touch health data in the US.
+   PCI-DSS applies if you handle payment card data.
+   COPPA applies if your users could be children.
+   If you do not know what these are — stop.
+   Before you write a single line of code, understand which 
+   regulations apply to your project. Study them. Have AI 
+   break them down for you, then cross-reference with Google 
+   or another browser to verify. Always ask AI to cite its 
+   sources on legal and regulatory questions. Getting this 
+   wrong is not a technical debt problem — it is a legal one.
+
+10. What does the full user journey look like from start to finish?
+    How does someone find the product? How do they sign up?
+    What is the first thing they see? What does onboarding look like?
+    How do they accomplish the core task? How do they get help?
+    How do they leave or delete their account?
+    Map every step before you build any of them.
+</code></pre></div>
+<p><strong>The security and privacy questions that must be answered before line one:</strong></p>
+<div class="highlight"><pre><span></span><code>→ Where does user data live and who can access it?
+→ What is the minimum data we need to collect?
+   (Collect less. Store less. Expose less.)
+→ How do users authenticate?
+→ What can authenticated users do that unauthenticated users cannot?
+→ What can admins do that regular users cannot?
+→ How do we handle a data breach if one happens?
+→ What regulations apply? (GDPR, CCPA, HIPAA, PCI-DSS)
+</code></pre></div>
+<p><strong>User experience is not the last thing you think about — it is the first.</strong></p>
+<p>UX and UI design is an entire professional field and area of study. People dedicate entire careers to it. Your competition takes it seriously. You should too — because user experience is what determines whether people actually use your product or abandon it after thirty seconds.</p>
+<p>A secure application that nobody can use is not a secure application. Security that creates friction gets bypassed. Users who cannot figure out how to do something safely will find an unsafe way to do it. The best security is invisible — it protects without getting in the way.</p>
+<p>Before you build, answer these questions:</p>
+<div class="highlight"><pre><span></span><code>→ What is the complete user journey from start to finish?
+  How does a new user discover the product?
+  How do they sign up? What does authentication look like?
+  What is the first screen they see after logging in?
+  How do they find the core feature? How do they use it?
+  How do they manage their profile and settings?
+  How do they get help when something goes wrong?
+  How do they delete their account if they want to leave?
+  Map every single step. Build none of them before you have the map.
+
+→ Where will people primarily use this?
+  Phone? Desktop? Laptop? Tablet?
+  The answer changes your layout, your navigation, your 
+  button sizes, your font sizes, and your entire interaction model.
+  A mobile-first app and a desktop-first app are designed differently
+  from the ground up — not the same thing with a responsive stylesheet.
+
+→ What platforms and operating systems does it need to support?
+  iOS? Android? Windows? macOS? Linux? All of them?
+  Will it be a web app that runs in a browser?
+  A native app that installs on a device?
+  A desktop app that runs locally?
+  Will it be in the App Store or Google Play?
+  What does the download and installation experience look like?
+  Or does it live locally on someone&#39;s machine and never go public?
+  Each answer has different distribution, update, and security implications.
+
+→ Is the interface obvious to someone who has never seen it before?
+  The test: give it to someone who was not involved in building it.
+  Watch them use it without helping them.
+  Where they get confused is where you failed.
+
+→ Are error messages helpful to users and safe from attackers?
+  &quot;Invalid credentials&quot; is correct.
+  &quot;No account found with that email&quot; tells an attacker which 
+  emails are registered. Never confirm whether an account exists.
+
+→ Does every security requirement have a UX solution that 
+  does not punish the user?
+  2FA should be smooth, not a wall.
+  Session timeouts should warn before they happen.
+  Password requirements should be shown upfront, not after failure.
+</code></pre></div>
+<p>Plan for security. Plan for privacy. Plan for users. Then build.</p>
+<hr />
+<h2 id="what-vibe-coding-actually-is">What Vibe Coding Actually Is</h2>
+<p>"Vibe coding" is the practice of building software primarily by prompting an AI — describing what you want, accepting what it generates, prompting again when something breaks, and repeating until it works. The name comes from the feeling of it: you are vibing with the AI, iterating quickly, shipping fast.</p>
+<p>It is genuinely powerful. It has lowered the barrier to building software dramatically. People who could never have written a web application five years ago are shipping working products today. That is not nothing.</p>
+<p>It also produces a specific and well-documented category of problems — not because AI is bad at generating code, but because the workflow optimizes for speed and functionality while systematically skipping the steps that produce secure, maintainable software.</p>
+<p>Understanding why this happens requires understanding what AI is actually doing when it writes code.</p>
+<hr />
+<h2 id="what-ai-cannot-know-when-it-writes-your-code">What AI Cannot Know When It Writes Your Code</h2>
+<p>When you ask an AI to generate code, it draws on patterns from the vast amount of code it was trained on. It produces code that matches those patterns — code that looks like code that works, structured like code that works, and in many cases, code that does work.</p>
+<p>What it cannot know — and this list will grow as technology advances, because these are structural limitations of how AI works, not bugs that will be patched:</p>
+<div class="highlight"><pre><span></span><code>→ Your specific environment
+  What operating system, what Python version, what library
+  versions are actually installed on your machine or server.
+  macOS, Linux, and Windows handle paths, permissions, and 
+  system calls differently. AI generates code for a generic
+  environment that may not match yours.
+
+→ Your users
+  Who they are, what they will try to do, how they will
+  misuse or abuse the system, their technical sophistication,
+  their accessibility needs, their languages, their devices.
+
+→ Your threat model
+  What an attacker targeting your specific application would
+  actually try. A financial app, a healthcare tool, a social
+  platform, and a developer portfolio have completely different
+  threat models. AI does not know which one you are building
+  unless you explicitly tell it — and even then, it cannot
+  reason about threats the way a security professional can.
+
+→ What is currently safe
+  AI has a knowledge cutoff. The library version it suggests
+  as current may have a critical CVE published against it since
+  training. The API pattern it recommends may have been 
+  deprecated. The cryptographic approach it uses may have 
+  been broken. It does not know. It cannot know.
+
+→ Your data
+  What is actually in your database, what your users data
+  looks like in practice, what edge cases your real data 
+  produces, how large your datasets will grow.
+
+→ The regulatory environment you operate in
+  GDPR, HIPAA, CCPA, PCI-DSS, COPPA, SOC2 — AI can describe
+  these but cannot apply them to your specific situation with
+  legal accuracy. Compliance is not a code problem.
+
+→ The consequences of failure
+  If this breaks, who is affected and how badly?
+  If data leaks, whose data is it and what are the 
+  downstream effects on real people?
+  The AI has no stake in the answer.
+
+→ Your infrastructure
+  How your production environment is configured, what your
+  network topology looks like, what your CI/CD pipeline does,
+  what monitoring you have in place.
+
+→ Your team and your processes
+  Who reviews code, how often deployments happen, what your
+  incident response looks like, whether anyone will actually
+  rotate those API keys every 90 days.
+
+→ The social and organizational context
+  Who has access to what, who has left the company and still
+  has credentials, what vendor relationships exist that
+  create third-party risk.
+
+→ Future vulnerabilities
+  A library that is safe today may have a zero-day published
+  tomorrow. AI-generated code that passes every scan today
+  may be vulnerable next week. Security is not a state you
+  achieve. It is a practice you maintain.
+</code></pre></div>
+<p>This is not a criticism of AI. It is a description of the tool. A hammer cannot know whether the nail is in the right place. The person holding the hammer is responsible for that. We are providing fixes and tools for the issues we can address today — but these will change as technology continues to advance. Treat this section as a living reference, not a final checklist.</p>
+<hr />
+<h2 id="for-complete-beginners-it-works-is-not-the-finish-line">For Complete Beginners — "It Works" Is Not the Finish Line</h2>
+<p>If you have been building with AI and you have no computer science or security background, this section is written for you.</p>
+<p>You asked AI to build something. It gave you code. You ran it. It worked. That feels like success — and in one sense it is. Getting something to run is genuinely hard and genuinely satisfying.</p>
+<p>But "it works" answers one question: does this do what I described? It does not answer: is this safe? Is this stable under real usage? Could someone break this, steal data from it, or use it to harm your users?</p>
+<p>"It works" also does not mean it will work when real people use it. Development testing is not production testing. Ten friends testing something on a Tuesday afternoon is not the same as ten thousand strangers using it simultaneously on a Monday morning. You do not know if it works live until it is live — and by then, bugs are user experiences, not development notes.</p>
+<p>Large companies use beta programs for exactly this reason. They release to a limited audience first, collect feedback, find the bugs that only appear under real usage patterns, and fix them before the full release. There will be bugs. Assume it. Plan for it. Build feedback mechanisms into the product from the start.</p>
+<p>Here is the analogy. If you have only ever used an instruction manual to assemble IKEA furniture, that does not mean you have the knowledge or capability to build a full functioning house. A house has electrical systems, plumbing, load-bearing structures, fire codes, building permits — each of which is a professional discipline that licensed experts study for years. You would not wire your own electrical panel after watching one YouTube video. The same principle applies here.</p>
+<p>A working demo is IKEA furniture. A production application serving real users is the house. The gap between them is testing, hardening, monitoring, error handling, rate limiting, authentication, data protection, and every other discipline covered in this guide.</p>
+<p>Before you go public: test it yourself end to end. Have people who were not involved in building it test it — friends, family, anyone willing to break things. Watch them use it. Fix what breaks. Then test again. Then go public.</p>
+<p>"It works" means the furniture is assembled. Security and production-readiness mean it is safe to live in.</p>
+<p><strong>The most dangerous sentence in security is: "I don't understand this code but it works."</strong></p>
+<p>If you do not understand the code running in your application, you cannot defend it. You cannot explain what data it accesses, what it does with that data, or what happens when it receives unexpected input. You are flying blind — and an attacker who understands your code better than you do has a significant advantage.</p>
+<p><strong>What to do when you don't understand code AI gave you:</strong></p>
+<div class="highlight"><pre><span></span><code>Step 1 — Ask the AI to explain it.
+  &quot;Explain this code to me line by line as if I have 
+  never seen Python before.&quot;
+  Read the explanation. If it still does not make sense,
+  ask follow-up questions until it does.
+
+Step 2 — Ask about the security implications.
+  &quot;What are the security risks in this code?&quot;
+  &quot;What could go wrong if a malicious user sent 
+  unexpected input to this function?&quot;
+  &quot;Is there a more secure way to write this?&quot;
+
+Step 3 — Do not ship it until you understand it.
+  This is the hard part. The temptation is to ship 
+  and figure it out later. Later never comes.
+  Understanding what you ship is not optional — it is 
+  the minimum bar for responsible development.
+
+Step 4 — If you still cannot understand it after 
+  asking, it is the wrong tool for this job.
+  Some things require more foundation than AI can give you
+  in a single session. That is okay. Build the foundation
+  before you build the feature.
+</code></pre></div>
+<hr />
+<h2 id="for-experienced-developers-the-new-challenge">For Experienced Developers — The New Challenge</h2>
+<p>If you have been writing software for years, you already know how to write secure code. The challenge AI introduces is not a knowledge gap — it is a discipline gap.</p>
+<p>AI moves faster than your review process. It generates in seconds what would take you hours to write. That speed is the point. It is also the problem.</p>
+<p>When you write 20 lines yourself, you review every line because you wrote it. You know what it does. When AI generates 200 lines, the psychological pressure to accept it and move on is real — especially when it looks reasonable, the tests pass, and you have ten other things to do.</p>
+<p><strong>The false confidence of passing tests:</strong></p>
+<p>Tests passing on AI-generated code means the code does what the tests describe. Tests are written by the same AI that wrote the code, often testing the happy path only — the expected inputs, the expected outputs. They do not test what an attacker would send. They do not test the edge cases that only appear in production. They do not test the security properties that were never specified in the prompt.</p>
+<p>Working tests on insecure code are not a safety net. They are a confidence trap.</p>
+<p><strong>Technical debt velocity:</strong></p>
+<p>In traditional development, technical debt accumulates at roughly the pace you write code. When you write a shortcut, you know you wrote a shortcut. With AI, debt accumulates at the pace AI generates code — which is ten to a hundred times faster. A week of vibe coding can produce months of technical debt that is invisible until it fails.</p>
+<p>The debt that matters most from a security perspective is the debt you cannot see: the missing input validation, the unrotated credentials, the API endpoint with no authentication, the rate limiter that was never added because the AI never mentioned it.</p>
+<p><strong>Subtle vulnerabilities that pass code review:</strong></p>
+<p>The most dangerous AI-generated vulnerabilities are the ones that look right. Not the obvious hardcoded API key — those get caught. The subtle ones:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># This looks fine. It is not.</span>
+<span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SELECT * FROM users WHERE email = &#39;</span><span class="si">{</span><span class="n">email</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+
+<span class="c1"># This is SQL injection. The email variable is user input.</span>
+<span class="c1"># AI generates this pattern constantly because it works </span>
+<span class="c1"># in testing where email is always a valid email address.</span>
+<span class="c1"># In production, email could be:</span>
+<span class="c1"># &#39; OR &#39;1&#39;=&#39;1</span>
+<span class="c1"># ...and now you have handed over your entire users table.</span>
+
+<span class="c1"># The correct version:</span>
+<span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM users WHERE email = ?&quot;</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">(</span><span class="n">email</span><span class="p">,))</span>
+</code></pre></div>
+<p>The first version passes every functional test. The second version is the only one that is safe. AI knows both patterns — it produces whichever one matches the context of the prompt, and the prompt rarely specifies "make this SQL injection resistant."</p>
+<hr />
+<h2 id="what-ai-slop-looks-like-how-to-spot-it">What AI Slop Looks Like — How to Spot It</h2>
+<p>"AI slop" is the informal term for AI-generated code that is functional but structurally poor — bloated, inconsistent, fragile, and difficult to maintain or secure. Industry leaders who are skeptical of vibe coding are not skeptical of AI — they are skeptical of unreviewed AI output being shipped to production.</p>
+<p>Here is what it looks like:</p>
+<p><strong>Unnecessary length:</strong></p>
+<p>AI tends to be verbose. A function that should be 10 lines is 40. Logic that should be a single expression is five nested conditionals. This is not just aesthetic — longer code has more surface area, more places for bugs to hide, and more for a security reviewer to read and miss something in.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># AI slop — 15 lines to do what 3 lines do</span>
+<span class="k">def</span> <span class="nf">is_valid_email</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">email</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="s1">&#39;@&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">email</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="c1"># Clean version — same logic, 3 lines</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="k">def</span> <span class="nf">is_valid_email</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">email</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[^@]+@[^@]+\.[^@]+$&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Old code left in when new code is added:</strong></p>
+<p>Every time you prompt AI to fix or change something, it adds new code. The old code it replaced often stays — commented out, renamed, or just left there doing nothing. Dead code is not neutral. It is confusion, it is potential for a future developer to accidentally re-enable something broken, and it is attack surface.</p>
+<p><strong>Spacing, indentation, and capitalization errors:</strong></p>
+<p>In Python, indentation is syntax. A single misindented line changes what the code does — not just how it looks. AI-generated code frequently has inconsistent indentation, especially in long functions or when code was added across multiple prompts. These errors do not always cause obvious crashes. Sometimes they cause subtle logic errors that only appear under specific conditions.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># This looks fine. The indentation error is subtle.</span>
+<span class="k">def</span> <span class="nf">process_payment</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">charge_card</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+            <span class="n">log_transaction</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># This should be indented one more level</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="c1"># The return True executes whether the charge succeeded or not,</span>
+<span class="c1"># and whether amount &gt; 0 or not. The indentation error means</span>
+<span class="c1"># the payment logic is completely bypassed in some cases.</span>
+</code></pre></div>
+<p><strong>Context decay — AI forgetting what it built:</strong></p>
+<p>In a long session, AI loses track of earlier decisions. It rewrites a function you already wrote, using a different pattern. It adds a dependency you already removed. It creates a second version of something that already exists. The result is contradictory code — two functions doing the same thing differently, two authentication patterns that conflict, two error handlers that fight each other.</p>
+<p><strong>Hallucinated libraries:</strong></p>
+<p>AI sometimes references packages that do not exist, or exist but do not have the methods being called. The code looks correct, runs no syntax errors, and fails only at runtime — or worse, fails silently when the import happens to succeed but the method does not exist in the installed version.</p>
+<hr />
+<h2 id="the-top-technical-failures-what-goes-wrong-and-why">The Top Technical Failures — What Goes Wrong and Why</h2>
+<p>These are the failures that appear most consistently in AI-generated applications. Each one is a real, documented pattern with real consequences.</p>
+<hr />
+<h3 id="rate-limiting-why-your-app-dies-at-10-users">Rate Limiting — Why Your App Dies at 10 Users</h3>
+<p>This is one of the most common ways vibe-coded applications fail in production. You build something, it works perfectly in development, you share it, ten people use it simultaneously, and it stops working.</p>
+<p>Rate limiting is the practice of restricting how many requests a user or system can make in a given time period. Without it, a single user — or a bot — can make thousands of requests per second, overwhelming your server, exhausting your API quota, and potentially running up costs into the thousands of dollars in minutes.</p>
+<p>AI almost never adds rate limiting unless you specifically ask for it. It is not part of the "happy path" that prompts describe. It is an operational concern that only becomes visible at scale.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># No rate limiting — anyone can call this endpoint unlimited times</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="n">password</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="n">generate_token</span><span class="p">(</span><span class="n">user</span><span class="p">)})</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Invalid credentials&#39;</span><span class="p">}),</span> <span class="mi">401</span>
+
+<span class="c1"># With rate limiting — 5 attempts per minute per IP</span>
+<span class="kn">from</span> <span class="nn">flask_limiter</span> <span class="kn">import</span> <span class="n">Limiter</span>
+<span class="n">limiter</span> <span class="o">=</span> <span class="n">Limiter</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">key_func</span><span class="o">=</span><span class="n">get_remote_address</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="nd">@limiter</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="s2">&quot;5 per minute&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">login</span><span class="p">():</span>
+    <span class="c1"># same code</span>
+</code></pre></div>
+<p>Without rate limiting on a login endpoint, an attacker can attempt millions of password combinations automatically. With rate limiting, they get five attempts per minute — at which point brute force becomes practically impossible.</p>
+<hr />
+<h3 id="hardcoded-api-keys-and-secrets">Hardcoded API Keys and Secrets</h3>
+<p>The most common security failure in AI-generated code. AI frequently places API keys, database URLs, and passwords directly in the code — because that is the simplest way to make the code run, and AI optimizes for making code run.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># AI slop — key is hardcoded and will be committed to git</span>
+<span class="n">openai_client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="s2">&quot;sk-abc123yourrealkey&quot;</span><span class="p">)</span>
+
+<span class="c1"># Correct — key comes from environment</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+<span class="n">openai_client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">))</span>
+</code></pre></div>
+<p>The hardcoded version works identically in development. It is catastrophically different in security — the moment it is committed to a public repository, automated scanners harvest the key within minutes.</p>
+<hr />
+<h3 id="missing-authentication-and-authorization">Missing Authentication and Authorization</h3>
+<p>AI builds features. Authentication checks whether a user is logged in. Authorization checks whether a logged-in user is allowed to do what they are trying to do. AI frequently builds the feature without the checks.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># AI slop — no authentication check</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/user/&lt;user_id&gt;/data&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_user_data</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">sensitive_data</span><span class="p">)</span>
+
+<span class="c1"># Any request to /api/user/1/data returns user 1&#39;s sensitive data.</span>
+<span class="c1"># No login required. No ownership check.</span>
+
+<span class="c1"># Correct version</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/user/&lt;user_id&gt;/data&#39;</span><span class="p">)</span>
+<span class="nd">@login_required</span>
+<span class="k">def</span> <span class="nf">get_user_data</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">id</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_admin</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Unauthorized&#39;</span><span class="p">}),</span> <span class="mi">403</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">sensitive_data</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h3 id="insecure-webhooks-no-signature-verification">Insecure Webhooks — No Signature Verification</h3>
+<p>A webhook is a URL on your server that an external service calls when something happens. Payment processors, GitHub, Stripe, Twilio — they all use webhooks. When a payment completes, Stripe sends a POST request to your webhook URL.</p>
+<p>The problem: anyone can send a POST request to a URL. Without signature verification, your application cannot tell the difference between a real Stripe notification and a fake one crafted by an attacker.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># AI slop — accepts any POST request as valid</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/webhook/payment&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">payment_webhook</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span>
+    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;payment_succeeded&#39;</span><span class="p">:</span>
+        <span class="n">fulfill_order</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;order_id&#39;</span><span class="p">])</span>  <span class="c1"># Anyone can trigger this</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">200</span>
+
+<span class="c1"># Correct — verify the signature Stripe includes in the request</span>
+<span class="kn">import</span> <span class="nn">stripe</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/webhook/payment&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">payment_webhook</span><span class="p">():</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">data</span>
+    <span class="n">sig_header</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Stripe-Signature&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">event</span> <span class="o">=</span> <span class="n">stripe</span><span class="o">.</span><span class="n">Webhook</span><span class="o">.</span><span class="n">construct_event</span><span class="p">(</span>
+            <span class="n">payload</span><span class="p">,</span> <span class="n">sig_header</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;STRIPE_WEBHOOK_SECRET&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">400</span>  <span class="c1"># Invalid payload</span>
+    <span class="k">except</span> <span class="n">stripe</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">SignatureVerificationError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">400</span>  <span class="c1"># Invalid signature</span>
+    <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;payment_intent.succeeded&#39;</span><span class="p">:</span>
+        <span class="n">fulfill_order</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="s1">&#39;object&#39;</span><span class="p">][</span><span class="s1">&#39;metadata&#39;</span><span class="p">][</span><span class="s1">&#39;order_id&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">200</span>
+</code></pre></div>
+<hr />
+<h3 id="no-input-validation">No Input Validation</h3>
+<p>Every place a user can give your application data is an attack surface. Names, emails, search queries, file uploads, URL parameters — all of it needs to be validated before it touches your database or your logic.</p>
+<p>AI generates code that handles expected input correctly. It rarely handles unexpected input at all.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># AI slop — no validation</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/search&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">():</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT * FROM products WHERE name LIKE &#39;%</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">%&#39;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+<span class="c1"># The query parameter is used directly in SQL — classic injection.</span>
+<span class="c1"># Also: no length check, no sanitization, no rate limiting.</span>
+
+<span class="c1"># Correct</span>
+<span class="kn">from</span> <span class="nn">markupsafe</span> <span class="kn">import</span> <span class="n">escape</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/search&#39;</span><span class="p">)</span>
+<span class="nd">@limiter</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="s2">&quot;30 per minute&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">search</span><span class="p">():</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">query</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">query</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Invalid query&#39;</span><span class="p">}),</span> <span class="mi">400</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+        <span class="s2">&quot;SELECT * FROM products WHERE name LIKE ?&quot;</span><span class="p">,</span>
+        <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;%</span><span class="si">{</span><span class="n">escape</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="what-grep-is-and-how-to-use-it">What grep Is and How to Use It</h2>
+<p>Before we get to the tools, you need to know how to search your own code. <code>grep</code> is the command-line tool for searching text patterns inside files. If you have never used it, here is everything you need.</p>
+<p><strong>ELI5:</strong> grep is like <code>Ctrl+F</code> but for your entire project — all files, all folders, at once. Instead of searching one file, you search everything.</p>
+<p><strong>Basic usage:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Search for a word in a single file</span>
+grep<span class="w"> </span><span class="s2">&quot;api_key&quot;</span><span class="w"> </span>config.py
+
+<span class="c1"># Search in all files in current directory</span>
+grep<span class="w"> </span><span class="s2">&quot;api_key&quot;</span><span class="w"> </span>*
+
+<span class="c1"># Search recursively through all folders</span>
+grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;api_key&quot;</span><span class="w"> </span>.
+
+<span class="c1"># Search case-insensitively</span>
+grep<span class="w"> </span>-ri<span class="w"> </span><span class="s2">&quot;api_key&quot;</span><span class="w"> </span>.
+
+<span class="c1"># Show line numbers in results</span>
+grep<span class="w"> </span>-rn<span class="w"> </span><span class="s2">&quot;api_key&quot;</span><span class="w"> </span>.
+
+<span class="c1"># Search for multiple patterns at once</span>
+grep<span class="w"> </span>-rE<span class="w"> </span><span class="s2">&quot;api_key|password|secret|token&quot;</span><span class="w"> </span>.
+</code></pre></div>
+<p><strong>What to grep for before committing AI code:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Look for hardcoded credentials</span>
+grep<span class="w"> </span>-rn<span class="w"> </span><span class="s2">&quot;api_key\s*=\s*[&#39;\&quot;]&quot;</span><span class="w"> </span>.
+grep<span class="w"> </span>-rn<span class="w"> </span><span class="s2">&quot;password\s*=\s*[&#39;\&quot;]&quot;</span><span class="w"> </span>.
+grep<span class="w"> </span>-rn<span class="w"> </span><span class="s2">&quot;secret\s*=\s*[&#39;\&quot;]&quot;</span><span class="w"> </span>.
+grep<span class="w"> </span>-rn<span class="w"> </span><span class="s2">&quot;token\s*=\s*[&#39;\&quot;]&quot;</span><span class="w"> </span>.
+
+<span class="c1"># Look for verify=False (SSL bypass)</span>
+grep<span class="w"> </span>-rn<span class="w"> </span><span class="s2">&quot;verify=False&quot;</span><span class="w"> </span>.
+
+<span class="c1"># Look for missing timeouts in requests</span>
+grep<span class="w"> </span>-rn<span class="w"> </span><span class="s2">&quot;requests\.get\|requests\.post&quot;</span><span class="w"> </span>.<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;timeout&quot;</span>
+
+<span class="c1"># Look for SQL string concatenation (injection risk)</span>
+grep<span class="w"> </span>-rn<span class="w"> </span><span class="s2">&quot;f\&quot;SELECT\|f&#39;SELECT\|% SELECT\|+ SELECT&quot;</span><span class="w"> </span>.
+
+<span class="c1"># Look for hardcoded URLs that should be environment variables</span>
+grep<span class="w"> </span>-rn<span class="w"> </span><span class="s2">&quot;http://\|https://&quot;</span><span class="w"> </span>.<span class="w"> </span>--include<span class="o">=</span><span class="s2">&quot;*.py&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;test\|#&quot;</span>
+
+<span class="c1"># Search git history for sensitive strings</span>
+git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>-p<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;api_key\|password\|secret&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-50
+</code></pre></div>
+<hr />
+<h2 id="the-tools-what-they-do-cost-and-how-hard-to-set-up">The Tools — What They Do, Cost, and How Hard to Set Up</h2>
+<p>These tools automate what your eyes miss. Each one catches a different category of problem. Used together, they form a review pipeline that runs before any code reaches your repository.</p>
+<hr />
+<p><strong>Ruff</strong>
+What it does: Lints and formats Python code. Replaces flake8, isort, pyupgrade, and several others in a single tool. Catches style violations, unused imports, undefined variables, and hundreds of other common issues.
+ELI5 analogy: A spell checker and grammar checker for code — it flags the obvious mistakes before anyone else sees them.
+Cost: Free, open source.
+Difficulty: Easy. One install, one command.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS / Linux:</span>
+pip<span class="w"> </span>install<span class="w"> </span>ruff<span class="w"> </span>--break-system-packages
+
+<span class="c1"># Windows:</span>
+pip<span class="w"> </span>install<span class="w"> </span>ruff
+ruff<span class="w"> </span>check<span class="w"> </span>.<span class="w">        </span><span class="c1"># find issues</span>
+ruff<span class="w"> </span>check<span class="w"> </span>.<span class="w"> </span>--fix<span class="w">  </span><span class="c1"># fix automatically where possible</span>
+ruff<span class="w"> </span>format<span class="w"> </span>.<span class="w">       </span><span class="c1"># format code</span>
+</code></pre></div>
+<hr />
+<p><strong>Black</strong>
+What it does: Formats Python code to a single, consistent style. No configuration, no debates. It makes every decision about spacing, line length, and formatting and applies it uniformly.
+ELI5 analogy: A strict editor who reformats every document to match a house style — you do not get to argue about it.
+Cost: Free, open source.
+Difficulty: Easy.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS / Linux:</span>
+pip<span class="w"> </span>install<span class="w"> </span>black<span class="w"> </span>--break-system-packages
+
+<span class="c1"># Windows:</span>
+pip<span class="w"> </span>install<span class="w"> </span>black
+
+black<span class="w"> </span>.
+</code></pre></div>
+<p>Why this matters for security: Consistent formatting makes code easier to review. Code that is easier to review gets reviewed more carefully. Security vulnerabilities hide in complexity and inconsistency.</p>
+<hr />
+<p><strong>Pylint</strong>
+What it does: Deep static analysis of Python code. Catches logic errors, type mismatches, undefined variables, unreachable code, and design problems that simpler linters miss.
+ELI5 analogy: A senior developer reading your code and leaving detailed notes about everything they would question or change.
+Cost: Free, open source.
+Difficulty: Medium. Has many configuration options; start with defaults.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS / Linux:</span>
+pip<span class="w"> </span>install<span class="w"> </span>pylint<span class="w"> </span>--break-system-packages
+
+<span class="c1"># Windows:</span>
+pip<span class="w"> </span>install<span class="w"> </span>pylint
+
+pylint<span class="w"> </span>yourmodule.py
+</code></pre></div>
+<hr />
+<p><strong>Flake8</strong>
+What it does: Classic Python linter. Checks style (PEP 8), common errors, and complexity. Slower and less comprehensive than Ruff but widely used and well understood.
+ELI5 analogy: A style guide enforcer — makes sure your code follows the agreed-upon rules.
+Cost: Free, open source.
+Difficulty: Easy.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS / Linux:</span>
+pip<span class="w"> </span>install<span class="w"> </span>flake8<span class="w"> </span>--break-system-packages
+
+<span class="c1"># Windows:</span>
+pip<span class="w"> </span>install<span class="w"> </span>flake8
+
+flake8<span class="w"> </span>.
+</code></pre></div>
+<hr />
+<p><strong>Bandit</strong>
+What it does: Security-specific static analysis for Python. Scans for known vulnerability patterns — hardcoded passwords, SQL injection, use of weak cryptography, insecure use of subprocess, and dozens more.
+ELI5 analogy: A security auditor who reads your code specifically looking for the things that get people hacked — not style issues, not performance issues, just security problems.
+Cost: Free, open source.
+Difficulty: Easy.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS / Linux:</span>
+pip<span class="w"> </span>install<span class="w"> </span>bandit<span class="w"> </span>--break-system-packages
+
+<span class="c1"># Windows:</span>
+pip<span class="w"> </span>install<span class="w"> </span>bandit
+
+bandit<span class="w"> </span>-r<span class="w"> </span>.<span class="w">                    </span><span class="c1"># scan everything</span>
+bandit<span class="w"> </span>-r<span class="w"> </span>.<span class="w"> </span>-ll<span class="w">                </span><span class="c1"># only show medium and high severity</span>
+bandit<span class="w"> </span>-r<span class="w"> </span>.<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>-o<span class="w"> </span>report.json<span class="w">  </span><span class="c1"># output as JSON report</span>
+</code></pre></div>
+<p>This is the tool that would catch <code>verify=False</code>, hardcoded credentials, SQL string concatenation, use of <code>eval()</code>, and weak random number generation. Run it on every AI-generated codebase.</p>
+<hr />
+<p><strong>MyPy</strong>
+What it does: Static type checking for Python. Catches type errors — places where a function expects a string but might receive None, or expects a number but receives a list.
+ELI5 analogy: A fact-checker who verifies that every variable is the type you said it would be, before the code runs.
+Cost: Free, open source.
+Difficulty: Medium. Requires type annotations to be most effective; can be added gradually.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS / Linux:</span>
+pip<span class="w"> </span>install<span class="w"> </span>mypy<span class="w"> </span>--break-system-packages
+
+<span class="c1"># Windows:</span>
+pip<span class="w"> </span>install<span class="w"> </span>mypy
+
+mypy<span class="w"> </span>yourmodule.py
+</code></pre></div>
+<p>Why this matters for security: Type errors are a major source of unexpected behavior. Unexpected behavior is exploitable behavior.</p>
+<hr />
+<p><strong>SonarQube</strong>
+What it does: Enterprise-grade code quality and security analysis platform. Scans for bugs, vulnerabilities, code smells, and security hotspots across multiple languages. Integrates with CI/CD pipelines and tracks issues over time.
+ELI5 analogy: A full security and quality audit firm — not just catching individual issues but tracking the health of the entire codebase over time.
+Cost: Community edition free (self-hosted). SonarCloud free for public repos, paid for private.
+Difficulty: Hard. Requires setup and configuration; significant overhead for small projects. Worth it for anything production-grade with a team.</p>
+<hr />
+<p><strong>CopyLeaks</strong>
+What it does: AI content detection and plagiarism checking. Identifies AI-generated content, copied code, and intellectual property issues.
+ELI5 analogy: A detector that tells you how much of what you are shipping was written by AI versus a human — and whether any of it is copied from somewhere else.
+Cost: Paid. Free trial available.
+Difficulty: Easy to use; moderate cost consideration.</p>
+<hr />
+<p><strong>pre-commit</strong>
+What it does: Framework for managing and running all of the above tools automatically before every <code>git commit</code>. If any tool fails, the commit is blocked.
+ELI5 analogy: A checklist that runs itself. Every time you try to commit, pre-commit runs every tool you have configured. If anything fails, it stops the commit and tells you why.
+Cost: Free, open source.
+Difficulty: Easy to set up, powerful once configured.</p>
+<hr />
+<h2 id="the-fix-tools-and-commands">The Fix — Tools and Commands</h2>
+<p>This is the section to jump to if you want the practical setup without reading everything above.</p>
+<p><strong>Install everything:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS / Linux:</span>
+pip<span class="w"> </span>install<span class="w"> </span>ruff<span class="w"> </span>black<span class="w"> </span>pylint<span class="w"> </span>bandit<span class="w"> </span>mypy<span class="w"> </span>pre-commit<span class="w"> </span>detect-secrets<span class="w"> </span>--break-system-packages
+
+<span class="c1"># Windows:</span>
+pip<span class="w"> </span>install<span class="w"> </span>ruff<span class="w"> </span>black<span class="w"> </span>pylint<span class="w"> </span>bandit<span class="w"> </span>mypy<span class="w"> </span>pre-commit<span class="w"> </span>detect-secrets
+</code></pre></div>
+<p><strong>Create your .pre-commit-config.yaml:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nt">repos</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/astral-sh/ruff-pre-commit</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.4.4</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff</span>
+<span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">--fix</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff-format</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/psf/black</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">24.4.2</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">black</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/PyCQA/bandit</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.7.8</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bandit</span>
+<span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;-ll&quot;</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/Yelp/detect-secrets</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.5.0</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">detect-secrets</span>
+<span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;--baseline&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;.secrets.baseline&#39;</span><span class="p p-Indicator">]</span>
+
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/pre-commit/pre-commit-hooks</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v4.6.0</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">trailing-whitespace</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">end-of-file-fixer</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-yaml</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-json</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">check-merge-conflict</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">debug-statements</span>
+</code></pre></div>
+<p><strong>Install the hooks:</strong></p>
+<div class="highlight"><pre><span></span><code>pre-commit<span class="w"> </span>install
+</code></pre></div>
+<p>From this point forward, every <code>git commit</code> automatically runs ruff, black, bandit, and detect-secrets. If any of them fail, the commit is blocked and you see exactly what failed and why.</p>
+<p><strong>Run manually against all files:</strong></p>
+<div class="highlight"><pre><span></span><code>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+</code></pre></div>
+<p><strong>The review checklist for every AI-generated block:</strong></p>
+<div class="highlight"><pre><span></span><code>Before accepting any AI-generated code:
+
+□ Do I understand what every line does?
+   If no — ask the AI to explain it line by line.
+
+□ Are there hardcoded values that should be in .env?
+   grep -rn &quot;=\s*[&#39;\&quot;][A-Za-z0-9]{20,}&quot; .
+
+□ Are there requests without timeouts?
+   grep -rn &quot;requests\.\(get\|post\|put\|delete\)&quot; . | grep -v timeout
+
+□ Is user input validated before use?
+   Find every place request data is accessed and trace it forward.
+
+□ Are there SQL queries built with string formatting?
+   grep -rn &quot;f\&quot;.*SELECT\|f&#39;.*SELECT\|%.*SELECT&quot; .
+
+□ Is verify=False anywhere?
+   grep -rn &quot;verify=False&quot; .
+
+□ Are there authentication checks on every endpoint?
+   Check every route decorator.
+
+□ Is there rate limiting on any endpoint that accepts 
+   user input or authenticates users?
+
+□ Run bandit:
+   bandit -r . -ll
+
+□ Run detect-secrets:
+   detect-secrets scan --all-files
+</code></pre></div>
+<p><strong>When to throw AI code away entirely:</strong></p>
+<div class="highlight"><pre><span></span><code>→ You have asked for the same security fix three times
+  and the AI keeps reintroducing the vulnerability
+
+→ The code is so long and tangled that you cannot
+  identify where the security-critical logic is
+
+→ The AI is generating code that uses libraries or APIs
+  that do not exist or do not work as described
+
+→ You have fixed five bugs and each fix created two more
+
+→ The code handles authentication, payments, or personal
+  data and you do not understand how it works
+</code></pre></div>
+<p>On security-critical code, writing it yourself with full understanding is better than shipping AI code you are guessing about.</p>
+<hr />
+<h2 id="open-source-tools-the-danger-nobody-talks-about">Open Source Tools — The Danger Nobody Talks About</h2>
+<p>Every open source tool you use to build your project is code you did not write, running with your permissions, on your machine, potentially with access to your credentials and your users' data.</p>
+<p>Most open source tools are safe. Some are not. And the line between safe and unsafe can change overnight when a maintainer's account is compromised, a malicious PR is merged, or a well-intentioned project is acquired by someone with different intentions.</p>
+<p><strong>How to vet an open source tool before using it:</strong></p>
+<div class="highlight"><pre><span></span><code>□ When was the last commit? 
+  More than 12 months ago = potentially unmaintained.
+  Unmaintained = unpatched vulnerabilities.
+
+□ How many contributors does it have?
+  One-person projects are higher risk — single point of failure.
+
+□ Does it have a SECURITY.md or vulnerability reporting process?
+  If not, how would you know if it had a critical CVE?
+
+□ How many open issues are there and how old are they?
+  1,000 open issues with none addressed in 6 months = abandoned.
+
+□ Has it been recently transferred to a new owner?
+  Account takeovers and malicious acquisitions happen.
+  A trusted package under new ownership is worth auditing.
+
+□ Does it have tests?
+  Code without tests is harder to audit and easier to break.
+
+□ Check pip-audit before installing:
+  pip-audit --dry-run package-name
+</code></pre></div>
+<p><strong>Copying code from Stack Overflow, GitHub, or AI:</strong></p>
+<div class="highlight"><pre><span></span><code>→ Check the license. Some licenses require attribution.
+  Some prohibit commercial use. Know what you are agreeing to.
+
+→ Read the code. Do not copy what you do not understand.
+
+→ Check the date. A Stack Overflow answer from 2015 may 
+  use an approach that has since been superseded by a 
+  more secure pattern.
+
+→ AI-generated code on GitHub is not peer-reviewed code.
+  A repository with AI-generated code labeled as such 
+  has the same security properties as if you generated it.
+</code></pre></div>
+<hr />
+<h2 id="the-bottom-line">The Bottom Line</h2>
+<p>AI is an extraordinarily powerful development tool. It is not a replacement for understanding what you are building, why it is built the way it is, and what could go wrong with it.</p>
+<p>The tools in this section exist because humans miss things. The review discipline exists because AI misses different things. Together — human review, automated tooling, and a security-first mindset — they catch what either one alone would not.</p>
+<p>Ship fast. Ship secure. Know the difference between the two.</p>
+<hr />
+<p><em><a href="https://instagram.com/sudochef">@sudochef</a> — Build like you're the target. Because you are.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © SudoChef — @sudochef — Build like you're the target. Because you are.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/commit-issues" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://instagram.com/sudochef" target="_blank" rel="noopener" title="instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
