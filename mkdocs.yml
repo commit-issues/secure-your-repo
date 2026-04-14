@@ -58,6 +58,7 @@ nav:
     - Network Security: code/network.md
     - Database Security: code/database.md
     - Logging & Auditing: code/logging.md
+    - Vibe Coding & AI Development: code/vibe-coding.md
   - Threats & Awareness:
     - OSINT & Identity Leakage: threats/osint.md
     - AI-Assisted Attacks: threats/ai-attacks.md
