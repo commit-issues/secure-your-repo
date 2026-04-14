@@ -52,13 +52,13 @@ nav:
     - Git History Auditing: hardening/history.md
     - Day One Checklist: hardening/checklist.md
   - Writing Secure Code:
+    - Vibe Coding & AI Dev: code/vibe-coding.md
     - Credential Management: code/credentials.md
     - Input Validation: code/input-validation.md
     - Dependency Security: code/dependencies.md
     - Network Security: code/network.md
     - Database Security: code/database.md
     - Logging & Auditing: code/logging.md
-    - Vibe Coding & AI Development: code/vibe-coding.md
   - Threats & Awareness:
     - OSINT & Identity Leakage: threats/osint.md
     - AI-Assisted Attacks: threats/ai-attacks.md
