@@ -74,6 +74,8 @@ The defense is simple and absolute: every account gets a unique password. No exc
 
 **Hardcoded credentials in public repositories**
 
+Before we go further — hardcoding is covered in its own full section later in this page, including what it means, why it happens, and how to find and fix it. This is just one of the ways it causes real damage in practice.
+
 Automated tools scan every public commit to GitHub within minutes of it being pushed, looking for credential patterns. API keys, database URLs, tokens, private keys — all of it. If you commit a credential to a public repo, assume it has been harvested before you notice the mistake.
 
 This happens constantly. It happens to experienced developers. It happens to security professionals. It happens because someone was moving fast, or testing something "temporarily," or forgot that a file was being tracked by git.
@@ -194,6 +196,9 @@ YubiKey is the most widely supported option.
 Google Titan Key is a solid alternative.
 Both work with GitHub, Google, and most major services.
 ```
+
+!!! warning "Hardware keys can be lost, stolen, or corrupted"
+    A hardware key is a physical object — which means it has physical vulnerabilities. If you lose it, it is gone. If someone steals it, they have it. If it is corrupted or damaged, it stops working. This is why you should always register at least two hardware keys on any account that supports it — a primary key and a backup stored somewhere secure. Without a backup, losing your key means going through account recovery, which is slow and not always possible. Never rely on a single hardware key as your only second factor.
 
 **Biometrics — convenient but not infallible**
 
@@ -342,37 +347,78 @@ const apiKey = process.env.API_KEY;
 const databaseUrl = process.env.DATABASE_URL;
 ```
 
-**chmod 600 — protecting your .env file:**
+**chmod — understanding and setting file permissions:**
 
-On macOS and Linux, every file has permissions that control who can read it, write to it, or execute it. `chmod` is the command that changes those permissions. The number `600` is a shorthand code that means: the owner of this file can read and write it, and nobody else can do anything with it at all.
+On macOS and Linux, every file has a set of permissions that controls exactly who can read it, write to it, or execute it. These permissions are enforced by the operating system — not by your application. Even if your code never exposes a file, if the permissions are too open, another user or process on the same system can read it directly.
 
-!!! tip "Understanding chmod numbers"
-    The three digits in chmod represent three groups of users:
-    the file owner, the owner's group, and everyone else.
-    Each digit is a number from 0-7 that represents permissions:
-    4 = read, 2 = write, 1 = execute, 0 = no permission.
-    You add them together: 6 = read + write (4+2), 0 = nothing.
-    So chmod 600 means: owner can read and write, 
-    everyone else gets nothing.
+`chmod` is the terminal command that changes file permissions. You run it in your terminal in the directory where the file lives:
 
 ```bash
-# macOS / Linux — set permissions so only you can read/write:
+chmod 600 .env
+```
+
+**Understanding the numbers:**
+
+chmod uses a three-digit number where each digit represents a different group:
+
+```
+First digit  → the file OWNER (you)
+Second digit → your GROUP (other users in the same group)
+Third digit  → EVERYONE ELSE on the system
+
+Each digit is built by adding permission values:
+4 = read
+2 = write
+1 = execute
+0 = no permission
+
+Examples:
+7 = read + write + execute (4+2+1) — full access
+6 = read + write (4+2)
+4 = read only
+0 = no access at all
+
+chmod 600 means:
+  6 → owner can read and write
+  0 → group gets nothing
+  0 → everyone else gets nothing
+```
+
+**Common permission values:**
+
+```
+chmod 600 .env        → private file, owner read/write only
+chmod 700 .ssh/       → private directory, owner only
+chmod 644 README.md   → public read, owner can write
+chmod 755 scripts/    → public read/execute, owner can write
+```
+
+**Apply and verify:**
+
+```bash
+# macOS / Linux:
 chmod 600 .env
 
-# Verify it worked:
+# Verify:
 ls -la .env
-# You should see: -rw------- 1 youruser staff ...
-# The -rw------- means: owner=read/write, group=none, others=none
+# Should show: -rw------- 1 youruser staff ...
+# -rw------- breaks down as:
+# - = regular file
+# rw- = owner: read + write
+# --- = group: no access
+# --- = everyone else: no access
 ```
 
 ```
 Windows equivalent:
-Right-click your .env file → Properties → Security tab
+Right-click .env → Properties → Security tab
 → Click Edit
-→ Remove all users and groups except your own account
-→ Set your account permissions to: Read and Write only
+→ Remove all users except your own account
+→ Set your account to Read and Write only
 → Click Apply → OK
 ```
+
+Run `chmod 600 .env` every time you create a new .env file. Verify with `ls -la .env` after creation and after any restore from backup.
 
 !!! warning "If you accidentally commit your .env file"
     Stop what you are doing. Do not just delete the file and commit again — that does not remove it from git history. Follow the emergency procedure at the bottom of this section. Every value in that file must be considered compromised and revoked immediately.
@@ -458,18 +504,31 @@ Note: these grep commands find candidates — you still need to read each result
 
 ## Temp Files — Always Remove Them
 
-Temporary files are created constantly during development — debugging output, test data, downloaded files, generated reports, cached responses. They accumulate quietly and often contain sensitive data.
+Temporary files are one of the most overlooked attack vectors in development. They are created constantly — debugging output, test data, API responses saved for inspection, downloaded files, generated reports, cached responses — and they accumulate quietly in your project directory. Most developers forget they exist until something goes wrong.
+
+The reason they are dangerous: they often contain exactly the kind of sensitive data attackers are looking for, and they are almost never added to .gitignore because nobody thinks about them when setting up a project. Make cleaning them up a habit — right after you are done with them, not before the next commit.
+
+**How attackers exploit forgotten temp files:**
+
+A temp file containing credentials or user data that gets committed — even once, even briefly — follows the same rules as any other committed secret. It is in the history. Deleting it does not remove it. Automated scanners harvest it. And because temp files are generated by your application, they often contain data more sensitive than your source code: real API responses with real tokens, real database query results with real user data, real debug output with environment variables printed to the console.
+
+Even on a private repository, temp files sitting in your project directory can be accidentally committed by a `git add .` that was not reviewed carefully. They can be included in zip archives sent to collaborators. They can appear in screenshots. They can be accessed by other processes on the same machine.
 
 ```
-Common temp files that contain credentials:
-→ debug.log — may contain printed environment variables
-→ test_output.json — may contain API responses with tokens
-→ downloaded_data.csv — may contain user PII
-→ cache/ directories — may contain authenticated responses
-→ *.tmp files — often forgotten entirely
+Common temp files that contain sensitive data:
+→ debug.log — often contains printed environment variables,
+  stack traces with file paths, and internal system details
+→ test_output.json — may contain real API responses with tokens
+→ downloaded_data.csv — may contain real user PII from the database
+→ cache/ directories — may contain authenticated API responses
+  that include session tokens or user data
+→ *.tmp files — generated by editors, build tools, and scripts,
+  often forgotten entirely
+→ response_debug.txt, output.json, test.db — one-off debugging
+  files that never get deleted
 ```
 
-**Add these to your .gitignore:**
+**Add these to your .gitignore immediately:**
 
 ```
 # Temp files
@@ -482,17 +541,26 @@ tmp/
 temp/
 test_output*
 downloaded_*
+response_*
+output_*
+*.bak
 ```
 
-**Find and review temp files before committing:**
+**Find and clean temp files before every commit:**
 
 ```bash
-# Find files that might be temp files
-find . -name "*.tmp" -o -name "*.log" -o -name "*.temp" 2>/dev/null
+# Find temp files in your project
+find . -name "*.tmp" -o -name "*.log" -o -name "*.temp" 2>/dev/null | grep -v ".git"
 
-# Find recently created files that might not be in .gitignore
+# Find untracked files not in .gitignore
 git status --short | grep "^?"
+
+# Review what git is tracking that should not be there
+git ls-files | grep -E "\.(log|tmp|temp|bak)$"
 ```
+
+!!! warning "If a temp file was already committed"
+    Adding it to .gitignore stops future updates — but the committed version is still in your history. If it contained sensitive data, follow the history rewrite procedure in [Git History Auditing](../hardening/history.md).
 
 ---
 
@@ -506,7 +574,10 @@ git status --short | grep "^?"
 **Installing pre-commit:**
 
 ```bash
-# macOS / Linux:
+# macOS:
+pip3 install pre-commit detect-secrets --break-system-packages
+
+# Linux:
 pip install pre-commit detect-secrets --break-system-packages
 
 # Windows:
@@ -693,6 +764,91 @@ Never echo, print, or log secret values in workflow steps. Never use secret valu
 → Never store in git — not even encrypted versions of the key
 → Rotate requires re-encrypting all data — plan for this
 ```
+
+---
+
+## Masking and Redacting Credentials
+
+Masking means displaying a credential in a way that reveals enough to identify it without revealing the full value. Redacting means removing sensitive information entirely before it appears somewhere it should not be.
+
+Both matter in more situations than most developers realize.
+
+**In logs — never log full credential values:**
+
+```python
+# Wrong — full key in the log
+import logging
+logging.info(f"Connecting with API key: {api_key}")
+
+# Correct — masked, shows enough to identify which key
+masked = api_key[:4] + "****" + api_key[-4:]
+logging.info(f"Connecting with API key: {masked}")
+
+# For database URLs — mask the password portion
+import re
+safe_url = re.sub(r"://([^:]+):([^@]+)@", r"://:****@", database_url)
+logging.info(f"Connecting to: {safe_url}")
+```
+
+**The envcheck pattern — verifying without exposing:**
+
+When you need to confirm environment variables are set without displaying their full values:
+
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+alias envcheck='python3 -c "
+import os
+from dotenv import load_dotenv
+load_dotenv()
+keys = ["API_KEY", "DATABASE_URL", "SECRET_KEY"]
+for key in keys:
+    val = os.getenv(key)
+    if val:
+        masked = val[:4] + chr(42)*4 + val[-4:] if len(val) > 8 else chr(42)*8
+        print(f"{key}={masked}")
+    else:
+        print(f"{key}=NOT SET")
+"'
+```
+
+This lets you verify your environment is configured correctly without credentials appearing in your terminal output — or your terminal history.
+
+**Before sharing screens or screenshots:**
+
+```
+→ Close terminal tabs with .env contents visible
+→ Check your editor for open files containing credentials
+→ Blur or crop sensitive portions before sharing screenshots
+→ Never paste credential values into chat, Discord, or Slack
+→ If you accidentally shared a credential — revoke immediately
+```
+
+**In CI/CD logs:**
+
+```yaml
+# Never do this
+- run: echo "Key is ${{ secrets.API_KEY }}"
+
+# Verify a secret is set without revealing it
+- run: |
+    if [ -z "$API_KEY" ]; then
+      echo "API_KEY is not set"
+      exit 1
+    fi
+    echo "API_KEY is set (${#API_KEY} characters)"
+```
+
+**In .env.example files:**
+
+```
+# Wrong — looks like it could be real
+API_KEY=sk-abc123
+
+# Correct — clearly a placeholder
+API_KEY=your-api-key-here
+```
+
+Never use values in .env.example that look like real credentials. Anyone who sees a realistic-looking key may not realize it is a placeholder.
 
 ---
 
