@@ -597,7 +597,7 @@ def search():
 
 Before we get to the tools, you need to know how to search your own code. `grep` is the command-line tool for searching text patterns inside files. If you have never used it, here is everything you need.
 
-**ELI5:** grep is like `Ctrl+F` but for your entire project — all files, all folders, at once. Instead of searching one file, you search everything.
+Think of it this way: grep is like `Ctrl+F` but for your entire project — all files, all folders, at once. Instead of searching one file, you search everything.
 
 **Basic usage:**
 
@@ -656,7 +656,7 @@ These tools automate what your eyes miss. Each one catches a different category 
 
 **Ruff**
 What it does: Lints and formats Python code. Replaces flake8, isort, pyupgrade, and several others in a single tool. Catches style violations, unused imports, undefined variables, and hundreds of other common issues.
-ELI5 analogy: A spell checker and grammar checker for code — it flags the obvious mistakes before anyone else sees them.
+Think of it this way: A spell checker and grammar checker for code — it flags the obvious mistakes before anyone else sees them.
 Cost: Free, open source.
 Difficulty: Easy. One install, one command.
 
@@ -675,7 +675,7 @@ ruff format .       # format code
 
 **Black**
 What it does: Formats Python code to a single, consistent style. No configuration, no debates. It makes every decision about spacing, line length, and formatting and applies it uniformly.
-ELI5 analogy: A strict editor who reformats every document to match a house style — you do not get to argue about it.
+Think of it this way: A strict editor who reformats every document to match a house style — you do not get to argue about it.
 Cost: Free, open source.
 Difficulty: Easy.
 
@@ -695,7 +695,7 @@ Why this matters for security: Consistent formatting makes code easier to review
 
 **Pylint**
 What it does: Deep static analysis of Python code. Catches logic errors, type mismatches, undefined variables, unreachable code, and design problems that simpler linters miss.
-ELI5 analogy: A senior developer reading your code and leaving detailed notes about everything they would question or change.
+Think of it this way: A senior developer reading your code and leaving detailed notes about everything they would question or change.
 Cost: Free, open source.
 Difficulty: Medium. Has many configuration options; start with defaults.
 
@@ -713,7 +713,7 @@ pylint yourmodule.py
 
 **Flake8**
 What it does: Classic Python linter. Checks style (PEP 8), common errors, and complexity. Slower and less comprehensive than Ruff but widely used and well understood.
-ELI5 analogy: A style guide enforcer — makes sure your code follows the agreed-upon rules.
+Think of it this way: A style guide enforcer — makes sure your code follows the agreed-upon rules.
 Cost: Free, open source.
 Difficulty: Easy.
 
@@ -731,7 +731,7 @@ flake8 .
 
 **Bandit**
 What it does: Security-specific static analysis for Python. Scans for known vulnerability patterns — hardcoded passwords, SQL injection, use of weak cryptography, insecure use of subprocess, and dozens more.
-ELI5 analogy: A security auditor who reads your code specifically looking for the things that get people hacked — not style issues, not performance issues, just security problems.
+Think of it this way: A security auditor who reads your code specifically looking for the things that get people hacked — not style issues, not performance issues, just security problems.
 Cost: Free, open source.
 Difficulty: Easy.
 
@@ -753,7 +753,7 @@ This is the tool that would catch `verify=False`, hardcoded credentials, SQL str
 
 **MyPy**
 What it does: Static type checking for Python. Catches type errors — places where a function expects a string but might receive None, or expects a number but receives a list.
-ELI5 analogy: A fact-checker who verifies that every variable is the type you said it would be, before the code runs.
+Think of it this way: A fact-checker who verifies that every variable is the type you said it would be, before the code runs.
 Cost: Free, open source.
 Difficulty: Medium. Requires type annotations to be most effective; can be added gradually.
 
@@ -773,7 +773,7 @@ Why this matters for security: Type errors are a major source of unexpected beha
 
 **SonarQube**
 What it does: Enterprise-grade code quality and security analysis platform. Scans for bugs, vulnerabilities, code smells, and security hotspots across multiple languages. Integrates with CI/CD pipelines and tracks issues over time.
-ELI5 analogy: A full security and quality audit firm — not just catching individual issues but tracking the health of the entire codebase over time.
+Think of it this way: A full security and quality audit firm — not just catching individual issues but tracking the health of the entire codebase over time.
 Cost: Community edition free (self-hosted). SonarCloud free for public repos, paid for private.
 Difficulty: Hard. Requires setup and configuration; significant overhead for small projects. Worth it for anything production-grade with a team.
 
@@ -781,7 +781,7 @@ Difficulty: Hard. Requires setup and configuration; significant overhead for sma
 
 **CopyLeaks**
 What it does: AI content detection and plagiarism checking. Identifies AI-generated content, copied code, and intellectual property issues.
-ELI5 analogy: A detector that tells you how much of what you are shipping was written by AI versus a human — and whether any of it is copied from somewhere else.
+Think of it this way: A detector that tells you how much of what you are shipping was written by AI versus a human — and whether any of it is copied from somewhere else.
 Cost: Paid. Free trial available.
 Difficulty: Easy to use; moderate cost consideration.
 
@@ -789,7 +789,7 @@ Difficulty: Easy to use; moderate cost consideration.
 
 **pre-commit**
 What it does: Framework for managing and running all of the above tools automatically before every `git commit`. If any tool fails, the commit is blocked.
-ELI5 analogy: A checklist that runs itself. Every time you try to commit, pre-commit runs every tool you have configured. If anything fails, it stops the commit and tells you why.
+Think of it this way: A checklist that runs itself. Every time you try to commit, pre-commit runs every tool you have configured. If anything fails, it stops the commit and tells you why.
 Cost: Free, open source.
 Difficulty: Easy to set up, powerful once configured.
 

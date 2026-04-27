@@ -285,7 +285,7 @@ The goal is not to make access impossible. The goal is to make it expensive enou
 
 If you have never heard the term "environment variable" before, this section is for you.
 
-!!! tip "ELI5 — What is an environment variable?"
+!!! tip "What is an environment variable?"
     Imagine your application is a chef and your API key is a secret recipe. You would not write the secret recipe on the menu for every customer to see. You keep it in a private notebook in the kitchen. The chef knows to look in the notebook when they need it.
 
     An environment variable is that private notebook. It is a value stored outside your code — in your operating system or a special file — that your application reads when it runs. The value never appears in your source code. It never gets committed to git. It just gets loaded when the application starts.
@@ -387,7 +387,7 @@ PII stands for Personally Identifiable Information — any data that can be used
 
 Beyond PII and credentials, hardcoding creates a broader problem: anything hardcoded becomes part of your attack surface. A hardcoded email address tells an attacker what account to target. A hardcoded username tells them what identity to impersonate. A hardcoded internal URL tells them what systems exist inside your infrastructure. Attackers do not just look for API keys — they read code looking for any information that helps them understand your environment, your accounts, and your weaknesses.
 
-!!! tip "ELI5 — What does hardcoding mean?"
+!!! tip "What does hardcoding mean?"
     Imagine tattooing your house key onto your arm and then going swimming at a public pool. Everyone there can see it. Hardcoding sensitive information in your code is the same thing — the information is right there in the source, visible to anyone who reads the file, anyone who clones the repo, anyone who finds an old commit in the history, and anyone who gets access to the codebase through a supply chain attack or compromised dependency.
 
 ```python
@@ -498,7 +498,7 @@ git status --short | grep "^?"
 
 ## What Is pre-commit and How It Works
 
-!!! tip "ELI5 — What is a pre-commit hook?"
+!!! tip "What is a pre-commit hook?"
     Every time you run `git commit`, git can automatically run a script first. If the script finds a problem — like a credential in your staged files — it blocks the commit and tells you what it found. You fix the problem, then commit successfully. The hook runs automatically. You do not have to remember to check.
 
     Think of it like a security guard at the door of your repository. Every time you try to commit, the guard checks what you are bringing in. Credentials? Not allowed. Clean code? Come on through.
