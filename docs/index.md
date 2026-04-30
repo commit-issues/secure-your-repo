@@ -9,7 +9,7 @@ hide:
 
 <div class="hero-section">
   <div class="hero-logo">
-    <svg viewBox="0 0 480 310" xmlns="http://www.w3.org/2000/svg" class="main-logo">
+    <svg viewBox="0 0 480 350" xmlns="http://www.w3.org/2000/svg" class="main-logo">
       <defs>
         <linearGradient id="ms1" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:#1e3a6e"/>
@@ -30,20 +30,21 @@ hide:
       <text x="60" y="162" font-family="Georgia,serif" font-size="72" font-weight="900" fill="#2a4f9e" letter-spacing="-2">Your</text>
       <text x="100" y="236" font-family="Georgia,serif" font-size="72" font-weight="900" fill="none" stroke="white" stroke-width="3.5" stroke-linejoin="round" letter-spacing="-2">Shi</text>
       <text x="100" y="236" font-family="Georgia,serif" font-size="72" font-weight="900" fill="#7c3aed" letter-spacing="-2">Shi</text>
-      <rect x="240" y="118" width="4" height="130" fill="none" stroke="white" stroke-width="2.5" rx="1.5"/>
-      <rect x="240" y="118" width="4" height="130" fill="#1e3a6e" rx="1.5"/>
-      <path d="M242 125 Q301 150 301 200 Q301 238 244 250 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M242 125 Q301 150 301 200 Q301 238 244 250 Z" fill="url(#ms1)"/>
-      <path d="M242 138 Q211 174 242 246 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M242 138 Q211 174 242 246 Z" fill="url(#ms2)" opacity="0.85"/>
-      <path d="M244 136 Q293 158 293 200 Q293 230 246 242" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.18"/>
-      <path d="M201 254 Q221 246 242 249 Q263 246 283 254 Q289 264 242 271 Q195 264 201 254 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M201 254 Q221 246 242 249 Q263 246 283 254 Q289 264 242 271 Q195 264 201 254 Z" fill="url(#mhl)"/>
-      <path d="M209 256 Q242 249 275 256" fill="none" stroke="#4a6fa5" stroke-width="1.2" opacity="0.45"/>
-      <path d="M191 276 Q219 270 242 273 Q266 270 293 276" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
-      <path d="M191 276 Q219 270 242 273 Q266 270 293 276" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
-      <path d="M181 288 Q199 282 217 288 Q235 294 253 288 Q271 282 289 288 Q303 292 313 288" fill="none" stroke="#9b5de5" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-      <path d="M185 298 Q202 293 220 298 Q238 303 256 298 Q274 293 292 298" fill="none" stroke="#7c3aed" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
+      <rect x="240" y="138" width="4" height="130" fill="none" stroke="white" stroke-width="2.5" rx="1.5"/>
+      <rect x="240" y="138" width="4" height="130" fill="#1e3a6e" rx="1.5"/>
+      <path d="M242 145 Q301 170 301 220 Q301 258 244 270 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M242 145 Q301 170 301 220 Q301 258 244 270 Z" fill="url(#ms1)"/>
+      <path d="M242 158 Q211 194 242 266 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M242 158 Q211 194 242 266 Z" fill="url(#ms2)" opacity="0.85"/>
+      <path d="M244 156 Q293 178 293 220 Q293 250 246 262" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.18"/>
+      <path d="M201 274 Q221 266 242 269 Q263 266 283 274 Q289 284 242 291 Q195 284 201 274 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M201 274 Q221 266 242 269 Q263 266 283 274 Q289 284 242 291 Q195 284 201 274 Z" fill="url(#mhl)"/>
+      <path d="M209 276 Q242 269 275 276" fill="none" stroke="#4a6fa5" stroke-width="1.2" opacity="0.45"/>
+      <path d="M191 296 Q219 290 242 293 Q266 290 293 296" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+      <path d="M191 296 Q219 290 242 293 Q266 290 293 296" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
+      <path d="M181 308 Q199 302 217 308 Q235 314 253 308 Q271 302 289 308 Q303 312 313 308" fill="none" stroke="#9b5de5" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+      <path d="M185 318 Q202 313 220 318 Q238 323 256 318 Q274 313 292 318" fill="none" stroke="#7c3aed" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
+      <text x="20" y="338" font-family="Georgia,serif" font-size="11" fill="white" font-style="italic" letter-spacing="1.2" opacity="0.5">A Full Security Engineering Field Guide</text>
       <text x="20" y="295" font-family="Georgia,serif" font-size="11" fill="white" font-style="italic" letter-spacing="1.2" opacity="0.5">A Full Security Engineering Field Guide</text>
     </svg>
   </div>
