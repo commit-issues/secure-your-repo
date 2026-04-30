@@ -2,6 +2,7 @@
 hide:
   - navigation
   - toc
+  - title
 ---
 
 <div class="hero-section">
@@ -83,19 +84,12 @@ fetch('https://api.github.com/repos/commit-issues/secure-your-repo')
 ---
 
 <div class="story-section">
-
-*Nobody handed me a roadmap. I found my way into tech from a kitchen — no CS degree, no connections, no one telling me where to start. I googled everything. I found pieces, fragments, half-answers scattered across forums and YouTube tabs and Stack Overflow threads that assumed I already knew what I didn't. Nothing clicked. Sound familiar?*
-
-*Well I kept going — engineering courses, AI training, more programs — I even graduated a cybersecurity program. And after all of it — I still felt like I didn't fully know what I was doing.*
-
-*The knowledge was there — scattered across bookmarks, notebooks, Notion docs, Obsidian vaults, Slack threads, emails, and textbooks. Everything I learned lived somewhere different. Nothing connected.*
-
-*Every single day I advise people on where to start in security, how to break into tech, where to even begin. I watch them get overwhelmed the same way I did — confused, unsure, not knowing what they don't know. Called skids for trying to learn. So I decided to do something about it. I gathered my messy notes, organized them, structured a guide, rewrote it hundreds of times until the words were exactly right — then I put it on the internet. For free.*
-
-*Because the gap I kept seeing wasn't just "people don't know security" — it was that nobody was teaching developers to build securely from the start. Not how to prevent. Not after the breach. Not how to build securely. Not one single line. So this guide became what nobody built for us — a field guide for shipping securely, written by someone who had to learn it the hard way so you don't have to. Secure your ship — before you ever leave the dock.*
-
-*If it helps even one person, every hour it took will have been worth it.*
-
+<p><em>Nobody handed me a roadmap. I found my way into tech from a kitchen — no CS degree, no connections, no one telling me where to start. I googled everything. I found pieces, fragments, half-answers scattered across forums and YouTube tabs and Stack Overflow threads that assumed I already knew what I didn't. Nothing clicked. Sound familiar?</em></p>
+<p><em>Well I kept going — engineering courses, AI training, more programs — I even graduated a cybersecurity program. And after all of it — I still felt like I didn't fully know what I was doing.</em></p>
+<p><em>The knowledge was there — scattered across bookmarks, notebooks, Notion docs, Obsidian vaults, Slack threads, emails, and textbooks. Everything I learned lived somewhere different. Nothing connected.</em></p>
+<p><em>Every single day I advise people on where to start in security, how to break into tech, where to even begin. I watch them get overwhelmed the same way I did — confused, unsure, not knowing what they don't know. Called skids for trying to learn. So I decided to do something about it. I gathered my messy notes, organized them, structured a guide, rewrote it hundreds of times until the words were exactly right — then I put it on the internet. For free.</em></p>
+<p><em>Because the gap I kept seeing wasn't just "people don't know security" — it was that nobody was teaching developers to build securely from the start. Not how to prevent. Not after the breach. Not how to build securely. Not one single line. So this guide became what nobody built for us — a field guide for shipping securely, written by someone who had to learn it the hard way so you don't have to. Secure your ship — before you ever leave the dock.</em></p>
+<p class="story-final"><em>If it helps even one person, every hour it took will have been worth it.</em></p>
 </div>
 
 ---
@@ -304,10 +298,13 @@ fetch('https://api.github.com/repos/commit-issues/secure-your-repo')
 .section-label.gold { color: #c9a84c; }
 .section-label.purple { color: #9b5de5; }
 
+.story-section p { font-size: 1.05rem; line-height: 1.9; opacity: 0.85; margin: 0 0 1.2rem; }
+.story-final { color: #9b5de5 !important; opacity: 1 !important; }
+
 /* AUDIENCE */
 .audience-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 .audience-card {
