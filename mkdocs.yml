@@ -53,13 +53,13 @@ nav:
     - Day One Checklist: hardening/checklist.md
   - Writing Secure Code:
     - Vibe Coding & AI Dev: code/vibe-coding.md
-    - Cron & Scheduled Tasks: code/cron.md
     - Credential Management: code/credentials.md
     - Input Validation: code/input-validation.md
     - Dependency Security: code/dependencies.md
     - Network Security: code/network.md
     - Database Security: code/database.md
     - Logging & Auditing: code/logging.md
+    - Cron & Scheduled Tasks: code/cron.md
   - Threats & Awareness:
     - OSINT & Identity Leakage: threats/osint.md
     - AI-Assisted Attacks: threats/ai-attacks.md
