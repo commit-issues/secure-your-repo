@@ -24,6 +24,7 @@ hide:
           <stop offset="100%" style="stop-color:#0f1f3d"/>
         </linearGradient>
       </defs>
+      <g transform="translate(70, 0)">
       <text x="20" y="88" font-family="Georgia,serif" font-size="72" font-weight="900" fill="none" stroke="white" stroke-width="3.5" stroke-linejoin="round" letter-spacing="-2">Secure</text>
       <text x="20" y="88" font-family="Georgia,serif" font-size="72" font-weight="900" fill="#1e3a6e" letter-spacing="-2">Secure</text>
       <text x="60" y="162" font-family="Georgia,serif" font-size="72" font-weight="900" fill="none" stroke="white" stroke-width="3.5" stroke-linejoin="round" letter-spacing="-2">Your</text>
@@ -45,6 +46,7 @@ hide:
       <path d="M181 308 Q199 302 217 308 Q235 314 253 308 Q271 302 289 308 Q303 312 313 308" fill="none" stroke="#9b5de5" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
       <path d="M185 318 Q202 313 220 318 Q238 323 256 318 Q274 313 292 318" fill="none" stroke="#7c3aed" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
       <text x="20" y="338" font-family="Georgia,serif" font-size="11" fill="white" font-style="italic" letter-spacing="1.2" opacity="0.5">A Full Security Engineering Field Guide</text>
+      </g>
     </svg>
   </div>
 
