@@ -75,6 +75,7 @@ nav:
     - Cron & Automation: maintenance/cron.md
     - Dependency Intelligence: maintenance/dependencies.md
     - Notifications: maintenance/notifications.md
+    - Now Go Build: now-go-build.md
 
 extra:
   social:
