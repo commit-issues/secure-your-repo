@@ -1,4 +1,4 @@
-site_name: Secure Your Repo
+site_name: Secure Your Ship
 site_url: https://commit-issues.github.io/secure-your-repo
 site_description: A field guide for securing your GitHub presence, repositories, identity, and code.
 site_author: SudoChef
@@ -39,7 +39,7 @@ markdown_extensions:
   - pymdownx.superfences
 
 nav:
-  - Home: index.md
+  - The Mission: index.md
   - Setup:
     - Securing Your Account: setup/account.md
     - SSH Keys: setup/ssh.md
