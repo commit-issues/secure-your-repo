@@ -22,7 +22,7 @@ Your GitHub account is the front door to everything you build. Every repo, every
 
 ---
 
-## 📧 Start With a Dedicated Email
+## Start With a Dedicated Email
 
 Before you create or harden your GitHub account, set it up with an email address that exists only for this purpose. Not your personal email. Not your work email. A clean, separate address that is not connected to your real name, your employer, or any other platform you use.
 
@@ -36,7 +36,7 @@ Before you create or harden your GitHub account, set it up with an email address
 
 ---
 
-## 🔐 Two-Factor Authentication — Do It Right
+## Two-Factor Authentication — Do It Right
 
 Enable 2FA immediately. But how you enable it matters as much as whether you enable it.
 
@@ -71,7 +71,7 @@ GitHub → Settings → Password and authentication
 
 ---
 
-## 🔑 Save Your Backup Codes — Right Now
+## Save Your Backup Codes — Right Now
 
 The moment you enable 2FA, GitHub gives you a set of one-time backup codes. These are your way back in if you ever lose access to your authenticator app.
 
@@ -85,7 +85,7 @@ The moment you enable 2FA, GitHub gives you a set of one-time backup codes. Thes
 
 ---
 
-## 📧 Commit Email — Mask Your Identity
+## Commit Email — Mask Your Identity
 
 Every commit you push includes the email address set in your local git config. If that is your real email, it is now permanently embedded in your commit history on every public repo you touch — visible to anyone, forever.
 
@@ -120,7 +120,7 @@ git config user.email
 
 ---
 
-## 👁 Vigilant Mode
+## Vigilant Mode
 
 Enable Vigilant Mode so every commit on your account displays its verification status. Any commit that is not cryptographically signed — including anything pushed while impersonating you — will show as unverified.
 
@@ -135,7 +135,7 @@ GitHub → Settings → SSH and GPG keys
 
 ---
 
-## 🔗 Audit SSH Keys and Third-Party Access
+## Audit SSH Keys and Third-Party Access
 
 Any SSH key registered to your account can push code to your repos. Any third-party app you have ever authorized still has that access unless you explicitly revoked it. Neither expires automatically.
 
@@ -165,7 +165,7 @@ Revoke anything unnecessary.
 
 ---
 
-## ✅ Verification Checklist
+## Verification Checklist
 
 New account or existing — run through this before moving on.
 
