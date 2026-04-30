@@ -5,6 +5,8 @@ hide:
   - title
 ---
 
+# &nbsp;
+
 <div class="hero-section">
   <div class="hero-logo">
     <svg viewBox="0 0 480 310" xmlns="http://www.w3.org/2000/svg" class="main-logo">
@@ -28,20 +30,20 @@ hide:
       <text x="60" y="162" font-family="Georgia,serif" font-size="72" font-weight="900" fill="#2a4f9e" letter-spacing="-2">Your</text>
       <text x="100" y="236" font-family="Georgia,serif" font-size="72" font-weight="900" fill="none" stroke="white" stroke-width="3.5" stroke-linejoin="round" letter-spacing="-2">Shi</text>
       <text x="100" y="236" font-family="Georgia,serif" font-size="72" font-weight="900" fill="#7c3aed" letter-spacing="-2">Shi</text>
-      <rect x="300" y="118" width="4" height="130" fill="none" stroke="white" stroke-width="2.5" rx="1.5"/>
-      <rect x="300" y="118" width="4" height="130" fill="#1e3a6e" rx="1.5"/>
-      <path d="M302 125 Q361 150 361 200 Q361 238 304 250 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M302 125 Q361 150 361 200 Q361 238 304 250 Z" fill="url(#ms1)"/>
-      <path d="M302 138 Q271 174 302 246 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M302 138 Q271 174 302 246 Z" fill="url(#ms2)" opacity="0.85"/>
-      <path d="M304 136 Q353 158 353 200 Q353 230 306 242" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.18"/>
-      <path d="M261 254 Q281 246 302 249 Q323 246 343 254 Q349 264 302 271 Q255 264 261 254 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M261 254 Q281 246 302 249 Q323 246 343 254 Q349 264 302 271 Q255 264 261 254 Z" fill="url(#mhl)"/>
-      <path d="M269 256 Q302 249 335 256" fill="none" stroke="#4a6fa5" stroke-width="1.2" opacity="0.45"/>
-      <path d="M251 276 Q279 270 302 273 Q326 270 353 276" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
-      <path d="M251 276 Q279 270 302 273 Q326 270 353 276" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
-      <path d="M241 288 Q259 282 277 288 Q295 294 313 288 Q331 282 349 288 Q363 292 373 288" fill="none" stroke="#9b5de5" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-      <path d="M245 298 Q262 293 280 298 Q298 303 316 298 Q334 293 352 298" fill="none" stroke="#7c3aed" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
+      <rect x="240" y="118" width="4" height="130" fill="none" stroke="white" stroke-width="2.5" rx="1.5"/>
+      <rect x="240" y="118" width="4" height="130" fill="#1e3a6e" rx="1.5"/>
+      <path d="M242 125 Q301 150 301 200 Q301 238 244 250 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M242 125 Q301 150 301 200 Q301 238 244 250 Z" fill="url(#ms1)"/>
+      <path d="M242 138 Q211 174 242 246 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M242 138 Q211 174 242 246 Z" fill="url(#ms2)" opacity="0.85"/>
+      <path d="M244 136 Q293 158 293 200 Q293 230 246 242" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.18"/>
+      <path d="M201 254 Q221 246 242 249 Q263 246 283 254 Q289 264 242 271 Q195 264 201 254 Z" fill="none" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M201 254 Q221 246 242 249 Q263 246 283 254 Q289 264 242 271 Q195 264 201 254 Z" fill="url(#mhl)"/>
+      <path d="M209 256 Q242 249 275 256" fill="none" stroke="#4a6fa5" stroke-width="1.2" opacity="0.45"/>
+      <path d="M191 276 Q219 270 242 273 Q266 270 293 276" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+      <path d="M191 276 Q219 270 242 273 Q266 270 293 276" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
+      <path d="M181 288 Q199 282 217 288 Q235 294 253 288 Q271 282 289 288 Q303 292 313 288" fill="none" stroke="#9b5de5" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+      <path d="M185 298 Q202 293 220 298 Q238 303 256 298 Q274 293 292 298" fill="none" stroke="#7c3aed" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
       <text x="20" y="295" font-family="Georgia,serif" font-size="11" fill="white" font-style="italic" letter-spacing="1.2" opacity="0.5">A Full Security Engineering Field Guide</text>
     </svg>
   </div>
