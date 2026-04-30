@@ -1,0 +1,3430 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A field guide for securing your GitHub presence, repositories, identity, and code.">
+      
+      
+        <meta name="author" content="SudoChef">
+      
+      
+        <link rel="canonical" href="https://commit-issues.github.io/secure-your-ship/code/network/">
+      
+      
+        <link rel="prev" href="../dependencies/">
+      
+      
+        <link rel="next" href="../database/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Network Security - Secure Your Ship</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#network-security-data-integrity" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Secure Your Ship" class="md-header__button md-logo" aria-label="Secure Your Ship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Secure Your Ship
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Network Security
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  The Mission
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../setup/account/" class="md-tabs__link">
+          
+  
+  
+  Setup
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../hardening/settings/" class="md-tabs__link">
+          
+  
+  
+  Hardening Your Repo
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../vibe-coding/" class="md-tabs__link">
+          
+  
+  
+  Writing Secure Code
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../threats/osint/" class="md-tabs__link">
+          
+  
+  
+  Threats & Awareness
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../maintenance/freshness/" class="md-tabs__link">
+          
+  
+  
+  Maintenance
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Secure Your Ship" class="md-nav__button md-logo" aria-label="Secure Your Ship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Secure Your Ship
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Mission
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Securing Your Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH Keys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/new-repo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starting a New Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting & Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardening Your Repo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardening Your Repo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/rulesets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch Protection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/advanced-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git History Auditing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day One Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing Secure Code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Writing Secure Code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vibe-coding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vibe Coding & AI Dev
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../credentials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credential Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependency Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-networks-actually-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Networks Actually Work
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How Networks Actually Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-a-network-actually-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a network actually is
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-a-network-call-is-and-why-your-application-makes-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a network call is — and why your application makes them
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis-what-they-are-and-where-they-fit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs — what they are and where they fit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-data-actually-travels-packets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How data actually travels — packets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip-addresses-the-addressing-system-that-makes-delivery-possible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IP addresses — the addressing system that makes delivery possible
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ports-how-one-server-handles-many-different-services-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ports — how one server handles many different services at once
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-the-city-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS — the city directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-threat-in-plain-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Threat in Plain Terms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssl-and-tls-the-encryption-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSL and TLS — The Encryption Layer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSL and TLS — The Encryption Layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-they-are" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What they are
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-tls-actually-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What TLS actually does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls-versions-why-the-version-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS versions — why the version matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#certificates-what-they-are-and-why-they-matter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificates — What They Are and Why They Matter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Certificates — What They Are and Why They Matter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#certificate-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificate chains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificate-pinning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificate pinning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificate-expiry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificate expiry
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https-not-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS — Not Optional
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTPS — Not Optional">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-padlock-actually-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the padlock actually means
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enforcing-https-in-your-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enforcing HTTPS in your application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hsts-making-the-enforcement-permanent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS — making the enforcement permanent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifyfalse-the-most-dangerous-line-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        verify=False — The Most Dangerous Line in Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="verify=False — The Most Dangerous Line in Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-developers-add-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why developers add it
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-correct-fix-for-every-scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The correct fix for every scenario
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timeouts-every-request-needs-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timeouts — Every Request Needs One
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Timeouts — Every Request Needs One">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-no-timeout-actually-costs-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What no timeout actually costs you
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-timeout-vs-read-timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connect timeout vs read timeout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-set-timeouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to set timeouts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensible-starting-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sensible starting values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-request-security-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Request Security Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS Security
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dns-spoofing-poisoning-the-address-book" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS spoofing — poisoning the address book
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dnssec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNSSEC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-your-application-can-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What your application can do
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-integrity-verifying-what-you-received" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Integrity — Verifying What You Received
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Integrity — Verifying What You Received">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checksums-and-hashes-for-downloaded-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checksums and hashes for downloaded files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhook-signature-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Webhook signature verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secure Headers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Secure Headers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-each-header-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What each header does
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors-cross-origin-resource-sharing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CORS — Cross-Origin Resource Sharing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CORS — Cross-Origin Resource Sharing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-wildcard-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The wildcard * problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-cors-correctly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring CORS correctly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging & Auditing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cron & Scheduled Tasks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threats & Awareness
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Threats & Awareness
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/osint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSINT & Identity Leakage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/ai-attacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI-Assisted Attacks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/forking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forking & Attribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/supply-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supply Chain Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/stolen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    When Your Project Gets Stolen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/visibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repo Visibility & Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintenance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maintenance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/freshness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Freshness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/backups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup & Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/email/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Email Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/debt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Debt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/cron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cron & Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependency Intelligence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../now-go-build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Now Go Build
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-networks-actually-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Networks Actually Work
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How Networks Actually Work">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-a-network-actually-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a network actually is
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-a-network-call-is-and-why-your-application-makes-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a network call is — and why your application makes them
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apis-what-they-are-and-where-they-fit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIs — what they are and where they fit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-data-actually-travels-packets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How data actually travels — packets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ip-addresses-the-addressing-system-that-makes-delivery-possible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IP addresses — the addressing system that makes delivery possible
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ports-how-one-server-handles-many-different-services-at-once" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ports — how one server handles many different services at once
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dns-the-city-directory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS — the city directory
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-threat-in-plain-terms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Threat in Plain Terms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ssl-and-tls-the-encryption-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSL and TLS — The Encryption Layer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSL and TLS — The Encryption Layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-they-are" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What they are
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-tls-actually-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What TLS actually does
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tls-versions-why-the-version-matters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS versions — why the version matters
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#certificates-what-they-are-and-why-they-matter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificates — What They Are and Why They Matter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Certificates — What They Are and Why They Matter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#certificate-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificate chains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificate-pinning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificate pinning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#certificate-expiry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Certificate expiry
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#https-not-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTTPS — Not Optional
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HTTPS — Not Optional">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-padlock-actually-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the padlock actually means
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enforcing-https-in-your-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enforcing HTTPS in your application
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hsts-making-the-enforcement-permanent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HSTS — making the enforcement permanent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifyfalse-the-most-dangerous-line-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        verify=False — The Most Dangerous Line in Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="verify=False — The Most Dangerous Line in Python">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-developers-add-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why developers add it
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-correct-fix-for-every-scenario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The correct fix for every scenario
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timeouts-every-request-needs-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timeouts — Every Request Needs One
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Timeouts — Every Request Needs One">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-no-timeout-actually-costs-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What no timeout actually costs you
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connect-timeout-vs-read-timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connect timeout vs read timeout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-set-timeouts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to set timeouts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensible-starting-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sensible starting values
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-request-security-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Request Security Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS Security
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DNS Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dns-spoofing-poisoning-the-address-book" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNS spoofing — poisoning the address book
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dnssec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DNSSEC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-your-application-can-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What your application can do
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-integrity-verifying-what-you-received" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Integrity — Verifying What You Received
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Integrity — Verifying What You Received">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checksums-and-hashes-for-downloaded-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checksums and hashes for downloaded files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#webhook-signature-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Webhook signature verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#secure-headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secure Headers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Secure Headers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-each-header-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What each header does
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors-cross-origin-resource-sharing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CORS — Cross-Origin Resource Sharing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CORS — Cross-Origin Resource Sharing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-wildcard-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The wildcard * problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-cors-correctly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring CORS correctly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="network-security-data-integrity">Network Security &amp; Data Integrity</h1>
+<p><em>Every request your application makes is a potential interception point.</em></p>
+<hr />
+<div class="admonition info">
+<p class="admonition-title">TL;DR</p>
+<ul>
+<li>Every network call your application makes travels through infrastructure you do not own or control — servers, routers, ISPs, and third-party vendors, any of which can be a weak link in the chain.</li>
+<li>SSL and TLS are the encryption protocols that protect data in transit. Understanding them is the foundation for everything else on this page.</li>
+<li>Without HTTPS, everything you send is readable by anyone on the path — credentials, tokens, user data.</li>
+<li><code>verify=False</code> in Python disables SSL verification entirely. It is never acceptable in production code.</li>
+<li>Every outbound request needs a timeout. A missing timeout is a denial-of-service vector waiting to be triggered.</li>
+<li>CORS misconfiguration and missing security headers are among the most common and most avoidable vulnerabilities in web applications.</li>
+</ul>
+<p>Already comfortable with networking basics? Jump to <a href="#the-request-security-checklist">The Request Security Checklist →</a></p>
+</div>
+<hr />
+<p>You spent weeks securing your application. Input validation. Encrypted secrets. Signed commits. Dependency audits. Everything locked down.</p>
+<p>Then your application made a network request — and everything you just protected left your controlled environment and traveled across infrastructure owned by strangers, maintained by organizations you have never audited, through systems that have been compromised before and will be again.</p>
+<p>At some point today, your application will send data across a network. It will not go directly from your machine to its destination. It will hop through routers, pass through ISPs, cross data centers, touch third-party infrastructure — none of which you own, none of which you can inspect, any of which can be a weak link.</p>
+<p>Most developers never think about this. The request goes out, the response comes back, and everything in between is invisible. That invisibility is exactly what attackers count on.</p>
+<hr />
+<p>You saw in the <a href="../dependencies/">Dependency Security →</a> section how a trusted package in your own supply chain can become the attack vector. The network is the same problem at a different layer — infrastructure you depend on, that you did not build, that you cannot fully control. This section covers what that actually means, why it matters for security, and exactly what to do about it. No networking background required — we start from the ground up.</p>
+<hr />
+<h2 id="how-networks-actually-work">How Networks Actually Work</h2>
+<p>Before you can secure something, you need to understand what it is. Most security mistakes in network code happen because developers treat network calls as magic — data goes in, data comes out, and everything in between is someone else's problem. It is not.</p>
+<h3 id="what-a-network-actually-is">What a network actually is</h3>
+<p>Picture a city. It has buildings of all sizes — houses, offices, warehouses, data centers. It has roads connecting them. It has intersections managed by traffic systems, highways that carry long-distance traffic, and local streets that get you to a specific address.</p>
+<p>Every building in this city can send and receive deliveries. To send something, you put it in a vehicle, give the driver a destination address, and send it out onto the road network. The vehicle doesn't travel in a straight line from your door to the destination — it goes through intersections, onto highways, through other neighborhoods, managed by road infrastructure that belongs to the city, not to you.</p>
+<p>The internet works exactly like this. Every device connected to it — your laptop, a server in a data center in another country, the API your application calls, the payment processor your users trust — is a building in this city. The roads between them are the cables, fiber lines, and wireless connections that carry data from one place to another.</p>
+<p>In networking, each of these connected devices is called a <strong>node</strong> — just a point on the network that can send or receive data. Your laptop is a node. The server running your application is a node. The router in your home is a node. A third-party API your code calls is a node. Every building in the city is a node on the network.</p>
+<p>The internet is the largest version of this city — billions of nodes connected by a shared road system, all using the same rules for how to navigate it.</p>
+<h3 id="what-a-network-call-is-and-why-your-application-makes-them">What a network call is — and why your application makes them</h3>
+<p>Now that you can picture the city, the next question is: what is your application actually doing in it? Apps, websites, SaaS tools, internal platforms — they are all constantly sending and receiving information to function. For the customer placing an order, the student submitting an assignment, the business processing a transaction — every piece of that information travels along those digital roads. And every trip it makes is a potential exposure point.</p>
+<p>Every action requires a network call. A <strong>network call</strong> is any time your application sends a vehicle out onto those roads to communicate. Your application does not sit in isolation processing data quietly. It is constantly in traffic.</p>
+<p>It sends requests to external APIs to get authentication tokens, exchange rates, or user data. It talks to a database running in a different building on the other side of the city. It dispatches notifications through a third-party service, fetches configuration from cloud storage, or checks for software updates. Every one of those is a network call — your application sending something out across roads it does not own, to buildings it does not control, and waiting for a response to come back.</p>
+<p>Each of those trips is an opportunity for something to go wrong — not because your code is broken, but because the roads and intersections between your building and the destination belong to other people. ISPs, cloud providers, data center operators, CDN vendors, and sometimes attackers who have positioned themselves somewhere along the route. The infrastructure in between is the part most developers never think about, until something goes wrong.</p>
+<h3 id="apis-what-they-are-and-where-they-fit">APIs — what they are and where they fit</h3>
+<p>You will make network calls to APIs constantly. An <strong>API</strong> (Application Programming Interface) is an agreement for how two services communicate. Think of it like a courier delivery — there is a service window on the side of a building: you approach, show your credentials, hand over the package, request confirmation in the correct format, and the receiver hands back a response — a signed confirmation of receipt, and a return package. The courier has done his job according to protocol. He does not need to know what happens inside.</p>
+<p>When you use an app, submit a form, or trigger any action — you are the sender. You handed off the package. You have no idea how it gets there. In the same way you do not know which route the bike courier took, you have no control over the roads your data travels. And just like anyone commuting through the city, the courier faces risks the entire time he is on the road — his bag can be gone through, the package tampered with, the contents swapped out, or the delivery rerouted entirely without him realizing it. If someone intercepts the package mid-route, you could receive something empty, something wrong, or something that looks exactly right but isn't. You would not know until it was too late.</p>
+<p>This is where the supply chain problem from the <a href="../dependencies/">Dependency Security →</a> section extends into the network layer. When the Axios npm package was compromised in March 2026, every API call that affected application made passed through compromised code. Imagine the courier delivered the package as expected — response received, everything looked normal. But inside that package was a hidden listening device, a tracker slipped in by a competitor, quietly recording every conversation and reporting back the whole time — and nobody knew it was there. The courier did his job, but after the package arrived, information was being stolen and the sender's building was being infiltrated through the very delivery service they trusted. Authentication headers, request bodies, API keys — all of it was readable to an attacker. Securing your network calls is not a separate concern from securing your supply chain. Your attack surface is constant and wide — you can be compromised from multiple directions at any time, and none of them announce themselves.</p>
+<h3 id="how-data-actually-travels-packets">How data actually travels — packets</h3>
+<p>Here is something that surprises most people: data does not travel across a network in one piece. When your application sends a request, that data gets broken into small chunks called <strong>packets</strong>. Think of it like shipping a large piece of furniture. Rather than trying to fit the whole sofa through the door at once, you disassemble it — cushions in one box, frame in another, legs in a third. Each box gets its own label with the destination address and a number indicating where it fits in the whole. They go out in separate vehicles, possibly taking completely different routes through the city, and get reassembled in the correct order when they all arrive at the destination.</p>
+<p>Network packets work the same way. Each one carries a fragment of your data plus addressing information — where it came from, where it is going, and its sequence number so it can be reassembled correctly. The packets travel independently, may take different roads, and are put back together at the destination.</p>
+<p>Why does this matter for security? Because an attacker who intercepts network traffic does not need to capture an entire connection. Individual packets carry real data. On an unencrypted connection — one where the contents are not scrambled — those packets are readable by anyone who can see them: credentials, API keys, user records, session tokens. All of it travels in packets, and without encryption, all of it is exposed. Encryption is what makes intercepted packets useless. We cover exactly how that works in the next section.</p>
+<h3 id="ip-addresses-the-addressing-system-that-makes-delivery-possible">IP addresses — the addressing system that makes delivery possible</h3>
+<p>Every device on a network has an IP address. Every server. Every router. Every phone. Every website. An IP address is how the network knows where to deliver packets.</p>
+<p>For a packet to travel from your application to a server and back, the road network needs to know where everything is. Every building in our city has a unique street address. In networking, that address is called an <strong>IP address</strong>.</p>
+<div class="admonition info">
+<p class="admonition-title">How IP addresses work</p>
+<p>Every device connected to the internet has a unique numerical address — its IP address. This is how the network knows where to deliver packets, the same way a street address tells a delivery driver where to go.</p>
+<p>IP addresses look like this: <code>203.0.113.42</code> — four numbers separated by dots, each between 0 and 255. Your laptop has one assigned by your router. The server running your application has one. The API you call has one. Even the DNS server we will cover shortly has one (<code>8.8.8.8</code> for Google's public resolver).</p>
+<p>When you write <code>mybank.com</code> in your code, your computer does not know the street address for that building yet. It has to look it up first — like checking a city directory for a business's address before you can send a vehicle there. That lookup is DNS, covered below.</p>
+</div>
+<h3 id="ports-how-one-server-handles-many-different-services-at-once">Ports — how one server handles many different services at once</h3>
+<p>A single server at a single IP address might be running a web server, a database, an email service, and an API all at the same time. Ports are how it keeps those services completely separate — and how your application knows exactly which one to talk to.</p>
+<p>If the IP address is the building, the port is the apartment number inside it. One building, many apartments, each serving a completely different purpose, each with its own door.</p>
+<p>Not all ports are protected the same way — and that is where the security issue comes in.</p>
+<p><strong>Port 80</strong> is where unencrypted HTTP traffic goes. No encryption, no verification. Everything sent through port 80 travels exactly as written — readable by anyone who intercepts it. Port 80 is like a building with no locks on the doors. Anyone walking by can walk in, look around, and read whatever is sitting on the table. You did not invite them. You did not know they were there.</p>
+<p><strong>Port 443</strong> is where HTTPS traffic goes — encrypted, verified, with identity checks before anything gets through. Port 443 is like a building with a deadbolt, a code lock on the entrance, and a system that verifies who is allowed in before they can proceed. Even legitimate access is scoped — like a dog walker who has the door code specifically to walk the dog, for that purpose, during those hours. A random person off the street cannot walk in and read what is on the table, because the system does not let them through the door in the first place.</p>
+<p>A port <strong>listens</strong> for incoming connections. Listening means the service on that port is waiting — like a dedicated receptionist at a specific desk, ready to handle anyone who approaches that desk for that specific purpose. Port 443's receptionist handles encrypted HTTPS connections. Port 5432's receptionist handles PostgreSQL database connections. Each desk handles its own type of visitor and nobody else's.</p>
+<p>When you leave a port open that should be closed, or run a service on a port without authentication, you have left a desk staffed with no one checking who sits down. The internet runs automated scanners around the clock, checking IP addresses for open ports — the same way someone might walk an entire street trying every door handle. An open, unprotected port will be found. The question is only when.</p>
+<h3 id="dns-the-city-directory">DNS — the city directory</h3>
+<p>Every building has a street address. But most people do not navigate by address numbers alone — they look up businesses by name. "I need to get to the main office of Example Corp" — you search the city directory, find their address, then navigate there.</p>
+<p><strong>DNS</strong> — the Domain Name System — is that directory for the internet. When your application needs to reach <code>mybank.com</code>, it does not know the street address yet. It sends a query to a DNS server: "What is the IP address for <code>mybank.com</code>?" The DNS server checks the directory and sends back the answer. Only then can your application's vehicle be dispatched to the right building.</p>
+<p>That lookup happens before your actual request goes anywhere — it is the step of checking the directory before leaving the building. And because it travels across the same road network, it can be intercepted.</p>
+<p>An attacker who can tamper with DNS responses can give your application the wrong address — directing your vehicle to a building they control instead of the real destination. Your application loads up its cargo, locks the doors, and drives straight into the wrong building thinking it has arrived safely. We cover what that means and how to defend against it in the DNS Security section.</p>
+<div class="admonition note">
+<p class="admonition-title">A common misconception — IP addresses and your location</p>
+<p>In this analogy we use street addresses to explain IP addresses, which makes sense for understanding how data gets routed. But in real life, an IP address does not pinpoint your exact location — and this is worth understanding clearly because a lot of people are either overly worried or not worried enough about it.</p>
+<p>Your IP address is assigned by your ISP — your internet provider. It identifies the ISP and the general region they serve, not your home. Think of it less like a street address and more like knowing someone lives somewhere in a particular zip code or neighborhood. Law enforcement can subpoena your ISP and request the account associated with a specific IP address at a specific time — that is how IP addresses are used to identify individuals legally. The ISP knows which customer was assigned that IP at that moment, and they can hand that over under a valid legal order. That is how people get caught.</p>
+<p>A VPN masks your real IP by routing your traffic through a server in a different location — so websites and services see the VPN server's IP, not yours. This is why people use VPNs for privacy. It does not make you invisible — the VPN provider now has your real IP instead — but it does add a layer of separation. What your IP leaking actually exposes is your ISP, a rough geographic area, and a thread that law enforcement or a determined attacker can pull on. That is worth protecting. It is just not the exact home address most people fear it is.</p>
+</div>
+<hr />
+<h2 id="the-threat-in-plain-terms">The Threat in Plain Terms</h2>
+<p>Every request your application sends leaves your machine, travels through infrastructure you do not own, and arrives at its destination through a path you cannot see. A DNS lookup decides where it goes before you send it. Packets carry the actual data. Any node on the path can see unencrypted packets in full.</p>
+<p>On a public network — a coffee shop, a conference, an airport — other people share the same network. Corporate proxies inspect traffic. ISPs log it. Compromised routers reroute it. Third-party vendors sit between you and the services you depend on.</p>
+<p>Encryption is what makes all of that irrelevant. An attacker on the path who intercepts encrypted traffic sees ciphertext — useless noise without the keys to decrypt it. That encryption layer is called TLS, and it is what everything in the rest of this section is built on.</p>
+<hr />
+<h2 id="ssl-and-tls-the-encryption-layer">SSL and TLS — The Encryption Layer</h2>
+<p>Before we go further, we need to establish what SSL and TLS actually are — because they appear throughout this entire section and most explanations skip past them entirely.</p>
+<h3 id="what-they-are">What they are</h3>
+<p><strong>TLS</strong> (Transport Layer Security) is the protocol that encrypts network connections. When your application connects to a server over HTTPS, TLS is doing the actual encryption. It scrambles everything being sent so that every node on the path between you and the server — routers, ISPs, intermediate infrastructure — sees only unreadable noise. Think of the <code>S</code> in <code>https://</code> as secured.</p>
+<p><strong>SSL</strong> (Secure Sockets Layer) is the older name. SSL was the original protocol, but it had security vulnerabilities and has been fully replaced by TLS. When people say "SSL" today, they almost always mean TLS. The terms are used interchangeably across documentation, tools, and error messages — including Python's <code>verify=False</code> flag and the built-in <code>ssl</code> library. If you see SSL mentioned anywhere, assume TLS is what is actually running.</p>
+<h3 id="what-tls-actually-does">What TLS actually does</h3>
+<p>TLS does two things every time your application opens a connection to a server:</p>
+<p><strong>1. It encrypts the connection.</strong> Every byte sent between your application and the server is encrypted before it leaves your machine and can only be decrypted at the destination. No node in between can see it.</p>
+<p><strong>2. It verifies identity.</strong> TLS checks that the server you connected to is actually who it claims to be — not an impersonator who intercepted the connection. This is done using certificates, which we cover in the very next section.</p>
+<h3 id="tls-versions-why-the-version-matters">TLS versions — why the version matters</h3>
+<p>Not all TLS versions are equal. Older versions have known vulnerabilities and should not be in use anywhere.</p>
+<div class="highlight"><pre><span></span><code>TLS 1.0 — deprecated, do not use
+TLS 1.1 — deprecated, do not use
+TLS 1.2 — acceptable, widely supported, minimum acceptable standard
+TLS 1.3 — current standard, faster and more secure than 1.2
+</code></pre></div>
+<p>Modern libraries default to TLS 1.2 or higher. If you are configuring your own server, explicitly disable older versions:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python — enforce minimum TLS version</span>
+<span class="kn">import</span> <span class="nn">ssl</span>
+
+<span class="n">context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">SSLContext</span><span class="p">(</span><span class="n">ssl</span><span class="o">.</span><span class="n">PROTOCOL_TLS_CLIENT</span><span class="p">)</span>
+<span class="n">context</span><span class="o">.</span><span class="n">minimum_version</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">TLSVersion</span><span class="o">.</span><span class="n">TLSv1_2</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Node — enforce minimum TLS version</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">https</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;https&#39;</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">https</span><span class="p">.</span><span class="nx">createServer</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">minVersion</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;TLSv1.2&#39;</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>TLS encrypts the connection. Certificates are how TLS proves the server on the other end is legitimate — and that is what we cover next.</p>
+<hr />
+<h2 id="certificates-what-they-are-and-why-they-matter">Certificates — What They Are and Why They Matter</h2>
+<p>A certificate is a verified identity document for a server — the digital equivalent of a passport or a business license. When your application connects to <code>https://mybank.com</code>, that server presents a certificate that says: "I am <code>mybank.com</code>, and a trusted authority has checked and signed off on this."</p>
+<p>That trusted authority is called a <strong>Certificate Authority (CA)</strong> — an organisation that has been vetted and included in your operating system's list of entities it trusts. Apple, Google, Mozilla, and Microsoft all maintain these lists. When a CA issues a certificate to a server, they are cryptographically signing it — staking their verified reputation that this server is who it claims to be.</p>
+<div class="admonition info">
+<p class="admonition-title">What cryptographic signing means</p>
+<p>Cryptographic signing is a way of proving that something is authentic and has not been tampered with. Think of it like a wax seal on a letter — except mathematically impossible to fake. When a CA signs a certificate, they use a private key that only they hold to generate a unique signature. Your operating system can verify that signature using the CA's public key. If the signature checks out, the certificate is genuine. If anyone tampered with it, the signature breaks and verification fails.</p>
+</div>
+<p>When your application verifies a certificate, it checks three things:</p>
+<div class="highlight"><pre><span></span><code>1. Was this certificate signed by a CA my system trusts?
+2. Does the name on the certificate match the domain I am connecting to?
+3. Has the certificate expired?
+</code></pre></div>
+<p>If all three pass, the connection proceeds. If any fail, the connection should be rejected — because something is wrong. Either the certificate is invalid, the domain does not match, or the server is not who it claims to be.</p>
+<h3 id="certificate-chains">Certificate chains</h3>
+<p>Certificates are not always signed directly by a root CA. Often there is a chain: a root CA signs an intermediate CA, which signs your server's certificate. TLS traces that chain back to a trusted root. This is called a certificate chain, and it is why you sometimes see errors mentioning intermediate certificates when something in the chain is misconfigured or missing.</p>
+<h3 id="certificate-pinning">Certificate pinning</h3>
+<p>Standard certificate verification accepts any valid certificate for a domain, as long as it was signed by a trusted CA. Certificate pinning goes further: your application hardcodes the specific certificate — or its public key — that it expects to see. Even a valid, properly signed certificate from a legitimate CA will be rejected if it does not match the pinned value.</p>
+<p>This protects against scenarios where a CA is compromised and fraudulently issues a certificate for a domain they do not control. It has happened to real CAs.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python — basic certificate fingerprint verification</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">ssl</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">base64</span>
+
+<span class="k">def</span> <span class="nf">verify_cert_fingerprint</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">expected_fingerprint</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">443</span><span class="p">):</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">create_default_context</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">socket</span><span class="o">.</span><span class="n">create_connection</span><span class="p">((</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">))</span> <span class="k">as</span> <span class="n">sock</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">context</span><span class="o">.</span><span class="n">wrap_socket</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="n">server_hostname</span><span class="o">=</span><span class="n">hostname</span><span class="p">)</span> <span class="k">as</span> <span class="n">ssock</span><span class="p">:</span>
+            <span class="n">cert_der</span> <span class="o">=</span> <span class="n">ssock</span><span class="o">.</span><span class="n">getpeercert</span><span class="p">(</span><span class="n">binary_form</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">actual</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">cert_der</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">actual</span> <span class="o">!=</span> <span class="n">expected_fingerprint</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Certificate fingerprint mismatch on </span><span class="si">{</span><span class="n">hostname</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected: </span><span class="si">{</span><span class="n">expected_fingerprint</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Actual:   </span><span class="si">{</span><span class="n">actual</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;This may indicate a man-in-the-middle attack.&quot;</span>
+        <span class="p">)</span>
+</code></pre></div>
+<p><strong>When pinning makes sense:</strong></p>
+<ul>
+<li>Mobile applications communicating with your own backend</li>
+<li>High-security internal services where you control both ends</li>
+<li>Situations where a CA compromise would have catastrophic consequences</li>
+</ul>
+<p><strong>When it does not:</strong></p>
+<ul>
+<li>Calling third-party APIs — providers rotate certificates regularly, and pinning breaks on every rotation</li>
+<li>Anywhere you do not control the certificate rotation schedule</li>
+</ul>
+<h3 id="certificate-expiry">Certificate expiry</h3>
+<p>Certificates expire. When they do, your application's connections fail — or worse, if verification is disabled, they silently continue to an unverified destination. Monitor your certificates. Most providers send expiry warnings, but do not rely solely on that. Set up your own alerts with enough lead time to renew without disruption. A certificate expiry that takes down production at 2am is entirely preventable.</p>
+<div class="admonition warning">
+<p class="admonition-title">Vibe coding and hardcoded values</p>
+<p>AI-generated code frequently hardcodes sensitive values — certificate paths, expiry dates, secrets, and credentials — directly into source files where they do not belong. If you are using AI to help write or scaffold your code, audit every value it hardcodes. Certificate paths, private key locations, and any environment-specific configuration should never be hardcoded. They belong in environment variables or a secrets manager — never in your source code. See <a href="../credentials/">Credential Management →</a> and <a href="../vibe-coding/">Vibe Coding &amp; AI Dev →</a> for how to handle this correctly.</p>
+</div>
+<hr />
+<h2 id="https-not-optional">HTTPS — Not Optional</h2>
+<p>HTTP is the protocol applications use to communicate with servers. HTTPS is HTTP with TLS encryption layered on top — the same TLS we just covered. That encryption is what prevents the nodes between your application and the server from reading your traffic.</p>
+<p>Without HTTPS, every request is plaintext. Your credentials, your API keys, your users' data — readable by any node on the path.</p>
+<h3 id="what-the-padlock-actually-means">What the padlock actually means</h3>
+<p>When a browser shows a padlock icon, it means the connection is encrypted using TLS. It does not mean the site is trustworthy or that the operator is legitimate. A phishing site can have a padlock. A malicious service can serve over HTTPS.</p>
+<p>The padlock tells you the connection is private. The certificate tells you the server is who it claims to be. Both matter — one without the other is incomplete.</p>
+<h3 id="enforcing-https-in-your-application">Enforcing HTTPS in your application</h3>
+<p>Never use <code>http://</code> URLs when <code>https://</code> is available:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python — requests</span>
+
+<span class="c1"># Wrong — sends everything across every node in plaintext</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;http://mybank.com/data&quot;</span><span class="p">)</span>
+
+<span class="c1"># Correct</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://mybank.com/data&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Node — fetch</span>
+
+<span class="c1">// Wrong</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;http://mybank.com/data&quot;</span><span class="p">);</span>
+
+<span class="c1">// Correct</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;https://mybank.com/data&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>If you are building a web server, redirect all HTTP traffic to HTTPS at the application level. Never let an unencrypted connection through:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Flask — redirect HTTP to HTTPS</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">request</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">before_request</span>
+<span class="k">def</span> <span class="nf">enforce_https</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="o">.</span><span class="n">is_secure</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;http://&quot;</span><span class="p">,</span> <span class="s2">&quot;https://&quot;</span><span class="p">),</span> <span class="n">code</span><span class="o">=</span><span class="mi">301</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Express — redirect HTTP to HTTPS</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">req</span><span class="p">.</span><span class="nx">secure</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="mf">301</span><span class="p">,</span><span class="w"> </span><span class="sb">`https://</span><span class="si">${</span><span class="nx">req</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">host</span><span class="si">}${</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nx">next</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="hsts-making-the-enforcement-permanent">HSTS — making the enforcement permanent</h3>
+<p>Even with server-side HTTPS enforcement, a user or client could still attempt an initial plain HTTP connection before being redirected. HSTS (HTTP Strict Transport Security) closes that window.</p>
+<p>HSTS is a response header that tells browsers: never connect to this domain over plain HTTP again, even if someone types <code>http://</code> or follows an unencrypted link. The browser remembers this instruction and upgrades all future connections automatically — before they leave the device.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Flask</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">after_request</span>
+<span class="k">def</span> <span class="nf">set_hsts</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Strict-Transport-Security&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;max-age=31536000; includeSubDomains&#39;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Express</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;Strict-Transport-Security&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;max-age=31536000; includeSubDomains&#39;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">  </span><span class="nx">next</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div>
+<p><code>max-age=31536000</code> is one year in seconds. Start with a shorter value during testing and extend once you are confident everything in your application runs over HTTPS. <code>includeSubDomains</code> applies the policy to all subdomains.</p>
+<p>HTTPS and TLS protect the connection. The next section is about what happens when a developer bypasses all of that with a single argument.</p>
+<hr />
+<h2 id="verifyfalse-the-most-dangerous-line-in-python"><code>verify=False</code> — The Most Dangerous Line in Python</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># This line has caused more production security incidents than most developers realize</span>
+<span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://mybank.com/data&quot;</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<p>This is the single most dangerous pattern in Python network code. It appears in production codebases constantly — added to fix a certificate error and forgotten there permanently. <code>verify=False</code> turns off certificate verification entirely. Your application will now connect to any server presenting any certificate — including an attacker sitting between you and the real server, presenting a fraudulent certificate your application accepts without checking. The traffic is still encrypted. But you have agreed to encrypt it with someone whose identity you have never verified.</p>
+<p>This is a man-in-the-middle attack. The attacker intercepts your connection, presents their own certificate, forwards your traffic to the real server, and reads every byte in plaintext. Your application never knows anything went wrong.</p>
+<div class="highlight"><pre><span></span><code>verify=True (correct):
+Your app → checks certificate → real mybank.com ✓
+
+verify=False (dangerous):
+Your app → skips check → attacker&#39;s server
+                         Attacker reads everything → forwards to real server
+                         Your application sees normal responses ✗
+</code></pre></div>
+<h3 id="why-developers-add-it">Why developers add it</h3>
+<p>Every instance of <code>verify=False</code> started with one of these:</p>
+<ul>
+<li>Self-signed certificate on an internal service</li>
+<li>Expired certificate that broke a connection</li>
+<li>Local development environment with an untrusted cert</li>
+<li>Corporate proxy presenting its own certificate</li>
+<li>"Just to get it working" — and then it shipped</li>
+</ul>
+<p>None of these are reasons to disable verification. They are reasons to fix the underlying certificate problem.</p>
+<h3 id="the-correct-fix-for-every-scenario">The correct fix for every scenario</h3>
+<p><strong>Self-signed or internal CA:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Wrong</span>
+<span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://internal-service.company.internal&quot;</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Correct — point to the CA bundle</span>
+<span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s2">&quot;https://internal-service.company.internal&quot;</span><span class="p">,</span>
+    <span class="n">verify</span><span class="o">=</span><span class="s2">&quot;/Users/youruser/certs/internal-ca.crt&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><strong>Local development HTTPS:</strong></p>
+<p>Use <a href="https://github.com/FiloSottile/mkcert">mkcert</a> to generate locally-trusted certificates. It installs a local CA into your system trust store so development certs pass verification without disabling anything.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># macOS / Linux</span>
+brew<span class="w"> </span>install<span class="w"> </span>mkcert
+mkcert<span class="w"> </span>-install
+mkcert<span class="w"> </span>localhost<span class="w"> </span><span class="m">127</span>.0.0.1
+
+<span class="c1"># Windows</span>
+choco<span class="w"> </span>install<span class="w"> </span>mkcert
+mkcert<span class="w"> </span>-install
+mkcert<span class="w"> </span>localhost<span class="w"> </span><span class="m">127</span>.0.0.1
+</code></pre></div>
+<p><strong>Expired certificate:</strong></p>
+<p>Renew it. An expired certificate is not a configuration problem — it is a maintenance failure. There is no version of this where disabling verification is the right answer. Disabling verification because a certificate lapsed is trading a maintenance problem for a security vulnerability. Fix it at the source.</p>
+<p><strong>Corporate proxy with SSL inspection:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;REQUESTS_CA_BUNDLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/Users/youruser/certs/corporate-ca.crt&#39;</span>
+
+<span class="c1"># Or per request</span>
+<span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://mybank.com&quot;</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="s2">&quot;/Users/youruser/certs/corporate-ca.crt&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">If you find <code>verify=False</code> in a codebase</p>
+<p>Treat it as a critical finding. Document it. Create a ticket. Fix it before the next release. It is not technical debt — it is an active vulnerability that bypasses the entire trust model TLS was built on.</p>
+</div>
+<p>Your connections are now encrypted and verified. But there is one more failure mode that trips up even experienced developers: what happens when the server on the other end simply stops responding.</p>
+<hr />
+<h2 id="timeouts-every-request-needs-one">Timeouts — Every Request Needs One</h2>
+<p>Imagine you run a business and you have drivers delivering your product across the city. Every vehicle your application dispatches travels roads it does not control, to buildings it cannot see inside. What happens if the vehicle arrives, knocks on the door, and nobody ever answers?</p>
+<p>Without a timeout, your application waits at that door forever.</p>
+<p>When your application sends a request, it is trusting that the server will respond within a reasonable amount of time. Servers go down. Networks get congested. And in adversarial scenarios, a malicious actor can deliberately send responses so slowly that your connection stays open indefinitely — consuming resources, blocking threads, and eventually making your application unable to handle anything else.</p>
+<p>This is a standard denial-of-service technique. An attacker who controls a server you call can slow-drip responses — sending just enough bytes to keep the connection alive — and hold your processes open until your application falls over.</p>
+<p>A timeout is the instruction you give every vehicle before it leaves: if the door is not answered within this amount of time, come back. Do not wait indefinitely.</p>
+<h3 id="what-no-timeout-actually-costs-you">What no timeout actually costs you</h3>
+<p>A thread or process waiting on a network response with no timeout will wait forever. One hung connection is manageable. Under load — or under a deliberate attack — you can accumulate enough hung connections that your application stops being able to process new requests entirely. It becomes unresponsive. It looks like a crash. The actual cause is that every connection is sitting open, waiting on servers that will never answer.</p>
+<p>This is a denial-of-service vector. It requires no special exploit — just a slow or unresponsive server, and your missing timeout does the rest.</p>
+<h3 id="connect-timeout-vs-read-timeout">Connect timeout vs read timeout</h3>
+<div class="highlight"><pre><span></span><code>Connect timeout — how long to wait for the building to answer the door at all
+                  (the initial connection, the TLS handshake)
+                  If there is no response to the knock, turn around.
+
+Read timeout    — how long to wait for the building to finish
+                  handing over the response after it opened the door
+                  If the building opens the door but then goes silent, leave.
+</code></pre></div>
+<h3 id="how-to-set-timeouts">How to set timeouts</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python — requests</span>
+<span class="c1"># Format: (connect_timeout, read_timeout) in seconds</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="s2">&quot;https://mybank.com/data&quot;</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python — httpx (async)</span>
+<span class="kn">import</span> <span class="nn">httpx</span>
+
+<span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">(</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="n">httpx</span><span class="o">.</span><span class="n">Timeout</span><span class="p">(</span><span class="n">connect</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">read</span><span class="o">=</span><span class="mf">30.0</span><span class="p">)</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://mybank.com/data&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python — aiohttp (async)</span>
+<span class="kn">import</span> <span class="nn">aiohttp</span>
+
+<span class="n">timeout</span> <span class="o">=</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientTimeout</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">connect</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">async</span> <span class="k">with</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://mybank.com/data&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Node — fetch with AbortController</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AbortController</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">timeoutId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">setTimeout</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">abort</span><span class="p">(),</span><span class="w"> </span><span class="mf">10000</span><span class="p">);</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s2">&quot;https://mybank.com/data&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">signal</span><span class="o">:</span><span class="w"> </span><span class="nx">controller</span><span class="p">.</span><span class="nx">signal</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+<span class="p">}</span><span class="w"> </span><span class="k">finally</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timeoutId</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Node — axios</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;axios&#39;</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;https://mybank.com/data&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">timeout</span><span class="o">:</span><span class="w"> </span><span class="mf">10000</span><span class="w">  </span><span class="c1">// milliseconds</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="sensible-starting-values">Sensible starting values</h3>
+<div class="highlight"><pre><span></span><code>Connect timeout:   3–5 seconds
+Read timeout:      10–30 seconds
+Background jobs:   60–120 seconds
+</code></pre></div>
+<p>If an API consistently takes longer than your timeout, the problem is the API — not your timeout. Do not keep raising the limit to accommodate a slow dependency. Fix the integration or raise it with the provider.</p>
+<hr />
+<h2 id="the-request-security-checklist">The Request Security Checklist</h2>
+<p>Every network call your application makes should clear this list before it ships to production. Every vehicle that leaves the building, checked.</p>
+<div class="highlight"><pre><span></span><code>BEFORE ANY OUTBOUND REQUEST SHIPS
+
+→ Does this request use HTTPS?
+  If the endpoint only supports HTTP, that is a problem
+  with the endpoint — not a reason to use HTTP.
+  Do not accept an unencrypted dependency.
+
+→ Is SSL/TLS verification enabled?
+  verify=False should not exist anywhere in your codebase.
+  If it does, it is a critical finding.
+
+→ Is there a timeout set?
+  Both connect and read timeouts, with sensible values.
+  An untimed request is a hanging thread waiting to happen —
+  and an attacker can hold your vehicles hostage indefinitely.
+
+→ Are credentials in headers — not URLs?
+  API keys in URLs appear in server logs, browser history,
+  and Referer headers sent to third parties.
+  Always use Authorization headers.
+
+→ Is the response validated before use?
+  Check status codes. Handle errors explicitly.
+  Never assume a 200 response body is what you expected.
+
+→ Is sensitive data being logged from this request?
+  Request headers often contain tokens.
+  Response bodies often contain user data.
+  Log what you need for debugging — not everything.
+
+→ Is this internal endpoint authenticated?
+  Internal does not mean trusted.
+  Service-to-service calls inside your infrastructure
+  should still be authenticated.
+
+→ Are redirects handled safely?
+  Some libraries follow redirects automatically.
+  Verify that credentials are not being forwarded
+  to an unintended destination after a redirect.
+</code></pre></div>
+<hr />
+<h2 id="dns-security">DNS Security</h2>
+<p>You know now that every network connection begins with a DNS lookup — your application asking a DNS server to translate <code>mybank.com</code> into the IP address it needs to connect. That lookup happens before TLS, before certificates, before any of the protections covered above. It is the first step, and it is a target.</p>
+<h3 id="dns-spoofing-poisoning-the-address-book">DNS spoofing — poisoning the address book</h3>
+<p>DNS spoofing — also called DNS cache poisoning — is when an attacker manipulates the answer your application receives from a DNS query. Instead of returning the real IP address, the poisoned response returns one the attacker controls. Your application connects to the wrong server.</p>
+<p>What happens next depends on what protections you have in place:</p>
+<div class="highlight"><pre><span></span><code>No HTTPS:
+Your app connects to attacker&#39;s server.
+Attacker reads all traffic in plaintext. ✗
+
+HTTPS with verify=False:
+Your app connects to attacker&#39;s server.
+Attacker presents any certificate — your app accepts it.
+Attacker reads all traffic in plaintext. ✗
+
+HTTPS with verify=True (correct):
+Your app connects to attacker&#39;s server.
+TLS checks the certificate — name mismatch, not trusted.
+Connection is rejected. ✓
+</code></pre></div>
+<p>This is why certificate verification and DNS security are not separate concerns. A correctly configured TLS connection catches a DNS spoofing attack at the certificate check — even if the DNS lookup was poisoned. This is also why <code>verify=False</code> is so dangerous: it removes the protection that catches exactly this scenario.</p>
+<h3 id="dnssec">DNSSEC</h3>
+<p>DNSSEC (DNS Security Extensions) adds cryptographic signatures to DNS records. When enabled for a domain, resolvers can verify that the DNS response they received was not tampered with in transit.</p>
+<p>DNSSEC is configured at the registrar level — it is a setting on your domain, not something you add to application code. Check your domain registrar's documentation for how to enable it. If you own a domain, this is worth doing.</p>
+<h3 id="what-your-application-can-do">What your application can do</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Use trusted DNS resolvers explicitly</span>
+<span class="c1"># Cloudflare (1.1.1.1) and Google (8.8.8.8) support DNS over HTTPS,</span>
+<span class="c1"># encrypting the query itself so it cannot be read or modified in transit</span>
+
+<span class="kn">import</span> <span class="nn">dns.resolver</span>  <span class="c1"># pip install dnspython</span>
+
+<span class="n">resolver</span> <span class="o">=</span> <span class="n">dns</span><span class="o">.</span><span class="n">resolver</span><span class="o">.</span><span class="n">Resolver</span><span class="p">()</span>
+<span class="n">resolver</span><span class="o">.</span><span class="n">nameservers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;1.1.1.1&#39;</span><span class="p">,</span> <span class="s1">&#39;8.8.8.8&#39;</span><span class="p">]</span>
+<span class="n">answer</span> <span class="o">=</span> <span class="n">resolver</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="s1">&#39;mybank.com&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>At the application level, the most reliable defense against DNS attacks is the one already covered: HTTPS with certificate verification enabled. A poisoned DNS response that redirects your traffic does not matter if your TLS check rejects the impersonation.</p>
+<hr />
+<h2 id="data-integrity-verifying-what-you-received">Data Integrity — Verifying What You Received</h2>
+<p>Your vehicle made the trip. TLS was in place. The certificate checked out. The building was the right one. You received a response. But is what arrived actually what was sent? TLS protects cargo on the road. Data in transit can be tampered with, corrupted, or substituted — not just read. Once data arrives, you are responsible for checking that it is what it claims to be. Integrity verification is how you confirm that what your application received is what the source actually sent.</p>
+<h3 id="checksums-and-hashes-for-downloaded-files">Checksums and hashes for downloaded files</h3>
+<p>When your application downloads files — release artifacts, configuration data, dependencies — verify the hash of what you received against the expected hash published by the source. If the file was modified anywhere along the path, the hash will not match.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="k">def</span> <span class="nf">download_and_verify</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">expected_sha256</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">)):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+    <span class="n">actual_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">actual_hash</span> <span class="o">!=</span> <span class="n">expected_sha256</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Hash mismatch — file may have been tampered with.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected: </span><span class="si">{</span><span class="n">expected_sha256</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Actual:   </span><span class="si">{</span><span class="n">actual_hash</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+</code></pre></div>
+<h3 id="webhook-signature-verification">Webhook signature verification</h3>
+<p>When an external service pushes data to an endpoint your application exposes — a payment processor, a CI system, a third-party tool — anyone who knows the URL could send data to it. Signature verification is how you confirm a request came from who you expect and has not been modified.</p>
+<p>The standard pattern uses HMAC-SHA256: the sender signs the request body with a shared secret and includes the signature in a header. You recompute the expected signature from the raw body and compare. A match confirms authenticity.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">hmac</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">abort</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">WEBHOOK_SECRET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;WEBHOOK_SECRET&quot;</span><span class="p">)</span>  <span class="c1"># never hardcoded</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/webhook&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">handle_webhook</span><span class="p">():</span>
+    <span class="n">signature_header</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;X-Hub-Signature-256&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">signature_header</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;sha256=&quot;</span><span class="p">):</span>
+        <span class="n">abort</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="s2">&quot;Missing or malformed signature&quot;</span><span class="p">)</span>
+
+    <span class="n">received_signature</span> <span class="o">=</span> <span class="n">signature_header</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span>
+
+    <span class="n">expected_signature</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+        <span class="n">WEBHOOK_SECRET</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">get_data</span><span class="p">(),</span>  <span class="c1"># raw bytes — do not parse the body first</span>
+        <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+    <span class="c1"># Constant-time comparison — prevents timing attacks</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hmac</span><span class="o">.</span><span class="n">compare_digest</span><span class="p">(</span><span class="n">received_signature</span><span class="p">,</span> <span class="n">expected_signature</span><span class="p">):</span>
+        <span class="n">abort</span><span class="p">(</span><span class="mi">403</span><span class="p">,</span> <span class="s2">&quot;Signature verification failed&quot;</span><span class="p">)</span>
+
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="c1"># process payload here</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Always use <code>hmac.compare_digest</code> — not <code>==</code></p>
+<p>Standard string comparison is vulnerable to timing attacks: an attacker can measure tiny differences in how long the comparison takes to figure out the correct signature one byte at a time. <code>hmac.compare_digest</code> takes the same amount of time regardless of where or whether the strings differ.</p>
+</div>
+<p>See <a href="../credentials/">Credential Management →</a> for guidance on storing webhook secrets securely.</p>
+<hr />
+<h2 id="secure-headers">Secure Headers</h2>
+<p>Every HTTP response your server sends includes headers — instructions to the browser about how to handle your content and what it is allowed to do with it. Think of them like the signs posted at a building's entrance — "no outside food or drinks," "bathrooms for customers only," "no dogs allowed." These are instructions for who and what is permitted inside, and under what conditions. Several of those headers are security controls that reduce your attack surface in meaningful ways. They cost almost nothing to add. They are missing from the majority of applications.</p>
+<p>The headers below apply to any web application serving responses to browsers. Set all of them.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Flask — set all security headers in one place</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">after_request</span>
+<span class="k">def</span> <span class="nf">set_security_headers</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="c1"># Force HTTPS — never connect over plain HTTP again</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Strict-Transport-Security&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;max-age=31536000; includeSubDomains&#39;</span>
+    <span class="p">)</span>
+    <span class="c1"># Control which resources the browser is allowed to load</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Security-Policy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;default-src &#39;self&#39;; &quot;</span>
+        <span class="s2">&quot;script-src &#39;self&#39;; &quot;</span>
+        <span class="s2">&quot;style-src &#39;self&#39; &#39;unsafe-inline&#39;; &quot;</span>
+        <span class="s2">&quot;img-src &#39;self&#39; data: https:; &quot;</span>
+        <span class="s2">&quot;connect-src &#39;self&#39;; &quot;</span>
+        <span class="s2">&quot;frame-ancestors &#39;none&#39;&quot;</span>
+    <span class="p">)</span>
+    <span class="c1"># Prevent clickjacking via iframes</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;X-Frame-Options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;DENY&#39;</span>
+    <span class="c1"># Prevent browsers from guessing content types</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;X-Content-Type-Options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;nosniff&#39;</span>
+    <span class="c1"># Control how much URL info leaks to third parties</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Referrer-Policy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;strict-origin-when-cross-origin&#39;</span>
+    <span class="c1"># Deny browser feature access your app does not need</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Permissions-Policy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s1">&#39;camera=(), microphone=(), geolocation=()&#39;</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Express — helmet handles all of this automatically</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">helmet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;helmet&#39;</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">helmet</span><span class="p">());</span>
+
+<span class="c1">// Or set manually</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">((</span><span class="nx">req</span><span class="p">,</span><span class="w"> </span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Strict-Transport-Security&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;max-age=31536000; includeSubDomains&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Content-Security-Policy&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;default-src &#39;self&#39;; script-src &#39;self&#39;; style-src &#39;self&#39; &#39;unsafe-inline&#39;; &quot;</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="s2">&quot;img-src &#39;self&#39; data: https:; connect-src &#39;self&#39;; frame-ancestors &#39;none&#39;&quot;</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;X-Frame-Options&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DENY&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;X-Content-Type-Options&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;nosniff&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Referrer-Policy&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;strict-origin-when-cross-origin&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">res</span><span class="p">.</span><span class="nx">setHeader</span><span class="p">(</span><span class="s1">&#39;Permissions-Policy&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;camera=(), microphone=(), geolocation=()&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">next</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div>
+<h3 id="what-each-header-does">What each header does</h3>
+<p><strong><code>Strict-Transport-Security</code></strong> — Tells the browser to always connect to your domain over HTTPS, even if someone types <code>http://</code> or follows an unencrypted link. The browser enforces this itself for the duration of <code>max-age</code>, before any request even leaves the device.</p>
+<p><strong><code>Content-Security-Policy</code></strong> — Controls exactly which resources — scripts, styles, images, external connections — the browser is allowed to load for your page. A strict CSP is the most effective defense against cross-site scripting (XSS), because even if an attacker injects a script tag into your page, CSP prevents the browser from executing it.</p>
+<p>Start with <code>default-src 'self'</code> and loosen only what your application actually needs. Use report-only mode to tune the policy before enforcing it:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Log CSP violations without blocking — use during tuning</span>
+<span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Security-Policy-Report-Only&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;default-src &#39;self&#39;; report-uri /csp-violations&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><strong><code>X-Frame-Options: DENY</code></strong> — Prevents your page from being embedded in an <code>&lt;iframe&gt;</code> on another site. Without this, an attacker can overlay your page transparently inside their site and trick users into clicking things they did not intend to — a technique called clickjacking.</p>
+<p><strong><code>X-Content-Type-Options: nosniff</code></strong> — Prevents browsers from guessing the content type of a response. Without it, a browser might decide that a response contains executable code and run it, even if your server delivered it as something else entirely.</p>
+<p><strong><code>Referrer-Policy</code></strong> — Controls what URL information gets sent in the <code>Referer</code> header when users navigate from your site to another. URLs often contain session identifiers, search terms, or internal paths. <code>strict-origin-when-cross-origin</code> sends only your domain name — not the full URL — on cross-origin requests.</p>
+<p><strong><code>Permissions-Policy</code></strong> — Controls which browser APIs your page can access. If your application does not need the camera, microphone, or geolocation, deny them explicitly. If a script is ever injected into your page, this limits what it can do with the user's device.</p>
+<div class="admonition tip">
+<p class="admonition-title">Verify your headers after deployment</p>
+<p>Check your live site at <a href="https://securityheaders.com">securityheaders.com</a>. It grades your configuration and explains exactly what is missing and why it matters. Takes thirty seconds and will surface issues you did not know were there.</p>
+</div>
+<p>Headers control what your server tells browsers about how to behave. The last piece is controlling which external origins are allowed to interact with your application from a browser at all — and that is where CORS comes in.</p>
+<hr />
+<h2 id="cors-cross-origin-resource-sharing">CORS — Cross-Origin Resource Sharing</h2>
+<p>You have locked down your server's response headers. But there is still a question the browser needs answered before it will let external JavaScript interact with your application: who is actually allowed to make requests here?</p>
+<p>Browsers enforce a rule called the same-origin policy: JavaScript running on <code>app.example.com</code> is not allowed to make requests to <code>api.otherdomain.com</code> unless <code>api.otherdomain.com</code> explicitly says it permits that. This rule exists because without it, any website you visit could use your authenticated browser session to make requests to other services you are logged into — reading your data and taking actions on your behalf, invisibly.</p>
+<p>CORS is the mechanism that controls those permissions. This is a browser-level protection only — it does not stop direct requests made by servers, curl, scripts, or any non-browser client. But for web applications, it is worth getting right.</p>
+<h3 id="the-wildcard-problem">The wildcard <code>*</code> problem</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Wrong — allows any website&#39;s JavaScript to call your API</span>
+<span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+</code></pre></div>
+<p><code>*</code> means any origin on the internet. Any website can run JavaScript that calls your API in a user's browser, using that user's active session and credentials. For genuinely public APIs with no authentication, <code>*</code> is acceptable. For any endpoint that handles credentials, sessions, or user data, it is a misconfiguration.</p>
+<h3 id="configuring-cors-correctly">Configuring CORS correctly</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Flask — explicit origin allowlist</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">flask_cors</span> <span class="kn">import</span> <span class="n">CORS</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">CORS</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">origins</span><span class="o">=</span><span class="p">[</span>
+    <span class="s2">&quot;https://app.example.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;https://staging.example.com&quot;</span>
+<span class="p">])</span>
+
+<span class="c1"># Or manually for full control</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">after_request</span>
+<span class="k">def</span> <span class="nf">set_cors_headers</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+    <span class="n">allowed_origins</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;https://app.example.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;https://staging.example.com&quot;</span>
+    <span class="p">]</span>
+    <span class="n">origin</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Origin&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">origin</span> <span class="ow">in</span> <span class="n">allowed_origins</span><span class="p">:</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">origin</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Vary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Origin&#39;</span>
+    <span class="k">return</span> <span class="n">response</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">// Express — explicit origin allowlist</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">cors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cors&#39;</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">allowedOrigins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="s1">&#39;https://app.example.com&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;https://staging.example.com&#39;</span>
+<span class="p">];</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="nx">origin</span><span class="p">,</span><span class="w"> </span><span class="nx">callback</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">origin</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">allowedOrigins</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">origin</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">callback</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="ne">Error</span><span class="p">(</span><span class="s1">&#39;Not allowed by CORS&#39;</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">credentials</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="w">  </span><span class="c1">// required when sending cookies or Authorization headers</span>
+<span class="p">}));</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">The <code>Vary: Origin</code> header</p>
+<p>When <code>Access-Control-Allow-Origin</code> is set to a specific origin rather than <code>*</code>, add <code>Vary: Origin</code> to the response. This tells caches that the response differs by origin — preventing a cached response for one origin from being incorrectly served to a different one.</p>
+</div>
+<hr />
+<p><em><a href="https://instagram.com/sudochef">@sudochef</a> — Build like you're the target. Because you are.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © SudoChef — @sudochef — Build like you're the target. Because you are.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/commit-issues" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://instagram.com/sudochef" target="_blank" rel="noopener" title="instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2664 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A field guide for securing your GitHub presence, repositories, identity, and code.">
+      
+      
+        <meta name="author" content="SudoChef">
+      
+      
+        <link rel="canonical" href="https://commit-issues.github.io/secure-your-ship/code/database/">
+      
+      
+        <link rel="prev" href="../network/">
+      
+      
+        <link rel="next" href="../logging/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Database Security - Secure Your Ship</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#database-security" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Secure Your Ship" class="md-header__button md-logo" aria-label="Secure Your Ship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Secure Your Ship
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Database Security
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  The Mission
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../setup/account/" class="md-tabs__link">
+          
+  
+  
+  Setup
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../hardening/settings/" class="md-tabs__link">
+          
+  
+  
+  Hardening Your Repo
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../vibe-coding/" class="md-tabs__link">
+          
+  
+  
+  Writing Secure Code
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../threats/osint/" class="md-tabs__link">
+          
+  
+  
+  Threats & Awareness
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../maintenance/freshness/" class="md-tabs__link">
+          
+  
+  
+  Maintenance
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Secure Your Ship" class="md-nav__button md-logo" aria-label="Secure Your Ship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Secure Your Ship
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Mission
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Securing Your Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH Keys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/new-repo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starting a New Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting & Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardening Your Repo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardening Your Repo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/rulesets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch Protection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/advanced-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git History Auditing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day One Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing Secure Code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Writing Secure Code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vibe-coding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vibe Coding & AI Dev
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../credentials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credential Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependency Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Security
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-the-right-database-for-your-use-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing the Right Database for Your Use Case
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Choosing the Right Database for Your Use Case">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQLite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgresql-and-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PostgreSQL and MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-vs-cloud-hosted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local vs cloud-hosted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encryption-at-rest-sqlcipher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Encryption at Rest — SQLCipher
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Encryption at Rest — SQLCipher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-sqlcipher-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What SQLCipher is
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-and-access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication and Access Control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication and Access Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#never-use-the-root-or-admin-user-in-application-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Never use the root or admin user in application code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separate-credentials-for-every-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separate credentials for every environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-string-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection string security
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameterized-queries-non-negotiable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameterized Queries — Non-Negotiable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-audit-log-append-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Audit Log — Append Only
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Audit Log — Append Only">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-append-only-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The append-only principle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-log-at-the-database-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to log at the database level
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backups
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-in-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database in CI/CD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database in CI/CD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-databases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test databases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment separation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migrations-doing-them-safely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migrations — Doing Them Safely
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migrations — Doing Them Safely">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-rules-for-safe-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The rules for safe migrations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rolling-back-a-bad-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling back a bad migration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging & Auditing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cron & Scheduled Tasks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threats & Awareness
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Threats & Awareness
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/osint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSINT & Identity Leakage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/ai-attacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI-Assisted Attacks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/forking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forking & Attribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/supply-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supply Chain Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/stolen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    When Your Project Gets Stolen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/visibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repo Visibility & Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintenance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maintenance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/freshness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Freshness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/backups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup & Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/email/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Email Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/debt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Debt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/cron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cron & Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependency Intelligence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../now-go-build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Now Go Build
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-the-right-database-for-your-use-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing the Right Database for Your Use Case
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Choosing the Right Database for Your Use Case">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQLite
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgresql-and-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PostgreSQL and MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-vs-cloud-hosted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local vs cloud-hosted
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encryption-at-rest-sqlcipher" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Encryption at Rest — SQLCipher
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Encryption at Rest — SQLCipher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-sqlcipher-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What SQLCipher is
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key management
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-and-access-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication and Access Control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authentication and Access Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#never-use-the-root-or-admin-user-in-application-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Never use the root or admin user in application code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#separate-credentials-for-every-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Separate credentials for every environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-string-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection string security
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameterized-queries-non-negotiable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameterized Queries — Non-Negotiable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-audit-log-append-only" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Audit Log — Append Only
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Audit Log — Append Only">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-append-only-principle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The append-only principle
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-log-at-the-database-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to log at the database level
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backups
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database-in-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Database in CI/CD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Database in CI/CD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-databases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test databases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-separation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Environment separation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migrations-doing-them-safely" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migrations — Doing Them Safely
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migrations — Doing Them Safely">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-rules-for-safe-migrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The rules for safe migrations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rolling-back-a-bad-migration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling back a bad migration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="database-security">Database Security</h1>
+<p><em>Your database is where everything that matters lives. Treat it like it.</em></p>
+<hr />
+<div class="admonition info">
+<p class="admonition-title">TL;DR</p>
+<ul>
+<li>Most database breaches are not sophisticated attacks — they are default settings left unchanged, credentials reused, and access controls never configured.</li>
+<li>Encrypt your database at rest. If someone walks out with the file, they should walk out with nothing usable.</li>
+<li>Never use the root or admin database user in your application code. Create a least-privilege user and use that.</li>
+<li>Parameterized queries only. No exceptions. SQL injection is still one of the most common attack vectors in existence.</li>
+<li>Every audit log entry is permanent. You do not delete logs. You do not edit logs. They are your evidence.</li>
+<li>A backup you have never tested is not a backup. It is a false sense of security.</li>
+</ul>
+<p>Already handling encryption and access control? Jump to <a href="#the-audit-log--append-only">The Audit Log →</a></p>
+</div>
+<hr />
+<p>In 2021, a misconfigured database exposed the personal records of over 700 million LinkedIn users. In 2019, a single misconfigured MongoDB instance leaked 275 million Indian citizens' personal data — names, phone numbers, email addresses, employment history. In 2017, Equifax exposed the financial records of 147 million people. The technical root causes vary, but the pattern is consistent: the data was there, accessible, and nobody had done the work to protect it.</p>
+<p>Your database is the end of the line. It is where credentials land after authentication, where transactions are recorded, where user data accumulates over time. Everything you built — the input validation, the encrypted secrets, the secure network calls — exists to protect what ends up here. This section is about making sure the database itself is not the thing that undoes all of it.</p>
+<hr />
+<h2 id="choosing-the-right-database-for-your-use-case">Choosing the Right Database for Your Use Case</h2>
+<p>Before you can secure a database, you need to be running the right one for what you are building. The wrong choice does not just create security problems — it creates operational ones that make security harder to implement correctly.</p>
+<h3 id="sqlite">SQLite</h3>
+<p>SQLite is a file-based database. There is no server, no network connection, no authentication layer. The entire database lives in a single file on disk. Your application reads and writes that file directly.</p>
+<p>This makes SQLite excellent for local tools, desktop applications, development environments, and anything that runs on a single machine without needing concurrent access from multiple processes.</p>
+<p>What SQLite is not appropriate for: anything with multiple simultaneous users, anything that needs to be accessed over a network, anything running in a cloud environment where the database needs to scale independently of the application.</p>
+<h3 id="postgresql-and-mysql">PostgreSQL and MySQL</h3>
+<p>PostgreSQL and MySQL are server-based databases. They run as a separate process, accept network connections, handle concurrent users, and have full authentication and access control systems built in. These are the right choice for web applications, APIs, anything deployed to a server, and anything with more than one user.</p>
+<p>The tradeoff is operational complexity. You are now running a server, managing credentials, configuring network access, and thinking about backups differently than you do with a file.</p>
+<div class="admonition tip">
+<p class="admonition-title">When in doubt, PostgreSQL</p>
+<p>PostgreSQL has stronger data integrity guarantees, better support for complex queries, and a more active security patch process than MySQL. If you are starting a new project and are not sure which to use, PostgreSQL is the safer default.</p>
+</div>
+<h3 id="local-vs-cloud-hosted">Local vs cloud-hosted</h3>
+<p>Cloud-hosted databases — AWS RDS, Supabase, PlanetScale, Railway — handle a significant amount of operational security for you: automated backups, encryption at rest by default, managed patching, network isolation. The tradeoff is that you are trusting a third party with your data and need to configure their access controls correctly.</p>
+<p>Self-hosted databases give you full control and full responsibility. Every configuration decision is yours.</p>
+<p>Neither is inherently more secure. Both have been breached. The difference is where the mistakes happen.</p>
+<hr />
+<h2 id="encryption-at-rest-sqlcipher">Encryption at Rest — SQLCipher</h2>
+<p>Encryption in transit — the HTTPS and TLS we covered in the <a href="../network/">Network Security →</a> section — protects your data while it is moving. Encryption at rest protects it while it is sitting still.</p>
+<p>If someone physically takes your server, copies your disk, steals your backup, or gains filesystem access to your machine, an unencrypted database file gives them everything. Every user record, every credential, every piece of sensitive data — readable with any SQLite browser or database client, no password required.</p>
+<p>In 2012, Dropbox was breached. The attackers obtained a database of hashed user passwords. Because the passwords were hashed, they were not immediately usable — but they were extractable and crackable offline, at the attacker's leisure, with no time pressure. Encryption at rest would not have prevented the breach, but it is the layer that makes offline extraction either impossible or prohibitively expensive.</p>
+<h3 id="what-sqlcipher-is">What SQLCipher is</h3>
+<p>SQLCipher is an open-source extension to SQLite that adds full database encryption using AES-256. Every page of the database file is encrypted before it is written to disk and decrypted when read. Without the key, the file is unreadable — it looks like random noise. With the key, it behaves exactly like a normal SQLite database.</p>
+<p>The CVE Security Intelligence Monitor, an open-source security tool I built at <code>commit-issues/cve-security-monitor</code>, uses SQLCipher for exactly this reason: it runs locally, manages sensitive security data, and if the database file were ever exfiltrated, SQLCipher ensures it is useless without the key.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python — connecting to a SQLCipher database</span>
+<span class="c1"># macOS / Linux</span>
+<span class="c1"># pip3 install sqlcipher3</span>
+
+<span class="c1"># Windows</span>
+<span class="c1"># pip install sqlcipher3</span>
+
+<span class="kn">import</span> <span class="nn">sqlcipher3</span>
+
+<span class="k">def</span> <span class="nf">open_database</span><span class="p">(</span><span class="n">db_path</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlcipher3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="n">sqlcipher3</span><span class="o">.</span><span class="n">Row</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PRAGMA key=&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA cipher_page_size=4096&quot;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA kdf_iter=256000&quot;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA cipher_hmac_algorithm=HMAC_SHA512&quot;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA cipher_kdf_algorithm=PBKDF2_HMAC_SHA512&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">conn</span>
+</code></pre></div>
+<h3 id="key-management">Key management</h3>
+<p>The encryption is only as strong as how you protect the key. A key hardcoded in your source code, committed to git, or stored in the same place as the database defeats the entire purpose.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Wrong — key in source code</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA key=&#39;mysecretkey123&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Correct — key from environment variable</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">db_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DB_ENCRYPTION_KEY&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">db_key</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;DB_ENCRYPTION_KEY not set&quot;</span><span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PRAGMA key=&#39;</span><span class="si">{</span><span class="n">db_key</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Store the key in your environment, a secrets manager, or a separate secrets file that is never committed. See <a href="../credentials/">Credential Management →</a> for the full approach.</p>
+<div class="admonition warning">
+<p class="admonition-title">Encrypting an existing unencrypted database</p>
+<p>If you are adding SQLCipher to a database that already exists and contains data, you cannot just add the PRAGMA key and call it done. You need to use <code>sqlcipher_export()</code> to create a new encrypted copy. Doing this wrong can corrupt your data. Test the migration on a copy first. Never on production data directly.</p>
+</div>
+<hr />
+<h2 id="authentication-and-access-control">Authentication and Access Control</h2>
+<p>This is the section where most breaches actually happen. Not sophisticated exploits — just databases running with default credentials, or application code connecting as root because nobody set up a proper user.</p>
+<h3 id="never-use-the-root-or-admin-user-in-application-code">Never use the root or admin user in application code</h3>
+<p>The root user on a database has permission to do everything: read any table, drop any database, create or delete any user, modify any configuration. Your application almost certainly does not need any of that.</p>
+<p>In 2017, the MongoDB ransomware attacks wiped tens of thousands of databases in a matter of days. The majority of affected databases were running with no authentication at all — the default MongoDB configuration at the time did not require a password. Attackers wrote scripts to scan for open MongoDB ports, connect without credentials, exfiltrate data, delete it, and leave a ransom note. No exploit required. Just a default configuration and an open port.</p>
+<p>Create a dedicated user for your application with only the permissions it actually needs:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- PostgreSQL — create a least-privilege application user</span>
+
+<span class="c1">-- Create the user</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="n">app_user</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">PASSWORD</span><span class="w"> </span><span class="s1">&#39;use-a-strong-password-from-env&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Grant only what the application needs</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">CONNECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">your_database</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">app_user</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">USAGE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">SCHEMA</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">app_user</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="n">TABLES</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">SCHEMA</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">app_user</span><span class="p">;</span>
+
+<span class="c1">-- Do NOT grant DELETE unless your application explicitly needs it</span>
+<span class="c1">-- Do NOT grant DROP, CREATE, or ALTER</span>
+<span class="c1">-- Do NOT grant access to tables the application does not use</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">-- MySQL — create a least-privilege application user</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;app_user&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;use-a-strong-password-from-env&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">your_database</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;app_user&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+<span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="separate-credentials-for-every-environment">Separate credentials for every environment</h3>
+<p>Your development database and your production database should never share credentials. If your dev environment is compromised — a malicious package, a compromised developer machine, a leaked dotfile — production credentials should not be reachable from it.</p>
+<div class="highlight"><pre><span></span><code>Development:  DB_USER=dev_user      DB_PASS=dev-only-password
+Staging:      DB_USER=staging_user  DB_PASS=staging-only-password
+Production:   DB_USER=prod_user     DB_PASS=strong-unique-production-password
+</code></pre></div>
+<p>Each environment connects to its own database with its own credentials. Never the same key across environments. See <a href="../credentials/">Credential Management →</a> for how to manage this without losing your mind.</p>
+<h3 id="connection-string-security">Connection string security</h3>
+<p>A connection string packages your database host, port, username, password, and database name into a single value. It is convenient. It is also a single string that, if leaked, hands an attacker everything they need to connect.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Wrong — connection string in source code</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;postgresql://root:password123@localhost/mydb&quot;</span><span class="p">)</span>
+
+<span class="c1"># Correct — assembled from environment variables</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DB_HOST&quot;</span><span class="p">],</span>
+    <span class="n">port</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DB_PORT&quot;</span><span class="p">],</span>
+    <span class="n">user</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DB_USER&quot;</span><span class="p">],</span>
+    <span class="n">password</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DB_PASS&quot;</span><span class="p">],</span>
+    <span class="n">dbname</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DB_NAME&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Never put a connection string in source code. Never commit it to git. Never log it. Treat every component of it — especially the password — as a secret.</p>
+<hr />
+<h2 id="parameterized-queries-non-negotiable">Parameterized Queries — Non-Negotiable</h2>
+<p>SQL injection has been in the OWASP Top 10 most critical web application security risks for over fifteen years. It is not a new or exotic attack. It is one of the oldest and most well-documented vulnerabilities in existence, and it still takes down applications regularly because developers concatenate strings instead of using parameters.</p>
+<p>This is covered in detail in <a href="../input-validation/">Input Handling &amp; Validation →</a>. It belongs here too because it is a database security issue as much as it is an input issue.</p>
+<p>In 2008, Heartland Payment Systems was breached via SQL injection. 130 million credit card numbers were stolen. It remains one of the largest data breaches in history. The technique used was known, documented, and preventable.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Wrong — string concatenation, injectable</span>
+<span class="n">user_input</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT * FROM users WHERE username = &#39;</span><span class="si">{</span><span class="n">user_input</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Correct — parameterized query</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM users WHERE username = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_input</span><span class="p">,))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># SQLite / SQLCipher — same principle</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM cves WHERE severity_level = ?&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">severity</span><span class="p">,))</span>
+</code></pre></div>
+<p>The parameter is never interpreted as SQL. It is passed as data. The database never confuses it for a command. This is not optional — it is the baseline.</p>
+<hr />
+<h2 id="the-audit-log-append-only">The Audit Log — Append Only</h2>
+<p>An audit log is a permanent, chronological record of what happened in your database: who accessed what, what changed, when, and from where. It is not the same as application logging. Application logs help you debug. An audit log is evidence.</p>
+<p>When the breach happens — and for a sufficiently complex application, the question is when, not if — your audit log is how you answer: what data was accessed, when did the attacker get in, what did they change, and who was affected. Without it, you are guessing. With it, you can reconstruct exactly what happened.</p>
+<h3 id="the-append-only-principle">The append-only principle</h3>
+<p>Audit logs must be append-only. You add entries. You never edit them. You never delete them. If an audit log can be modified, it is not evidence — it is a document that someone might have changed.</p>
+<p>This matters because the first thing an attacker who gains database access will try to do is cover their tracks. If your audit log lives in the same database they just compromised, and they have write access to it, your evidence is gone.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python — append-only audit log table setup</span>
+<span class="k">def</span> <span class="nf">setup_audit_log</span><span class="p">(</span><span class="n">conn</span><span class="p">):</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        CREATE TABLE IF NOT EXISTS audit_log (</span>
+<span class="s2">            id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="s2">            timestamp TEXT NOT NULL DEFAULT (datetime(&#39;now&#39;, &#39;utc&#39;)),</span>
+<span class="s2">            event_type TEXT NOT NULL,</span>
+<span class="s2">            user_id TEXT,</span>
+<span class="s2">            ip_address TEXT,</span>
+<span class="s2">            table_name TEXT,</span>
+<span class="s2">            record_id TEXT,</span>
+<span class="s2">            action TEXT NOT NULL,</span>
+<span class="s2">            old_value TEXT,</span>
+<span class="s2">            new_value TEXT,</span>
+<span class="s2">            outcome TEXT NOT NULL</span>
+<span class="s2">        )</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="c1"># Revoke delete and update permissions on this table</span>
+    <span class="c1"># for the application user — inserts only</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Logging an audit event</span>
+<span class="k">def</span> <span class="nf">log_audit_event</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">event_type</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">table_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">record_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">old_value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">new_value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">outcome</span><span class="o">=</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="n">ip_address</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        INSERT INTO audit_log</span>
+<span class="s2">        (event_type, user_id, ip_address, table_name, record_id,</span>
+<span class="s2">         action, old_value, new_value, outcome)</span>
+<span class="s2">        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">event_type</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">record_id</span><span class="p">,</span>
+          <span class="n">action</span><span class="p">,</span> <span class="n">old_value</span><span class="p">,</span> <span class="n">new_value</span><span class="p">,</span> <span class="n">outcome</span><span class="p">))</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="what-to-log-at-the-database-level">What to log at the database level</h3>
+<div class="highlight"><pre><span></span><code>Authentication events     — logins, failures, logouts, permission changes
+Data access               — who read sensitive records and when
+Data modification         — what changed, the old value, the new value, who changed it
+Schema changes            — table creation, column changes, index modifications
+Permission changes        — who was granted or revoked access to what
+Failed queries            — especially repeated failures on the same record
+</code></pre></div>
+<p>You do not need to log every SELECT on every table. You do need to log access to anything sensitive — user records, payment data, credentials, PII — and every write operation without exception.</p>
+<hr />
+<h2 id="backups">Backups</h2>
+<p>In 2019, a misconfigured script at GitLab deleted 300GB of production database data in minutes. The engineer ran a database removal command on the wrong server. Six hours of data was gone. GitLab had five different backup systems. Four of them were not working correctly. One had data but it was six hours old.</p>
+<p>GitLab recovered. They were transparent about what happened. But the incident illustrated exactly what backup failure looks like in practice: multiple systems, none tested, all assumed to be working.</p>
+<h3 id="the-rules">The rules</h3>
+<p><strong>Back up frequently.</strong> How frequently depends on how much data loss is acceptable. For most applications, daily is the minimum. For anything handling financial transactions or user-generated content, more often.</p>
+<p><strong>Encrypt your backups.</strong> A backup is a copy of your database. Everything we said about encrypting the database applies equally to the backup. An unencrypted backup stored in S3 is an unencrypted database file accessible to anyone who gets into that bucket.</p>
+<p><strong>Store backups separately.</strong> A backup on the same server as the database it backs up is not a backup. If the server goes down, you lose both. Backups need to be in a separate location — a different machine, a different cloud region, offline storage.</p>
+<p><strong>Test your restores.</strong> This is the one most people skip. A backup file that has never been restored is a file that might restore correctly. You do not know until you try. Schedule restore tests. Actually run them. Confirm the data is intact and the application works against the restored database.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># PostgreSQL — automated backup with timestamp</span>
+pg_dump<span class="w"> </span>-U<span class="w"> </span>app_user<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>your_database<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>gzip<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>gpg<span class="w"> </span>--symmetric<span class="w"> </span>--cipher-algo<span class="w"> </span>AES256<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>&gt;<span class="w"> </span>backup_<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d_%H%M%S<span class="k">)</span>.sql.gz.gpg
+
+<span class="c1"># Store the encrypted backup offsite</span>
+<span class="c1"># Never store the GPG passphrase next to the backup</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Test a restore — do this regularly, not just after something breaks</span>
+gpg<span class="w"> </span>--decrypt<span class="w"> </span>backup_20260101_120000.sql.gz.gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>gunzip<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>psql<span class="w"> </span>-U<span class="w"> </span>app_user<span class="w"> </span>-h<span class="w"> </span>localhost<span class="w"> </span>your_database_restore_test
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">The backup you have never tested is not a backup</p>
+<p>It is a file you are hoping will work when you need it most. Schedule a restore test. Put it in your calendar. Do it.</p>
+</div>
+<hr />
+<h2 id="database-in-cicd">Database in CI/CD</h2>
+<p>Your CI/CD pipeline runs tests. Those tests need a database. That database should never be your production database, and it should never use your production credentials.</p>
+<p>In 2020, a developer at a major fintech company accidentally ran a test suite against a production database. The test suite included teardown scripts that wiped tables between tests. Several thousand live user records were deleted before anyone noticed. The company recovered the data from backups, but the incident required regulatory disclosure.</p>
+<h3 id="test-databases">Test databases</h3>
+<p>Use a separate database for tests. Either spin one up fresh for each CI run, or use a persistent test database that gets seeded with known data before each run and cleaned up after.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># conftest.py — pytest setup for test database</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_db</span><span class="p">():</span>
+    <span class="c1"># Use a separate test database — never production</span>
+    <span class="n">db_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;TEST_DB_PATH&quot;</span><span class="p">,</span> <span class="s2">&quot;:memory:&quot;</span><span class="p">)</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">get_connection</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
+    <span class="n">setup_schema</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
+    <span class="n">seed_test_data</span><span class="p">(</span><span class="n">conn</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="n">conn</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="c1"># Clean up if file-based</span>
+    <span class="k">if</span> <span class="n">db_path</span> <span class="o">!=</span> <span class="s2">&quot;:memory:&quot;</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="environment-separation">Environment separation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># .env.test — never shares values with .env.production</span>
+<span class="nv">DB_HOST</span><span class="o">=</span>localhost
+<span class="nv">DB_NAME</span><span class="o">=</span>myapp_test
+<span class="nv">DB_USER</span><span class="o">=</span>test_user
+<span class="nv">DB_PASS</span><span class="o">=</span>test-only-password
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># .env.production — loaded only in production</span>
+<span class="nv">DB_HOST</span><span class="o">=</span>prod-db.internal
+<span class="nv">DB_NAME</span><span class="o">=</span>myapp_production
+<span class="nv">DB_USER</span><span class="o">=</span>prod_user
+<span class="nv">DB_PASS</span><span class="o">=</span>strong-unique-production-password
+</code></pre></div>
+<p>Your CI pipeline should load <code>.env.test</code>. Your production deployment should load <code>.env.production</code>. They should never overlap. If your CI pipeline ever touches production credentials, something is wrong with your setup.</p>
+<hr />
+<h2 id="migrations-doing-them-safely">Migrations — Doing Them Safely</h2>
+<p>A database migration is any change to the structure of your database — adding a table, adding a column, changing a data type, removing something that is no longer needed. Every significant application goes through dozens or hundreds of migrations over its lifetime.</p>
+<p>Done wrong, a migration can corrupt data, take down production, or create a state that is impossible to roll back from. Done right, it is invisible to users.</p>
+<h3 id="the-rules-for-safe-migrations">The rules for safe migrations</h3>
+<p><strong>Never modify production data directly.</strong> Write a migration script. Run the script. The script is version controlled. The manual edit is not.</p>
+<p><strong>Test migrations on a copy of production data first.</strong> Not on staging with fake data — on an actual copy of what production looks like. Schema changes that work fine on small datasets can take hours or lock tables on large ones.</p>
+<p><strong>Make migrations reversible.</strong> Every migration should have a corresponding rollback. If the migration introduces a bug, you need to be able to undo it without data loss.</p>
+<p><strong>Run migrations before deploying new code, not after.</strong> New code that depends on a new column should be deployed after that column exists, not before. The order matters.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python — simple migration runner</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+
+<span class="k">def</span> <span class="nf">run_migrations</span><span class="p">(</span><span class="n">conn</span><span class="p">):</span>
+    <span class="c1"># Create migrations table if it doesn&#39;t exist</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        CREATE TABLE IF NOT EXISTS schema_migrations (</span>
+<span class="s2">            version TEXT PRIMARY KEY,</span>
+<span class="s2">            applied_at TEXT DEFAULT (datetime(&#39;now&#39;, &#39;utc&#39;))</span>
+<span class="s2">        )</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Find all migration files</span>
+    <span class="n">migration_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;migrations/*.sql&quot;</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">filepath</span> <span class="ow">in</span> <span class="n">migration_files</span><span class="p">:</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.sql&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Skip already-applied migrations</span>
+        <span class="n">already_applied</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&quot;SELECT 1 FROM schema_migrations WHERE version = ?&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">version</span><span class="p">,)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">already_applied</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Apply the migration</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">sql</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="n">conn</span><span class="o">.</span><span class="n">executescript</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&quot;INSERT INTO schema_migrations (version) VALUES (?)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">version</span><span class="p">,)</span>
+        <span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Applied migration: </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="rolling-back-a-bad-migration">Rolling back a bad migration</h3>
+<p>If a migration causes problems in production, you need a rollback plan before you run it — not after you discover the problem.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- migrations/003_add_notification_type.sql</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tool_alerts</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">notification_type</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;Desktop&#39;</span><span class="p">;</span>
+
+<span class="c1">-- migrations/003_add_notification_type_rollback.sql</span>
+<span class="c1">-- SQLite does not support DROP COLUMN directly before version 3.35</span>
+<span class="c1">-- Create a new table without the column and copy data</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tool_alerts_backup</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">alert_type</span><span class="p">,</span><span class="w"> </span><span class="n">created_at</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">tool_alerts</span><span class="p">;</span>
+<span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tool_alerts</span><span class="p">;</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tool_alerts_backup</span><span class="w"> </span><span class="k">RENAME</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">tool_alerts</span><span class="p">;</span>
+</code></pre></div>
+<p>Write the rollback script at the same time as the migration. Commit both. If you ever need the rollback, you will not have time to write it from scratch.</p>
+<hr />
+<p><em><a href="https://instagram.com/sudochef">@sudochef</a> — Build like you're the target. Because you are.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © SudoChef — @sudochef — Build like you're the target. Because you are.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/commit-issues" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://instagram.com/sudochef" target="_blank" rel="noopener" title="instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2277 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A field guide for securing your GitHub presence, repositories, identity, and code.">
+      
+      
+        <meta name="author" content="SudoChef">
+      
+      
+        <link rel="canonical" href="https://commit-issues.github.io/secure-your-ship/hardening/rulesets/">
+      
+      
+        <link rel="prev" href="../settings/">
+      
+      
+        <link rel="next" href="../advanced-security/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Branch Protection - Secure Your Ship</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#branch-protection-rulesets" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Secure Your Ship" class="md-header__button md-logo" aria-label="Secure Your Ship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Secure Your Ship
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Branch Protection
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  The Mission
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../setup/account/" class="md-tabs__link">
+          
+  
+  
+  Setup
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../settings/" class="md-tabs__link">
+          
+  
+  
+  Hardening Your Repo
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../code/vibe-coding/" class="md-tabs__link">
+          
+  
+  
+  Writing Secure Code
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../threats/osint/" class="md-tabs__link">
+          
+  
+  
+  Threats & Awareness
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../maintenance/freshness/" class="md-tabs__link">
+          
+  
+  
+  Maintenance
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Secure Your Ship" class="md-nav__button md-logo" aria-label="Secure Your Ship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Secure Your Ship
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Mission
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Securing Your Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH Keys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/new-repo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starting a New Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting & Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardening Your Repo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardening Your Repo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch Protection
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch Protection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rulesets-vs-branch-protection-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rulesets vs Branch Protection Rules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-ruleset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating Your Ruleset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Rules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restrict-deletions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restrict Deletions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-force-pushes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block Force Pushes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#require-signed-commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Require Signed Commits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#direct-push-vs-pull-request-understanding-the-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Direct Push vs Pull Request — Understanding the Difference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-status-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Status Checks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-reviewers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Reviewers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#does-adding-a-ruleset-affect-existing-commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Does Adding a Ruleset Affect Existing Commits?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifying-your-ruleset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verifying Your Ruleset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-about-other-branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What About Other Branches?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coming-up-in-the-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coming Up in the Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-bigger-picture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Bigger Picture
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advanced-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git History Auditing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day One Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing Secure Code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Writing Secure Code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/vibe-coding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vibe Coding & AI Dev
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/credentials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credential Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/input-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependency Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/logging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging & Auditing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../code/cron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cron & Scheduled Tasks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threats & Awareness
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Threats & Awareness
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/osint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSINT & Identity Leakage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/ai-attacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI-Assisted Attacks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/forking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forking & Attribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/supply-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supply Chain Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/stolen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    When Your Project Gets Stolen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/visibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repo Visibility & Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintenance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maintenance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/freshness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Freshness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/backups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup & Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/email/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Email Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/debt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Debt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/cron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cron & Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependency Intelligence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../now-go-build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Now Go Build
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rulesets-vs-branch-protection-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rulesets vs Branch Protection Rules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-ruleset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating Your Ruleset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Rules
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Rules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#restrict-deletions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Restrict Deletions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#block-force-pushes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block Force Pushes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#require-signed-commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Require Signed Commits
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#direct-push-vs-pull-request-understanding-the-difference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Direct Push vs Pull Request — Understanding the Difference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-status-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Status Checks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-reviewers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Reviewers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#does-adding-a-ruleset-affect-existing-commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Does Adding a Ruleset Affect Existing Commits?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifying-your-ruleset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verifying Your Ruleset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-about-other-branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What About Other Branches?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coming-up-in-the-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coming Up in the Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-bigger-picture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Bigger Picture
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="branch-protection-rulesets">Branch Protection Rulesets</h1>
+<blockquote>
+<p>Main is where your project comes to life. Don't let it become a liability.</p>
+</blockquote>
+<hr />
+<div class="admonition abstract">
+<p class="admonition-title">TL;DR</p>
+<ul>
+<li>Create a ruleset targeting your default branch before you push any real code.</li>
+<li>Enable Restrict deletions — no one should be able to delete main.</li>
+<li>Enable Block force pushes — force pushing rewrites history and cannot be undone.</li>
+<li>Enable Require signed commits — every commit must be cryptographically verified.</li>
+<li>Set the bypass list to Repository admin only — and check it first every time.</li>
+<li>Enforcement status must be set to Active or the rules do nothing.</li>
+<li>For team projects — add Required reviewers and Required status checks.</li>
+<li>Rulesets only affect future pushes — adding one to an existing repo does not rewrite history.</li>
+</ul>
+<p>Already have a ruleset? Jump to <a href="#verifying-your-ruleset">Verifying Your Ruleset</a></p>
+</div>
+<hr />
+<p>Imagine you have been building something for months. The code is solid, the history is clean, you have merged dozens of commits carefully reviewed and tested. Then someone — or something — runs a single command.</p>
+<div class="highlight"><pre><span></span><code>git push origin main --force
+</code></pre></div>
+<p>In seconds, your entire commit history is gone. Replaced. Every carefully reviewed merge, every documented decision, every signed commit — overwritten by whatever was in the force push. If other people have forked your repo or cloned it, their copies still have the old history. Your main branch now tells a completely different story than every other copy of your project in existence. There is no undo button. Git does not have one for this.</p>
+<p>Or consider a different scenario. Your account credentials are compromised — a phishing attack, a stolen session token, a leaked personal access token. The attacker does not need to be subtle. They delete your main branch outright. No commits, no history, no recovery path unless you have a local copy or a fork somewhere that still has it.</p>
+<p>These are not hypothetical edge cases. They are documented incidents that have happened to real projects, real developers, and real teams. In some cases the damage was recoverable. In others it was not.</p>
+<p>Branch protection rulesets exist to make these scenarios impossible — or at minimum, require explicit human intervention to bypass. They are the guardrails that keep your main branch from being destroyed accidentally or maliciously, and they take less than five minutes to configure.</p>
+<hr />
+<h2 id="rulesets-vs-branch-protection-rules">Rulesets vs Branch Protection Rules</h2>
+<p>GitHub has two systems for protecting branches — the older Branch Protection Rules and the newer Rulesets. If you have used GitHub for a while you may have encountered both.</p>
+<p><strong><em>Use Rulesets.</em></strong> They are the current system, they offer more flexibility, they support bypass lists with granular control, and they are what GitHub is actively developing and maintaining. Branch Protection Rules still work but they are the legacy approach. Everything in this section uses Rulesets.</p>
+<div class="highlight"><pre><span></span><code>Settings → Branches → Rulesets → New branch ruleset
+</code></pre></div>
+<hr />
+<h2 id="creating-your-ruleset">Creating Your Ruleset</h2>
+<p>When you open the ruleset creation screen you will see several fields. Work through them in order.</p>
+<p><strong>Ruleset name</strong></p>
+<p>Give it a name that tells you exactly what it does at a glance. Something like <code>main-protection</code> works perfectly. You will thank yourself later when you are auditing your settings and can immediately identify what each ruleset covers without clicking into it.</p>
+<p><strong>Enforcement status</strong></p>
+<p>This is the field that catches people out more than any other. A ruleset with enforcement set to anything other than <strong><em>Active</em></strong> does nothing. It is configured but not enforced. GitHub offers an "Evaluate" mode for testing rules without enforcing them, and a "Disabled" state for rules you want to keep but temporarily turn off. For your main branch protection — set it to Active from the moment you create it and leave it there.</p>
+<div class="highlight"><pre><span></span><code>Enforcement status: Active
+</code></pre></div>
+<p><strong>Bypass list</strong></p>
+<p>This is one of the most important fields in the entire ruleset — and one of the most commonly misconfigured.</p>
+<p>The bypass list defines who is exempt from the rules you are about to set. If you leave it empty, the rules apply to everyone including yourself. That sounds ideal in theory, but in practice it means you cannot push directly to main even for legitimate maintenance tasks unless you go through a pull request. For a solo project where you are the only contributor, that creates unnecessary friction.</p>
+<p>The correct configuration for a personal or solo repo:</p>
+<div class="highlight"><pre><span></span><code>Bypass list: Repository admin
+</code></pre></div>
+<p>This means the rules apply to everyone — but you, as the repository admin, can bypass them when you explicitly need to. It is not a loophole. It is a deliberate escape hatch that requires conscious action rather than an accident waiting to happen.</p>
+<div class="admonition warning">
+<p class="admonition-title">Check the bypass list before anything else</p>
+<p>When you open a ruleset to create or edit it, check the bypass list <strong><em>first</em></strong> — before you look at any of the rules. This is easy to forget and the consequences of getting it wrong go in both directions. An empty bypass list locks you out of direct pushes. A bypass list that is too permissive undermines the rules you are trying to enforce. Repository admin only is the right balance for most personal projects.</p>
+</div>
+<p><strong>Target branches</strong></p>
+<p>This tells the ruleset which branches to apply to. Click "Add target" and select:</p>
+<div class="highlight"><pre><span></span><code>Include default branch
+</code></pre></div>
+<p>This targets whatever your default branch is — main, master, or anything else you have configured. Using "default branch" instead of hardcoding the name means the ruleset automatically follows if you ever rename the branch.</p>
+<hr />
+<h2 id="the-rules">The Rules</h2>
+<p>Now for the actual protections. Scroll down to the Rules section and enable these. Each one closes a specific attack or accident vector.</p>
+<hr />
+<h3 id="restrict-deletions">Restrict Deletions</h3>
+<div class="highlight"><pre><span></span><code>✅ Restrict deletions
+Only allow users with bypass permission to delete matching refs.
+</code></pre></div>
+<p>This prevents anyone — including collaborators — from deleting your main branch. Without this rule, anyone with write access to the repository can delete the branch entirely with a single command. With this rule, deleting main requires bypass permission — which means it requires you to do it deliberately, not accidentally.</p>
+<p>The scenario this protects against: a collaborator runs <code>git push origin --delete main</code> by mistake, or an attacker with compromised credentials deletes the branch as part of a destructive attack. Either way — without this rule, the branch is gone. With it, the push is rejected.</p>
+<hr />
+<h3 id="block-force-pushes">Block Force Pushes</h3>
+<div class="highlight"><pre><span></span><code>✅ Block force pushes
+Prevent users with push access from force pushing to matching refs.
+</code></pre></div>
+<p>A force push (<code>git push --force</code>) overwrites the remote branch history with whatever is in your local branch. It does not merge, it does not check for conflicts, it does not warn you. It replaces. Everything that was on the remote branch that is not in your local copy is gone.</p>
+<p>There are legitimate uses for force pushing — rebasing a feature branch before merging, cleaning up a messy history before it becomes part of main. But those use cases belong on feature branches, not on main. <strong><em>There is almost never a legitimate reason to force push to main.</em></strong></p>
+<p>Blocking force pushes on main means that even if you accidentally run the command, even if a compromised token tries to run it, even if a misconfigured CI/CD pipeline attempts it — the push is rejected. The history is preserved.</p>
+<div class="admonition tip">
+<p class="admonition-title">What if I genuinely need to rewrite main's history?</p>
+<p>It happens occasionally — removing a secret that was committed, fixing a fundamental structural problem in the history. The process is: use your bypass permission to temporarily allow the force push, make the change, verify the result, and then the protection immediately applies to all subsequent pushes again. The bypass is not permanent. It is a single deliberate action, not a persistent permission change.</p>
+</div>
+<hr />
+<h3 id="require-signed-commits">Require Signed Commits</h3>
+<div class="highlight"><pre><span></span><code>✅ Require signed commits
+Commits pushed to matching refs must have verified signatures.
+</code></pre></div>
+<p>We set up SSH commit signing in <a href="../../setup/ssh/#setting-up-ssh-commit-signing">SSH Keys →</a> and enabled Vigilant Mode in <a href="../../setup/account/#vigilant-mode">Securing Your GitHub Account →</a>. This rule is the enforcement layer that makes signing mandatory at the branch level, not just a personal preference.</p>
+<p>Without this rule, signed commits are a practice you follow voluntarily. Someone else pushing to the repo — a collaborator, or an attacker with stolen credentials — can push unsigned commits and they will be accepted. With this rule, every commit pushed to main must carry a verified cryptographic signature. No signature, no merge.</p>
+<p>This matters for two reasons. First, it makes impersonation detectable — a commit claiming to be from you but lacking your signature is immediately visible as something different. Second, it creates an auditable chain of custody for your main branch. Every commit in the history of main is provably linked to an authenticated identity.</p>
+<hr />
+<h2 id="direct-push-vs-pull-request-understanding-the-difference">Direct Push vs Pull Request — Understanding the Difference</h2>
+<p>This is something that trips up a lot of developers and it is worth understanding clearly before you configure it.</p>
+<p><strong><em>Direct push</em></strong> means pushing commits straight to main from your local machine — the workflow we have been using throughout this guide. You make changes locally, commit, and push. Simple, fast, and perfectly appropriate for solo projects where you are the only contributor and you have the other protections in place.</p>
+<p><strong><em>Pull request merge</em></strong> means all changes to main must go through a pull request first — even your own. You push to a feature branch, open a PR, review it, and merge it. This adds a review step and a paper trail for every change.</p>
+<p>For a solo personal project, direct push with signed commits and force push protection is secure and reasonable. The protections we already configured catch the dangerous mistakes. Adding a mandatory PR process for a project where you are reviewing your own PRs adds friction without meaningful security benefit.</p>
+<p>For a team project — the calculus changes entirely. When multiple people have push access, a mandatory PR process with required reviewers is not overhead, it is your primary defense against unreviewed code reaching main. One person's mistake gets caught by another person's eyes before it becomes everyone's problem.</p>
+<p><strong>To require pull requests before merging, add this rule to your ruleset:</strong></p>
+<div class="highlight"><pre><span></span><code>✅ Require a pull request before merging
+
+Under the expanded options:
+  Required approvals: 1 (minimum for teams)
+  Dismiss stale pull request approvals when new commits are pushed: ✅
+  Require review from code owners: ✅ (if you have a CODEOWNERS file)
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">If you enable required PRs on a solo project</p>
+<p>You will need to open a pull request for every change you make — including small fixes. Even as admin with bypass permission, bypassing this rule requires a conscious override. This is not wrong — some solo developers prefer it for the discipline and the paper trail. Just go in with eyes open about what it means for your daily workflow. If you find yourself bypassing it constantly, the rule is not serving you.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">The 'one small fix' habit</p>
+<p>One of the most common ways review discipline erodes on team projects is the "I'll just push this directly, it's just a one-line fix" pattern. It feels harmless. Over time it becomes the default. And then one day the "one-line fix" has a bug, nobody reviewed it, and it is on main. Required PRs eliminate that habit entirely — not by trusting people to do the right thing, but by making the wrong thing impossible.</p>
+</div>
+<hr />
+<h2 id="required-status-checks">Required Status Checks</h2>
+<p>Status checks are automated tests or validations that must pass before a pull request can be merged. If you have a CI/CD pipeline that runs your test suite — or any other automated check — you can require it to pass on every PR before anything reaches main.</p>
+<div class="highlight"><pre><span></span><code>✅ Require status checks to pass before merging
+  → Add the specific checks you want to require by name
+  → Require branches to be up to date before merging
+</code></pre></div>
+<p>This guide does not configure required status checks for this specific repo because it is a documentation site without a test suite. But for any project that has automated tests, linting, security scans, or other CI checks — <strong><em>requiring them to pass before merge is one of the most valuable protections you can add.</em></strong></p>
+<p>The pattern it enforces: broken code cannot reach main. Ever. Not even if someone is in a hurry, not even if the test failure "seems unrelated," not even if it is just one small fix. The check runs, it must pass, otherwise the merge is blocked.</p>
+<div class="admonition tip">
+<p class="admonition-title">What counts as a status check?</p>
+<p>Any GitHub Actions workflow step can be configured as a required status check. Your test suite, your linting pass, your security scan, your build verification — if it runs in Actions and produces a pass/fail result, it can be required. To add it, run the check once so GitHub knows it exists, then go to your ruleset and add it by the name GitHub assigned it.</p>
+</div>
+<hr />
+<h2 id="required-reviewers">Required Reviewers</h2>
+<p>For team projects, requiring a minimum number of reviewers before a PR can merge is a fundamental control. It means no single person — including the repo owner — can unilaterally push changes to main without another set of eyes.</p>
+<div class="highlight"><pre><span></span><code>✅ Require a pull request before merging
+  Required approvals: 1 minimum, 2 for sensitive projects
+  Dismiss stale reviews when new commits are pushed: ✅
+</code></pre></div>
+<p>The "dismiss stale reviews" setting is important and easy to overlook. Without it, a PR that receives approval and then gets additional commits pushed to it can still be merged on the strength of the original approval — even though the reviewer never saw the new commits. Enabling this setting means any new commit invalidates existing approvals and requires a fresh review.</p>
+<p>For projects with sensitive files — workflow configurations, deployment scripts, security-critical code — consider pairing required reviewers with a CODEOWNERS file. CODEOWNERS lets you specify that changes to particular files or directories must be reviewed by specific people, regardless of who else has approved the PR. We cover CODEOWNERS in <a href="../checklist/">Day One Checklist →</a>.</p>
+<hr />
+<h2 id="does-adding-a-ruleset-affect-existing-commits">Does Adding a Ruleset Affect Existing Commits?</h2>
+<p>No. <strong><em>A ruleset only affects future pushes.</em></strong> Adding branch protection to a repo that already has commits does not rewrite, alter, or affect any existing history in any way.</p>
+<p>What changes the moment you save the ruleset:</p>
+<div class="highlight"><pre><span></span><code>→ Future force pushes to main are rejected
+→ Future unsigned commits to main are rejected
+→ Future deletions of main are rejected
+→ Any PR merge rules you configured now apply to new PRs
+</code></pre></div>
+<p>What does not change:</p>
+<div class="highlight"><pre><span></span><code>→ Existing commits remain exactly as they are
+→ Existing history is untouched
+→ No files are modified
+→ No commits are altered
+</code></pre></div>
+<p>This means you can add a ruleset to an existing project at any point without any risk to what you have already built. The only thing that changes is what is allowed going forward.</p>
+<hr />
+<h2 id="verifying-your-ruleset">Verifying Your Ruleset</h2>
+<p>After saving, confirm the ruleset is active and configured correctly:</p>
+<div class="highlight"><pre><span></span><code>Settings → Branches → Rulesets
+</code></pre></div>
+<p>You should see your ruleset listed with a green Active indicator. Click into it and verify:</p>
+<div class="highlight"><pre><span></span><code>✅ Enforcement status: Active
+✅ Bypass list: Repository admin
+✅ Target: Default branch
+✅ Restrict deletions: enabled
+✅ Block force pushes: enabled
+✅ Require signed commits: enabled
+</code></pre></div>
+<p><strong>Test it from the terminal:</strong></p>
+<p>Try a force push and confirm it is rejected:</p>
+<div class="highlight"><pre><span></span><code>git push origin main --force
+</code></pre></div>
+<p>You should see:</p>
+<div class="highlight"><pre><span></span><code>remote: error: GH006: Protected branch update failed for refs/heads/main.
+remote: error: Cannot force-push to a protected branch.
+</code></pre></div>
+<p>That error message is the ruleset working exactly as intended.</p>
+<p><strong>Verify signed commits are required:</strong></p>
+<p>Temporarily disable signing and attempt a push:</p>
+<div class="highlight"><pre><span></span><code>git config commit.gpgsign false
+git commit --allow-empty -m &quot;test: unsigned commit&quot;
+git push origin main
+</code></pre></div>
+<p>You should see a rejection. Then immediately re-enable signing:</p>
+<div class="highlight"><pre><span></span><code>git config commit.gpgsign true
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Re-enable signing immediately after testing</p>
+<p>Do not leave <code>commit.gpgsign</code> set to false. The moment you confirm the ruleset rejects unsigned commits, turn signing back on. Every commit to main should be signed.</p>
+</div>
+<hr />
+<h2 id="what-about-other-branches">What About Other Branches?</h2>
+<p>The ruleset we configured targets your default branch — main. Feature branches, development branches, and other working branches are intentionally left unprotected by this ruleset.</p>
+<p>This is the right call. Force pushing on a feature branch is sometimes exactly what you need to do — cleaning up commits before a merge, rebasing on top of recent main changes. Requiring signed commits on every branch adds friction to everyday development without meaningful security benefit.</p>
+<p>The protection that matters is on the branch that matters — main. That is where your stable, released code lives. Everything else is working space.</p>
+<p>If you run a larger project with multiple long-lived branches — a release branch, a staging branch — consider creating additional rulesets for those. The same principles apply: restrict deletions, block force pushes, require signed commits. The configuration is identical, just targeted at different branches.</p>
+<hr />
+<h2 id="coming-up-in-the-checklist">Coming Up in the Checklist</h2>
+<p>Two files that work directly with your rulesets and deserve their own treatment:</p>
+<p><strong>CODEOWNERS</strong> — defines which people must review changes to specific files or directories. Pairs with required reviewers to ensure sensitive files like workflow configs always get reviewed by the right person.</p>
+<p><strong>SECURITY.md</strong> — the file GitHub looks for when someone wants to report a vulnerability privately. We configured private vulnerability reporting in <a href="../settings/">GitHub Settings →</a> — this is the companion file that tells reporters what to do and where to go.</p>
+<p>Both are covered in <a href="../checklist/">Day One Checklist →</a>.</p>
+<hr />
+<h2 id="the-bigger-picture">The Bigger Picture</h2>
+<p>Branch protection rulesets are one of the clearest examples of security and stability reinforcing each other. The rules that protect your main branch from a malicious actor are the same rules that protect it from a bad day and a careless command.</p>
+<p>When you have rulesets in place, you can push to your repo confidently knowing that the worst-case accidental command — the force push, the accidental deletion, the unsigned commit from a misconfigured machine — will be caught and rejected before it causes damage. That confidence is not complacency. It is exactly what a well-configured safety net is supposed to provide.</p>
+<p>Next: <a href="../advanced-security/">Advanced Security →</a></p>
+<hr />
+<p><em><a href="https://instagram.com/sudochef">@sudochef</a> — Build like you're the target. Because you are.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © SudoChef — @sudochef — Build like you're the target. Because you are.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/commit-issues" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://instagram.com/sudochef" target="_blank" rel="noopener" title="instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

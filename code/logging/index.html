@@ -1,0 +1,3119 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A field guide for securing your GitHub presence, repositories, identity, and code.">
+      
+      
+        <meta name="author" content="SudoChef">
+      
+      
+        <link rel="canonical" href="https://commit-issues.github.io/secure-your-ship/code/logging/">
+      
+      
+        <link rel="prev" href="../database/">
+      
+      
+        <link rel="next" href="../cron/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Logging & Auditing - Secure Your Ship</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#logging-auditing-accountability" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Secure Your Ship" class="md-header__button md-logo" aria-label="Secure Your Ship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Secure Your Ship
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Logging & Auditing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  The Mission
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../setup/account/" class="md-tabs__link">
+          
+  
+  
+  Setup
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../hardening/settings/" class="md-tabs__link">
+          
+  
+  
+  Hardening Your Repo
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../vibe-coding/" class="md-tabs__link">
+          
+  
+  
+  Writing Secure Code
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../threats/osint/" class="md-tabs__link">
+          
+  
+  
+  Threats & Awareness
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../maintenance/freshness/" class="md-tabs__link">
+          
+  
+  
+  Maintenance
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Secure Your Ship" class="md-nav__button md-logo" aria-label="Secure Your Ship" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Secure Your Ship
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The Mission
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Setup
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Securing Your Account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SSH Keys
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/new-repo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Starting a New Repository
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../setup/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting & Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardening Your Repo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardening Your Repo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/rulesets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Branch Protection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/advanced-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git History Auditing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardening/checklist/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Day One Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing Secure Code
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Writing Secure Code
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vibe-coding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vibe Coding & AI Dev
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../credentials/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Credential Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependency Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging & Auditing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logging & Auditing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-four-types-of-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Four Types of Logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-management-tools-you-do-not-have-to-build-everything-yourself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Management Tools — You Do Not Have to Build Everything Yourself
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-data-your-liability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your Data, Your Liability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-to-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to Log
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What to Log">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-and-authorization-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication and authorization events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-access-and-modification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data access and modification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#system-and-deployment-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System and deployment events
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-never-to-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Never to Log
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What Never to Log">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#masking-pii-you-do-need-to-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masking PII you do need to log
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structured-logging-format-that-can-be-searched" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Structured Logging — Format That Can Be Searched
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-levels-using-them-correctly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Levels — Using Them Correctly
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-compliance-and-the-right-to-be-forgotten" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy, Compliance, and the Right to Be Forgotten
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Privacy, Compliance, and the Right to Be Forgotten">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retention-periods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retention periods
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compliance-reference-know-which-rules-apply-to-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compliance Reference — Know Which Rules Apply to You
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-audit-trail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Audit Trail
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Audit Trail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#immutability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Immutability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-a-complete-audit-trail-looks-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a complete audit trail looks like
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-storage-rotation-and-tamper-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Storage, Rotation, and Tamper Evidence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Log Storage, Rotation, and Tamper Evidence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#centralized-log-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Centralized log aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-rotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log rotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alerting-on-log-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alerting on Log Events
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-repos-pull-requests-and-the-audit-trail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Repos, Pull Requests, and the Audit Trail
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public Repos, Pull Requests, and the Audit Trail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-pr-audit-trail-covers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the PR audit trail covers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#signed-commits-as-audit-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signed commits as audit evidence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-accepting-contributions-blindly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not accepting contributions blindly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ongoing-maintenance-logging-is-not-set-and-forget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ongoing Maintenance — Logging Is Not Set and Forget
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ongoing Maintenance — Logging Is Not Set and Forget">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automated-scans-vs-scheduled-reviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automated scans vs scheduled reviews
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-and-security-scanning-in-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency and security scanning in CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracking-changes-through-tickets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracking changes through tickets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-something-goes-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Something Goes Wrong
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="When Something Goes Wrong">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reconstructing-an-incident" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconstructing an incident
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preserving-logs-as-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preserving logs as evidence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chain-of-custody" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chain of custody
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cron & Scheduled Tasks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Threats & Awareness
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Threats & Awareness
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/osint/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OSINT & Identity Leakage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/ai-attacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI-Assisted Attacks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/forking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forking & Attribution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/supply-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supply Chain Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/stolen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    When Your Project Gets Stolen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../threats/visibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repo Visibility & Access
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maintenance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Maintenance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/freshness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Freshness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/backups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup & Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/email/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Email Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/debt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Security Debt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/cron/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cron & Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/dependencies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependency Intelligence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maintenance/notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Notifications
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../now-go-build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Now Go Build
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-four-types-of-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Four Types of Logs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-management-tools-you-do-not-have-to-build-everything-yourself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Management Tools — You Do Not Have to Build Everything Yourself
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-data-your-liability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your Data, Your Liability
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-to-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to Log
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What to Log">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-and-authorization-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication and authorization events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-access-and-modification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data access and modification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#system-and-deployment-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System and deployment events
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-never-to-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Never to Log
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What Never to Log">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#masking-pii-you-do-need-to-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masking PII you do need to log
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structured-logging-format-that-can-be-searched" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Structured Logging — Format That Can Be Searched
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-levels-using-them-correctly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Levels — Using Them Correctly
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#privacy-compliance-and-the-right-to-be-forgotten" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Privacy, Compliance, and the Right to Be Forgotten
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Privacy, Compliance, and the Right to Be Forgotten">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retention-periods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retention periods
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compliance-reference-know-which-rules-apply-to-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compliance Reference — Know Which Rules Apply to You
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-audit-trail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Audit Trail
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Audit Trail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#immutability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Immutability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-a-complete-audit-trail-looks-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What a complete audit trail looks like
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-storage-rotation-and-tamper-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log Storage, Rotation, and Tamper Evidence
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Log Storage, Rotation, and Tamper Evidence">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#centralized-log-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Centralized log aggregation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#log-rotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log rotation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alerting-on-log-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alerting on Log Events
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#public-repos-pull-requests-and-the-audit-trail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Public Repos, Pull Requests, and the Audit Trail
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Public Repos, Pull Requests, and the Audit Trail">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-the-pr-audit-trail-covers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the PR audit trail covers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#signed-commits-as-audit-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Signed commits as audit evidence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not-accepting-contributions-blindly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not accepting contributions blindly
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ongoing-maintenance-logging-is-not-set-and-forget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ongoing Maintenance — Logging Is Not Set and Forget
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ongoing Maintenance — Logging Is Not Set and Forget">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automated-scans-vs-scheduled-reviews" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automated scans vs scheduled reviews
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-and-security-scanning-in-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency and security scanning in CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tracking-changes-through-tickets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tracking changes through tickets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-something-goes-wrong" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Something Goes Wrong
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="When Something Goes Wrong">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reconstructing-an-incident" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reconstructing an incident
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preserving-logs-as-evidence" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preserving logs as evidence
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chain-of-custody" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chain of custody
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="logging-auditing-accountability">Logging, Auditing &amp; Accountability</h1>
+<p><em>Logs are your evidence. When something goes wrong, they are how you prove what happened, when, and from where.</em></p>
+<hr />
+<div class="admonition info">
+<p class="admonition-title">TL;DR</p>
+<ul>
+<li>Most applications either log too much — including sensitive data they should never store — or too little — nothing useful when something goes wrong.</li>
+<li>There are four distinct types of logs. They serve different purposes, have different audiences, and should be stored and retained differently.</li>
+<li>Never log passwords, full API keys, session tokens, or unmasked PII. Log the event. Not the secret.</li>
+<li>Audit logs are immutable. You do not edit them. You do not delete them. They are evidence.</li>
+<li>GDPR and CCPA give users the right to have their data deleted — but that does not mean deleting audit evidence. It means anonymizing PII while keeping the event record.</li>
+<li>In a public repo that accepts pull requests, your logging and audit system is your accountability layer for every change that has ever touched your codebase.</li>
+</ul>
+<p>Already logging structured events? Jump to <a href="#the-audit-trail">The Audit Trail →</a></p>
+</div>
+<hr />
+<p>Nobody sits down to build an app and thinks "I can't wait to set up logging." It is the least glamorous part of any project. No one brags about their log format at a hackathon. And yet — when an account gets compromised, when a user calls screaming that someone drained their balance — logs are the only thing standing between you and complete blindness. Every developer who has ever had to investigate an incident without them has the same story: they wished they had done it right from the start.</p>
+<p>Think about any crime show where investigators pull surveillance footage, phone records, and transaction history to reconstruct exactly what happened. Logs are that for your application. Every login attempt, every data access, every failed request — all of it leaves a trace. Without logs, an incident investigation is guesswork. With them, you can reconstruct exactly what an attacker did, when they got in, what they touched, and how to prove it. The difference between "we think we were breached" and "here is exactly what happened and here is the evidence" is logs.</p>
+<p>You saw in the <a href="../dependencies/">Dependency Security →</a> section how a trusted package in your own supply chain can become the attack vector. The network is the same problem at a different layer. Logs are what ties it all together — the record that tells you when something in that chain was exploited, how far it got, and what it touched.</p>
+<p>So before we get into what to log, what never to log, and how to structure it — you need to understand that logging is not one thing. Most developers treat it like it is, and that is where the problems start.</p>
+<hr />
+<h2 id="the-four-types-of-logs">The Four Types of Logs</h2>
+<p><strong>Operational logs</strong> — What the infrastructure is doing. CPU usage, memory, response times, uptime, deployment events, server restarts. This is what your ops team or monitoring dashboard watches. It contains no user data and does not need to.</p>
+<p><strong>Application logs</strong> — What your code is doing, or not doing. Errors, warnings, exceptions, slow queries, failed jobs. This is what developers look at when something breaks. It should contain enough context to reproduce and fix the problem — but not passwords, tokens, or user PII.</p>
+<p><strong>Audit logs</strong> — Logs are receipts. Your application is constantly making decisions — who logged in, who did what, what they accessed, what changed, what failed. Without logs, those decisions happen and disappear. Immutable. Append-only. This is the compliance and security record. It answers the question "what happened on this account and when?" They are your receipts. And just like in real life, never show up without them.</p>
+<p><strong>User-facing activity logs</strong> — This is what the user themselves can see about their own account. Login history, active sessions, recent actions, connected devices. This builds trust and gives users the ability to spot unauthorized access themselves. Think Google's "last account activity" or the session list in a password manager.</p>
+<p>Each of these serves a different audience, lives in a different place, and plays by different rules around retention and access. Treat them as separate systems — because they are.</p>
+<hr />
+<h2 id="log-management-tools-you-do-not-have-to-build-everything-yourself">Log Management Tools — You Do Not Have to Build Everything Yourself</h2>
+<p>Once you understand the four types of logs, the next question is where they actually live and who manages them. You have two options: build and manage your own logging infrastructure, or use a tool that handles collection, storage, search, and alerting for you.</p>
+<p>If you do not want to set it up yourself, these are the most common tools:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Best For</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wazuh</strong></td>
+<td>Open-source SIEM, security event monitoring, compliance</td>
+<td>Free, self-hosted</td>
+</tr>
+<tr>
+<td><strong>Windows Event Viewer</strong></td>
+<td>Windows system and application logs, built-in</td>
+<td>Free, built-in</td>
+</tr>
+<tr>
+<td><strong>Loki + Grafana</strong></td>
+<td>Lightweight log aggregation, works well with Prometheus</td>
+<td>Free, self-hosted</td>
+</tr>
+<tr>
+<td><strong>Datadog</strong></td>
+<td>Full observability, alerting, dashboards, easy setup</td>
+<td>Paid, expensive at scale</td>
+</tr>
+<tr>
+<td><strong>Papertrail</strong></td>
+<td>Simple remote log aggregation, fast search</td>
+<td>Free tier, paid above limits</td>
+</tr>
+<tr>
+<td><strong>Splunk</strong></td>
+<td>Enterprise-grade log analysis, compliance reporting</td>
+<td>Expensive, enterprise focused</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">The cost of convenience</p>
+<p>Using a third-party log management tool means your logs — which may contain sensitive event data — are leaving your infrastructure and going to an outside vendor. That is a supply chain dependency, a data sharing arrangement, and an increased cost. Vet the vendor. Understand their data retention and access policies. Make sure their security posture matches yours.</p>
+</div>
+<hr />
+<h2 id="your-data-your-liability">Your Data, Your Liability</h2>
+<p>Not every application has the same logging obligations. The more sensitive the data your application handles, the stricter your requirements — for what you log, how long you keep it, how you protect it, and what rights users have over it. Here are some real examples of apps people actually build — and what their data actually looks like.</p>
+<p><strong>A savings calculator</strong> that takes numbers and returns math stores nothing about you. No account, no PII, no logging obligations beyond basic operational monitoring.</p>
+<p><strong>A personal trainer app</strong> collects your name, birthday, email, weight, and workout history. Birthday and weight start crossing into health-adjacent data. If you add injury tracking or medication reminders, you are in health data territory. Log the events only — account creation, data changes, login activity — never the PII or actual workout data itself.</p>
+<p><strong>A therapy or mental health app</strong> — anything like BetterMe, Calm, or a journaling app with mood tracking — is handling some of the most sensitive data that exists. Session notes, mental health assessments, mood history. In the US, depending on how the service is structured, HIPAA may apply. In the EU, this is special category data under GDPR with the highest level of protection. Your audit log needs to track every access to this data. Your application logs must never contain it.</p>
+<p><strong>A bill reader or financial aggregator</strong> like Rocket Money reads your bank statements, spending history, and credit data — and to verify who you are, it collects significant PII: full name, address, SSN, card numbers, and more. This triggers FCRA obligations in the US. Log who accessed financial summaries and when. Never log raw account numbers, card numbers, SSNs, addresses, or any verification data in application logs. Mask everything.</p>
+<p><strong>A crypto wallet app</strong> falls under the same financial rules — and then some. Add passport scans, selfies, transaction history, and wallet addresses to the mix. KYC (Know Your Customer) and AML (Anti-Money Laundering) regulations require you to keep certain records for years. A breach here means funds can be stolen directly. Your audit log is also a regulatory requirement, not just a best practice.</p>
+<div class="admonition warning">
+<p class="admonition-title">When in doubt, log the event — not the data</p>
+<p>When retaining records you need the time, date, device, and browser of when a user accessed their account or signed in — not the monthly statement they accessed. Log the action. Never the content.</p>
+</div>
+<hr />
+<h2 id="what-to-log">What to Log</h2>
+<p>Every security-relevant action in your application should leave a trace. Not the data itself — the event.</p>
+<h3 id="authentication-and-authorization-events">Authentication and authorization events</h3>
+<p>Every action that touches access and identity:</p>
+<div class="highlight"><pre><span></span><code><span class="n">AUTH_EVENTS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;login_success&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;login_failure&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;logout&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;password_change&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;password_reset_requested&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mfa_enabled&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mfa_disabled&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mfa_challenge_failed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;session_expired&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;account_locked&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;permission_granted&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;permission_revoked&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+<h3 id="data-access-and-modification">Data access and modification</h3>
+<p>Who touched sensitive data and what changed — never what was in it:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">log_data_access</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">resource_type</span><span class="p">,</span> <span class="n">resource_id</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">):</span>
+    <span class="n">log_event</span><span class="p">({</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;event_type&quot;</span><span class="p">:</span> <span class="s2">&quot;data_access&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span>
+        <span class="s2">&quot;resource_type&quot;</span><span class="p">:</span> <span class="n">resource_type</span><span class="p">,</span>
+        <span class="s2">&quot;resource_id&quot;</span><span class="p">:</span> <span class="n">resource_id</span><span class="p">,</span>
+        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span>
+        <span class="s2">&quot;ip_address&quot;</span><span class="p">:</span> <span class="n">ip_address</span><span class="p">,</span>
+        <span class="s2">&quot;outcome&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span>
+    <span class="p">})</span>
+</code></pre></div>
+<h3 id="security-events">Security events</h3>
+<p>Anything that looks like an attack, a misconfiguration, or an anomaly:</p>
+<div class="highlight"><pre><span></span><code><span class="n">SECURITY_EVENTS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;rate_limit_exceeded&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;invalid_token_presented&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sql_injection_attempt_blocked&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;csrf_validation_failed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;suspicious_pattern_detected&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;file_upload_rejected&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dependency_vulnerability_detected&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+<h3 id="system-and-deployment-events">System and deployment events</h3>
+<p>Every change to the running state of your application:</p>
+<div class="highlight"><pre><span></span><code><span class="n">SYSTEM_EVENTS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;application_startup&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;application_shutdown&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;config_change&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;deployment&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;database_migration_run&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;backup_completed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;backup_failed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dependency_updated&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+<hr />
+<h2 id="what-never-to-log">What Never to Log</h2>
+<p>Logs get breached too. They get subpoenaed. They get misconfigured and exposed. Whatever you log, assume someone else may gain access to it.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Never log any of these — not in application logs, not in audit logs, not anywhere</span>
+
+<span class="n">NEVER_LOG</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;passwords (plaintext or hashed)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;full API keys or tokens&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;full credit card numbers&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CVV codes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;social security numbers&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;passport numbers&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;full session tokens&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;OAuth access tokens&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;private keys&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;encryption keys&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;full bank account numbers&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;medical record contents&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;therapy session notes&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;unmasked email addresses beyond what is necessary&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;precise geolocation beyond what is necessary&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Log that a password was changed. Not what the old or new password was. Log that a payment was processed. Not the card number. Log that a user accessed their health record. Not what was in it.</p>
+<h3 id="masking-pii-you-do-need-to-log">Masking PII you do need to log</h3>
+<p>Sometimes you need just enough identifying information to be useful — to know which user, which card, which device — without storing the full value. Masking lets you keep the event meaningful without keeping the data dangerous.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">mask_email</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+    <span class="c1"># jane.doe@example.com → j*****e@example.com</span>
+    <span class="n">local</span><span class="p">,</span> <span class="n">domain</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">)</span>
+    <span class="n">masked</span> <span class="o">=</span> <span class="n">local</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">local</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">local</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">masked</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">def</span> <span class="nf">mask_card</span><span class="p">(</span><span class="n">card_number</span><span class="p">):</span>
+    <span class="c1"># Only keep last 4 digits</span>
+    <span class="k">return</span> <span class="s2">&quot;*&quot;</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">+</span> <span class="n">card_number</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span>
+
+<span class="k">def</span> <span class="nf">mask_ip</span><span class="p">(</span><span class="n">ip_address</span><span class="p">):</span>
+    <span class="c1"># Mask last octet for privacy</span>
+    <span class="n">parts</span> <span class="o">=</span> <span class="n">ip_address</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;.xxx&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="structured-logging-format-that-can-be-searched">Structured Logging — Format That Can Be Searched</h2>
+<p>Now that you know what to log and what to mask, the next question is how to format it — because getting the right data into your logs is only half the work. The other half is making sure it is in a format you can actually search, filter, and alert when you need it.</p>
+<p>Every log entry should contain:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">def</span> <span class="nf">log_event</span><span class="p">(</span><span class="n">event_data</span><span class="p">):</span>
+    <span class="n">entry</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">event_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;level&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;event_type&quot;</span><span class="p">:</span> <span class="n">event_data</span><span class="p">[</span><span class="s2">&quot;event_type&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">event_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;ip_address&quot;</span><span class="p">:</span> <span class="n">event_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ip_address&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;request_id&quot;</span><span class="p">:</span> <span class="n">event_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;request_id&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;outcome&quot;</span><span class="p">:</span> <span class="n">event_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;outcome&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="n">event_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">}</span>
+    <span class="n">entry</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">entry</span><span class="p">))</span>
+</code></pre></div>
+<p>A login failure looks like this:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-01T14:23:11Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;login_failure&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;usr_8f3k2p&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ip_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;203.0.113.42&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;request_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;req_9d2a1c&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;outcome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;failure&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;reason&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;invalid_password&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;attempt_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>No name. No email. No password. Just enough to know what happened, who it happened to by internal ID, and where it came from.</p>
+<hr />
+<h2 id="log-levels-using-them-correctly">Log Levels — Using Them Correctly</h2>
+<p>Not everything that goes into a log carries the same weight. Log levels are how you tell the difference between noise and a five alarm fire.</p>
+<div class="highlight"><pre><span></span><code>DEBUG     Development only. Never in production. Contains verbose internal state
+          that is useful for tracing logic but exposes too much in a live system.
+
+INFO      Normal operations. Startup, successful logins, completed jobs,
+          routine system events.
+
+WARNING   Something unexpected happened but the application kept running.
+          Failed login attempts, rate limit approaches, deprecated API usage.
+
+ERROR     Something failed. A request could not be completed, a job failed,
+          an integration returned an unexpected error.
+
+CRITICAL  The application cannot continue. Database unreachable, required
+          config missing, unrecoverable state.
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">DEBUG in production is a security risk</p>
+<p>DEBUG logs frequently contain internal state, query results, stack traces with file paths, and variable values that give an attacker a detailed map of your application. Set your log level to INFO in production. Always. A few other things to lock down:</p>
+<ul>
+<li><strong>Enforce log level via environment</strong> — set <code>LOG_LEVEL=INFO</code> in your production environment so it cannot be accidentally shipped as DEBUG</li>
+<li><strong>Strip debug endpoints</strong> — <code>/debug</code>, <code>/trace</code>, <code>/env</code> routes exposed by frameworks in development should never exist in production</li>
+<li><strong>Never return stack traces to users</strong> — log the full error server-side, return a generic message to the user</li>
+</ul>
+</div>
+<hr />
+<h2 id="privacy-compliance-and-the-right-to-be-forgotten">Privacy, Compliance, and the Right to Be Forgotten</h2>
+<p>There is already an epidemic of stolen and leaked data — but the uncomfortable truth is that most user data is not stolen. It is sold. Companies collect it, monetize it, and move on. Beyond being low integrity and putting your users at risk, depending on what you collect and where you operate, it can also be illegal — and the lawsuits and fines are real.</p>
+<p>GDPR in Europe and CCPA in California are just two examples of regulations that give users explicit rights over their data — including the right to have it deleted. But they are far from the only ones. We cover the full breakdown in the compliance reference below.</p>
+<p>This creates a tension worth understanding: audit logs must be immutable, but PII must be erasable. The solution is not deletion — it is anonymization.</p>
+<p>When a user deletes their account, the audit trail does not disappear — the identifying information does.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">anonymize_user_logs</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Replace PII with anonymized placeholder.</span>
+<span class="sd">    Keeps the event record intact for audit purposes.</span>
+<span class="sd">    Removes the ability to identify the individual.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        UPDATE audit_log</span>
+<span class="s2">        SET</span>
+<span class="s2">            user_id = &#39;deleted_user_&#39; || id,</span>
+<span class="s2">            ip_address = &#39;anonymized&#39;,</span>
+<span class="s2">            metadata = json_patch(metadata, &#39;{&quot;email&quot;: &quot;anonymized&quot;, &quot;name&quot;: &quot;anonymized&quot;}&#39;)</span>
+<span class="s2">        WHERE user_id = ?</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</code></pre></div>
+<p>The audit event still exists. The sequence of actions is still there. The individual is no longer identifiable. You have met your erasure obligation without destroying evidence.</p>
+<h3 id="retention-periods">Retention periods</h3>
+<p>How long you keep logs is not just an operational decision — it is a legal one.</p>
+<div class="highlight"><pre><span></span><code>Operational logs:    7–30 days. No PII. Short retention is fine.
+Application logs:    30–90 days. Minimal PII. Long enough to debug recent issues.
+Audit logs:          1–7 years depending on industry and jurisdiction.
+                     Financial services: often 7 years minimum.
+                     Healthcare: HIPAA requires 6 years.
+                     General: GDPR says no longer than necessary.
+User activity logs:  As long as the account exists, then anonymized on deletion.
+</code></pre></div>
+<hr />
+<h2 id="compliance-reference-know-which-rules-apply-to-you">Compliance Reference — Know Which Rules Apply to You</h2>
+<p>You do not need to be a lawyer to build compliant software. You do need to know which regulations apply to what you are building so you are not accidentally breaking laws you did not know existed.</p>
+<table>
+<thead>
+<tr>
+<th>Regulation</th>
+<th>Who It Applies To</th>
+<th>What It Covers</th>
+<th>Key Retention Requirement</th>
+<th>Penalty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GDPR</strong></td>
+<td>Any app with EU users</td>
+<td>All personal data, right to erasure, data minimization</td>
+<td>No longer than necessary</td>
+<td>Up to €20M or 4% of global revenue</td>
+</tr>
+<tr>
+<td><strong>CCPA</strong></td>
+<td>Apps serving California residents with 100K+ users or $25M+ revenue</td>
+<td>Personal data, right to deletion, opt-out of sale</td>
+<td>12 months minimum</td>
+<td>Up to $7,500 per intentional violation</td>
+</tr>
+<tr>
+<td><strong>HIPAA</strong></td>
+<td>Health apps, medical records, anything handling PHI</td>
+<td>Protected health information</td>
+<td>6 years</td>
+<td>Up to $1.9M per violation category per year</td>
+</tr>
+<tr>
+<td><strong>FCRA</strong></td>
+<td>Apps accessing credit reports, financial history</td>
+<td>Consumer financial data</td>
+<td>7 years for most records</td>
+<td>Up to $1,000 per violation + damages</td>
+</tr>
+<tr>
+<td><strong>PCI-DSS</strong></td>
+<td>Any app processing card payments</td>
+<td>Cardholder data, transaction records</td>
+<td>1 year online, 3 years archived</td>
+<td>Fines + loss of ability to process cards</td>
+</tr>
+<tr>
+<td><strong>COPPA</strong></td>
+<td>Apps with users under 13</td>
+<td>Children's personal data</td>
+<td>No longer than necessary</td>
+<td>Up to $51,744 per violation</td>
+</tr>
+<tr>
+<td><strong>SOX</strong></td>
+<td>Publicly traded companies</td>
+<td>Financial records and audit trails</td>
+<td>7 years</td>
+<td>Criminal charges, up to 20 years imprisonment</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">This is not legal advice</p>
+<p>Regulations change, thresholds vary, and your specific situation may be more complex than a table can capture. If you are building something that handles health, financial, or children's data — consult a lawyer.</p>
+</div>
+<hr />
+<h2 id="the-audit-trail">The Audit Trail</h2>
+<p>The audit trail is what saves you or buries you. When a regulator comes knocking, when a user disputes a transaction, when a lawyer asks what happened on a specific account on a specific date — this is the record that either answers the question or doesn't.</p>
+<h3 id="immutability">Immutability</h3>
+<p>Audit logs must be append-only. Insert only. No updates. No deletes. If your application user has UPDATE or DELETE permission on the audit log table, revoke it.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- PostgreSQL — revoke modification rights on audit table</span>
+<span class="k">REVOKE</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">audit_log</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">app_user</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">audit_log</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">app_user</span><span class="p">;</span>
+</code></pre></div>
+<p>For higher-security requirements, write audit logs to a separate system that your application cannot modify at all — a separate database, a write-once log aggregation service, or an append-only S3 bucket with object lock enabled.</p>
+<h3 id="what-a-complete-audit-trail-looks-like">What a complete audit trail looks like</h3>
+<div class="highlight"><pre><span></span><code>2026-04-01 09:14:22  user_8f3k  LOGIN          ip: 203.0.113.42   success
+2026-04-01 09:15:01  user_8f3k  VIEW_RECORD    resource: financial_summary  success
+2026-04-01 09:15:44  user_8f3k  UPDATE_PROFILE field: email   success
+2026-04-01 09:22:11  user_8f3k  LOGOUT         success
+2026-04-01 11:33:05  user_8f3k  LOGIN          ip: 198.51.100.7   success
+2026-04-01 11:33:09  user_8f3k  EXPORT_DATA    format: csv        success
+2026-04-01 11:33:12  user_8f3k  LOGOUT         success
+</code></pre></div>
+<p>Two logins from two different IP addresses, eleven minutes apart, with a data export in between. That pattern should trigger an alert. The audit trail made it visible.</p>
+<hr />
+<h2 id="log-storage-rotation-and-tamper-evidence">Log Storage, Rotation, and Tamper Evidence</h2>
+<p>Building the right logs is step one. Making sure they survive — and stay out of the wrong hands — is step two.</p>
+<h3 id="centralized-log-aggregation">Centralized log aggregation</h3>
+<p>Whether you are using one of the tools covered above or a simple remote syslog configuration, the goal is the same — your logs need to exist somewhere an attacker cannot reach even if they own your server.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Python — structured logging with remote handler</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">logging.handlers</span>
+
+<span class="k">def</span> <span class="nf">setup_logging</span><span class="p">():</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;app&quot;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+    <span class="n">local_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+    <span class="n">remote_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">SysLogHandler</span><span class="p">(</span>
+        <span class="n">address</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;logs.yourloghost.com&quot;</span><span class="p">,</span> <span class="mi">514</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">local_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+    <span class="n">remote_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">local_handler</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">remote_handler</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">logger</span>
+</code></pre></div>
+<h3 id="log-rotation">Log rotation</h3>
+<p>Logs that are never rotated will eventually fill your disk and take down your application just as effectively as any attack.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/logrotate.d/myapp</span>
+/var/log/myapp/*.log<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span>daily
+<span class="w">    </span>rotate<span class="w"> </span><span class="m">30</span>
+<span class="w">    </span>compress
+<span class="w">    </span>delaycompress
+<span class="w">    </span>missingok
+<span class="w">    </span>notifempty
+<span class="w">    </span>create<span class="w"> </span><span class="m">640</span><span class="w"> </span>appuser<span class="w"> </span>appgroup
+<span class="o">}</span>
+</code></pre></div>
+<hr />
+<h2 id="alerting-on-log-events">Alerting on Log Events</h2>
+<p>Rotation keeps your logs manageable. Alerting is what makes them actionable — because a log nobody reads until after the incident is just an expensive paper trail.</p>
+<div class="highlight"><pre><span></span><code><span class="n">IMMEDIATE_ALERTS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;login_failure&quot;</span><span class="p">,</span>          <span class="c1"># more than 5 in 10 minutes from same IP</span>
+    <span class="s2">&quot;account_locked&quot;</span><span class="p">,</span>         <span class="c1"># always</span>
+    <span class="s2">&quot;mfa_disabled&quot;</span><span class="p">,</span>           <span class="c1"># always — potential account takeover</span>
+    <span class="s2">&quot;permission_granted&quot;</span><span class="p">,</span>     <span class="c1"># always — privilege escalation</span>
+    <span class="s2">&quot;backup_failed&quot;</span><span class="p">,</span>          <span class="c1"># always</span>
+    <span class="s2">&quot;dependency_vulnerability_detected&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;suspicious_pattern_detected&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;database_migration_run&quot;</span><span class="p">,</span> <span class="c1"># in production — should never be a surprise</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Connect your alerting to your notification system. The CVE Security Intelligence Monitor, an open-source security tool I built at <code>commit-issues/cve-security-monitor</code>, demonstrates this pattern — security events detected by the monitor feed directly into desktop and email notifications so nothing requires manual review to surface.</p>
+<hr />
+<h2 id="public-repos-pull-requests-and-the-audit-trail">Public Repos, Pull Requests, and the Audit Trail</h2>
+<p>Everything we have covered so far audits what your application does at runtime — who logged in, what they accessed, what changed. But if your repo is public and accepts pull requests, there is a layer above that which needs the same scrutiny: who is changing the code that determines what your application does, how it behaves, and what it is allowed to access in the first place.</p>
+<h3 id="what-the-pr-audit-trail-covers">What the PR audit trail covers</h3>
+<p>Every merge to your main branch should be as traceable as every login to your application.</p>
+<div class="highlight"><pre><span></span><code>Who proposed the change        — GitHub username, linked to a real identity
+What the change contained      — diff, files modified, code added
+Whether it was reviewed        — at least one approval from a trusted reviewer
+Whether it passed checks       — CI green, security scans passed, no new vulnerabilities
+Whether the commit was signed  — GPG or SSH signature verifying the author
+When it was merged             — timestamp, by whom
+</code></pre></div>
+<h3 id="signed-commits-as-audit-evidence">Signed commits as audit evidence</h3>
+<p>As covered in the <a href="../../hardening/settings/">GitHub Settings →</a> section, requiring signed commits means every commit in your history is cryptographically tied to a verified identity. A signed commit log is an audit trail. An unsigned one is a list of claims anyone could have made.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verify the signature on a commit</span>
+git<span class="w"> </span>verify-commit<span class="w"> </span>&lt;commit-hash&gt;
+
+<span class="c1"># See signatures in the log</span>
+git<span class="w"> </span>log<span class="w"> </span>--show-signature
+</code></pre></div>
+<h3 id="not-accepting-contributions-blindly">Not accepting contributions blindly</h3>
+<p>A public repo that merges PRs without review, without CI checks, and without signed commits is a repo that an attacker can contribute malicious code to — and has. The XZ Utils attack, covered in <a href="../dependencies/">Dependency Security →</a>, used exactly this vector: build trust over time, then submit a malicious change that gets merged without sufficient scrutiny.</p>
+<p>Your branch protection rules, required reviews, and CI checks are not overhead. They are your audit controls for the codebase itself. Every PR that merges without a review is a gap in your audit trail.</p>
+<hr />
+<h2 id="ongoing-maintenance-logging-is-not-set-and-forget">Ongoing Maintenance — Logging Is Not Set and Forget</h2>
+<p>Your logging system needs the same ongoing attention as your dependencies and your security posture.</p>
+<h3 id="automated-scans-vs-scheduled-reviews">Automated scans vs scheduled reviews</h3>
+<p><strong>Automated scans</strong> run on every commit and PR via CI — catching vulnerabilities, exposed secrets, and dependency issues without any manual effort. That is the CI workflow already covered above.</p>
+<p><strong>Scheduled log reviews</strong> are manual — you sit down, look at patterns, and catch what automation missed. Schedule it. Put it in your calendar.</p>
+<h3 id="dependency-and-security-scanning-in-ci">Dependency and security scanning in CI</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/workflows/security.yml</span>
+<span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Security checks</span>
+
+<span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">push</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">pull_request</span><span class="p p-Indicator">]</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">audit</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">permissions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dependency audit</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip-audit --requirement requirements.txt</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Check for secrets in code</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">pip3 install detect-secrets</span>
+<span class="w">          </span><span class="no">detect-secrets scan --baseline .secrets.baseline</span>
+
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run tests</span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pytest --tb=short</span>
+</code></pre></div>
+<h3 id="tracking-changes-through-tickets">Tracking changes through tickets</h3>
+<p>Every security-relevant change — a dependency update, a permission change, a new data field being collected — should have a corresponding ticket. The ticket is the paper trail that connects the audit log entry ("dependency updated: requests 2.28.0 → 2.31.0") to the decision that caused it ("ticket #142: update requests to patch CVE-2023-32681").</p>
+<p>Without tickets, your audit log tells you what happened. Tickets tell you why.</p>
+<hr />
+<h2 id="when-something-goes-wrong">When Something Goes Wrong</h2>
+<p>Logs are most valuable when you need them most — after an incident. Here is how to use them.</p>
+<h3 id="reconstructing-an-incident">Reconstructing an incident</h3>
+<p>Start from what you know — a time, an IP, a user ID, an anomalous event — and work outward:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">investigate_ip</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        SELECT timestamp, event_type, user_id, action, outcome, metadata</span>
+<span class="s2">        FROM audit_log</span>
+<span class="s2">        WHERE ip_address = ?</span>
+<span class="s2">        AND timestamp BETWEEN ? AND ?</span>
+<span class="s2">        ORDER BY timestamp ASC</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">ip_address</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">))</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">investigate_account</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        SELECT timestamp, event_type, ip_address, action, outcome</span>
+<span class="s2">        FROM audit_log</span>
+<span class="s2">        WHERE user_id = ?</span>
+<span class="s2">        AND timestamp BETWEEN ? AND ?</span>
+<span class="s2">        ORDER BY timestamp ASC</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">start_time</span><span class="p">,</span> <span class="n">end_time</span><span class="p">))</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="preserving-logs-as-evidence">Preserving logs as evidence</h3>
+<p>If you suspect a breach, stop writing to the affected log files immediately and preserve a copy before anything else changes. Hash the files to establish that they have not been modified:</p>
+<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>/var/log/myapp/audit.log<span class="w"> </span>/secure/evidence/audit_<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d_%H%M%S<span class="k">)</span>.log
+sha256sum<span class="w"> </span>/secure/evidence/audit_*.log<span class="w"> </span>&gt;<span class="w"> </span>/secure/evidence/checksums.txt
+</code></pre></div>
+<h3 id="chain-of-custody">Chain of custody</h3>
+<p>Think of every true crime case thrown out because evidence was mishandled — not because the suspect was innocent, but because the chain of custody was broken. The Golden State Killer case used DNA evidence preserved with documented chain of custody, which is exactly why it was admissible decades later. In almost every high-profile cybercrime prosecution, the defense attacks the evidence handling before the evidence itself. Document who touches your logs, when, and why — from the moment you identify the incident. That documentation is what makes the evidence hold up.</p>
+<hr />
+<p><em><a href="https://instagram.com/sudochef">@sudochef</a> — Build like you're the target. Because you are.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      © SudoChef — @sudochef — Build like you're the target. Because you are.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/commit-issues" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://instagram.com/sudochef" target="_blank" rel="noopener" title="instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M224.3 141a115 115 0 1 0-.6 230 115 115 0 1 0 .6-230m-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1-.6-149.2m93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1-53.6 0m129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
