@@ -45,11 +45,10 @@ hide:
       <path d="M181 308 Q199 302 217 308 Q235 314 253 308 Q271 302 289 308 Q303 312 313 308" fill="none" stroke="#9b5de5" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
       <path d="M185 318 Q202 313 220 318 Q238 323 256 318 Q274 313 292 318" fill="none" stroke="#7c3aed" stroke-width="1" stroke-linecap="round" opacity="0.35"/>
       <text x="20" y="338" font-family="Georgia,serif" font-size="11" fill="white" font-style="italic" letter-spacing="1.2" opacity="0.5">A Full Security Engineering Field Guide</text>
-      <text x="20" y="295" font-family="Georgia,serif" font-size="11" fill="white" font-style="italic" letter-spacing="1.2" opacity="0.5">A Full Security Engineering Field Guide</text>
     </svg>
   </div>
 
-  <div class="hero-sidebar">
+  <div class="hero-sidebar" style="flex: 1; border-left: 2px solid rgba(124,58,237,0.4); padding-left: 40px;">
     <p class="hero-quote">"The guide I needed when I started — and couldn't find. Built from real knowledge, written for real people, open to the world."</p>
     <p class="hero-attribution">— SudoChef</p>
     <div class="hero-ctas">
@@ -202,10 +201,10 @@ fetch('https://api.github.com/repos/commit-issues/secure-your-repo')
   gap: 48px;
   padding: 56px 0 48px;
 }
-.hero-logo { flex: 1.2; display: flex; justify-content: center; max-width: 560px; }
+.hero-logo { flex: 1; display: flex; justify-content: center; max-width: 560px; }
 .main-logo { width: 100%; max-width: 560px; }
 .hero-sidebar {
-  flex: 0.8;
+  flex: 1;
   border-left: 2px solid rgba(124,58,237,0.4);
   padding-left: 40px;
 }
