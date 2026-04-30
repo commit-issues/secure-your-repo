@@ -39,3 +39,4 @@
 .md-typeset code {
   font-size: 0.6rem;
 }
+.md-content__inner > h1:first-child { display: none; }
