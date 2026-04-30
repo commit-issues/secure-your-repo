@@ -40,3 +40,4 @@
   font-size: 0.6rem;
 }
 .md-content__inner > h1:first-child { display: none; }
+.md-typeset h1 { display: none; }
