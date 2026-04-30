@@ -201,7 +201,7 @@ fetch('https://api.github.com/repos/commit-issues/secure-your-repo')
   gap: 48px;
   padding: 56px 0 48px;
 }
-.hero-logo { flex: 1.2; display: flex; justify-content: center; }
+.hero-logo { flex: 1.2; display: flex; justify-content: center; max-width: 440px; }
 .main-logo { width: 100%; max-width: 440px; }
 .hero-sidebar {
   flex: 0.8;
