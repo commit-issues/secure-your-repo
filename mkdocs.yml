@@ -53,6 +53,7 @@ nav:
     - Day One Checklist: hardening/checklist.md
   - Writing Secure Code:
     - Vibe Coding & AI Dev: code/vibe-coding.md
+    - Cron & Scheduled Tasks: code/cron.md
     - Credential Management: code/credentials.md
     - Input Validation: code/input-validation.md
     - Dependency Security: code/dependencies.md
