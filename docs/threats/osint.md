@@ -30,7 +30,7 @@ That command dumps every unique commit email from the history. Anyone can run it
 
 **Your machine name.** If you've ever pasted terminal output into a README, an issue, a PR comment, or a commit message — and that output contained your machine hostname — you've leaked it. Hostnames are frequently real names, location hints, or organization identifiers.
 
-**File paths.** Screenshots, error logs, and copy-pasted stack traces often include full local file paths like `/Users/yourname/projects/...`. That's your real name and confirms the type of OS system you're using. All from one pasted error message. This in the hands of the wrong person can do a lot of damage — they can find vulnerabilities and exploits specific to your OS, and combine that with any other software details you've leaked to build a targeted attack profile against you.
+**File paths.** Screenshots, error logs, and copy-pasted stack traces often include full local file paths like `/Users/yourusername/projects/...`. That's your real name and confirms the type of OS system you're using. All from one pasted error message. This in the hands of the wrong person can do a lot of damage — they can find vulnerabilities and exploits specific to your OS, and combine that with any other software details you've leaked to build a targeted attack profile against you.
 
 **Linked accounts.** Your GitHub profile bio, README, and pinned repos may link directly to your Twitter/X, LinkedIn, personal site, or email. Each one of those is another surface.
 
@@ -176,14 +176,14 @@ git log --format="%ae" | sort -u
 git log --format="%an" | sort -u
 
 # Hardcoded usernames, machine names, or device names in file content
-git log -p | grep -i "Users/yourname\|MacBook\|your-machine-name"
+git log -p | grep -i "Users/yourusername\|MacBook\|your-machine-name"
 ```
 
 Also check for hardcoded values inside the actual files — real names in comments, device hostnames in config examples, old usernames in documentation, personal paths that slipped through:
 
 ```bash
 # Search current files for anything personally identifying
-grep -r "yourname\|yourmachine\|your@email.com" . --include="*.py" --include="*.md" --include="*.yml"
+grep -r "yourusername\|yourmachine\|your@email.com" . --include="*.py" --include="*.md" --include="*.yml"
 ```
 
 Know everything you're dealing with before you start rewriting.
@@ -226,7 +226,7 @@ To rewrite a name:
 
 ```bash
 git filter-repo --name-callback '
-    return name.replace(b"Your Real Name", b"sudochef")
+    return name.replace(b"Your Real Name", b"yourhandle")
 '
 ```
 

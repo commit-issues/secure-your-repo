@@ -480,7 +480,7 @@ When it was merged             — timestamp, by whom
 
 ### Signed commits as audit evidence
 
-As covered in the [GitHub Settings →](../setup/github-settings.md) section, requiring signed commits means every commit in your history is cryptographically tied to a verified identity. A signed commit log is an audit trail. An unsigned one is a list of claims anyone could have made.
+As covered in the [GitHub Settings →](../hardening/settings.md) section, requiring signed commits means every commit in your history is cryptographically tied to a verified identity. A signed commit log is an audit trail. An unsigned one is a list of claims anyone could have made.
 
 ```bash
 # Verify the signature on a commit

@@ -68,7 +68,7 @@ This shows every commit hash, email, and author name in the repo. Run it and rea
 
 **File paths in deleted files**
 
-If a file ever existed at a path like `/Users/yourname/projects/...` and was committed — that path is in the history even if the file was deleted. File paths can reveal your real username, your machine name, your directory structure, and sometimes your employer or project names.
+If a file ever existed at a path like `/Users/yourusername/projects/...` and was committed — that path is in the history even if the file was deleted. File paths can reveal your real username, your machine name, your directory structure, and sometimes your employer or project names.
 
 **Secrets in file contents**
 
@@ -365,7 +365,7 @@ EMAILS AND IDENTITIES
 
 □ git log --format="%an" | sort | uniq  
   → No real names
-  → No old handles (if-then-sudo or similar)
+  → No old handles
   → No machine names
 
 □ git log --all -p | grep -i "/Users/\|/home/\|C:\\Users\\"

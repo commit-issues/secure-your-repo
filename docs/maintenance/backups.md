@@ -49,7 +49,7 @@ A bare clone is a complete copy of your repository — all history, all branches
 === "macOS / Linux / Kali"
     ```bash
     # Create a bare clone backup
-    git clone --bare git@github-commitissues:commit-issues/your-repo.git ~/backups/your-repo-backup.git
+    git clone --bare git@github-youralias:yourusername/your-repo.git ~/backups/your-repo-backup.git
 
     # To update an existing bare clone
     cd ~/backups/your-repo-backup.git
@@ -59,7 +59,7 @@ A bare clone is a complete copy of your repository — all history, all branches
 === "Windows (WSL2)"
     ```bash
     # Same commands inside WSL2
-    git clone --bare git@github-commitissues:commit-issues/your-repo.git ~/backups/your-repo-backup.git
+    git clone --bare git@github-youralias:yourusername/your-repo.git ~/backups/your-repo-backup.git
 
     cd ~/backups/your-repo-backup.git
     git fetch --all
@@ -118,7 +118,7 @@ Manual backups don't get done. Automate them.
             cd "$BACKUP_DIR/$REPO.git"
             git fetch --all
         else
-            git clone --bare git@github-commitissues:commit-issues/$REPO.git "$BACKUP_DIR/$REPO.git"
+            git clone --bare git@github-youralias:yourusername/$REPO.git "$BACKUP_DIR/$REPO.git"
         fi
     done
     EOF
@@ -159,7 +159,7 @@ If your GitHub repo is gone or corrupted and you have a bare clone:
 ```bash
 # Push your bare clone back to a new GitHub repo
 cd ~/backups/your-repo-backup.git
-git push --mirror git@github-commitissues:commit-issues/your-repo.git
+git push --mirror git@github-youralias:yourusername/your-repo.git
 ```
 
 This restores all branches, all tags, and all history.
