@@ -302,7 +302,7 @@ fetch('https://api.github.com/repos/commit-issues/secure-your-repo')
 .section-label.gold { color: #c9a84c; }
 .section-label.purple { color: #9b5de5; }
 
-.story-section p { font-size: 1.05rem; line-height: 1.9; opacity: 0.85; margin: 0 0 1.2rem; }
+.story-section p { font-size: 0.9rem; line-height: 1.9; opacity: 0.85; margin: 0 0 1.2rem; }
 .story-final { color: #9b5de5 !important; opacity: 1 !important; }
 
 /* AUDIENCE */
