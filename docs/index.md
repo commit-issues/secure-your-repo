@@ -55,7 +55,7 @@ hide:
     <p class="hero-attribution">— SudoChef</p>
     <div class="hero-ctas">
       <a href="setup/account/" class="cta-primary">Start Reading →</a>
-      <a href="https://github.com/commit-issues/secure-your-repo" class="cta-secondary">Download the Guide</a>
+      <a href="https://github.com/commit-issues/secure-your-ship" class="cta-secondary">Download the Guide</a>
     </div>
   </div>
 </div>
@@ -66,7 +66,7 @@ hide:
   <span class="byline-divider">|</span>
   <span class="byline-gh">GH: commit-issues</span>
   <span class="byline-divider">|</span>
-  <a href="https://github.com/commit-issues/secure-your-repo" target="_blank" class="star-badge">
+  <a href="https://github.com/commit-issues/secure-your-ship" target="_blank" class="star-badge">
     <span class="star-icon">★</span>
     <span class="star-text">Star on GitHub</span>
     <span class="star-count" id="gh-star-count">—</span>
@@ -74,7 +74,7 @@ hide:
 </div>
 
 <script>
-fetch('https://api.github.com/repos/commit-issues/secure-your-repo')
+fetch('https://api.github.com/repos/commit-issues/secure-your-ship')
   .then(r => r.json())
   .then(d => {
     const el = document.getElementById('gh-star-count');
@@ -191,7 +191,7 @@ fetch('https://api.github.com/repos/commit-issues/secure-your-repo')
   <p class="footer-title">Ready to actually secure your shi<span class="footer-p">p</span>?</p>
   <div class="footer-btns">
     <a href="setup/account/" class="cta-primary">Begin with Setup →</a>
-    <a href="https://github.com/commit-issues/secure-your-repo" class="cta-secondary">Download the Guide</a>
+    <a href="https://github.com/commit-issues/secure-your-ship" class="cta-secondary">Download the Guide</a>
   </div>
 </div>
 

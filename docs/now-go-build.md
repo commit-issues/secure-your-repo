@@ -37,13 +37,13 @@ Tools built with the same standards this guide teaches.
 Star the repo. Share it with someone building their first project or their fiftieth.
 
 <!-- GitHub star button -->
-<a class="github-button" href="https://github.com/commit-issues/secure-your-repo" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star commit-issues/secure-your-repo on GitHub">Star</a>
+<a class="github-button" href="https://github.com/commit-issues/secure-your-ship" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star commit-issues/secure-your-ship on GitHub">Star</a>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 <div class="share-btns">
-  <a href="https://twitter.com/intent/tweet?text=Just%20went%20through%20Secure%20Your%20Ship%20—%20a%20free%20security%20field%20guide%20for%20everyone%20who%20builds.&url=https://commit-issues.github.io/secure-your-repo/" target="_blank" class="share-btn twitter">𝕏 Share on X</a>
-  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://commit-issues.github.io/secure-your-repo/" target="_blank" class="share-btn linkedin">in Share on LinkedIn</a>
-  <button onclick="navigator.clipboard.writeText('https://commit-issues.github.io/secure-your-repo/now-go-build/').then(() => { this.textContent = '✓ Copied!'; setTimeout(() => { this.textContent = '🔗 Copy Link'; }, 2000); })" class="share-btn copy">🔗 Copy Link</button>
+  <a href="https://twitter.com/intent/tweet?text=Just%20went%20through%20Secure%20Your%20Ship%20—%20a%20free%20security%20field%20guide%20for%20everyone%20who%20builds.&url=https://commit-issues.github.io/secure-your-ship/" target="_blank" class="share-btn twitter">𝕏 Share on X</a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://commit-issues.github.io/secure-your-ship/" target="_blank" class="share-btn linkedin">in Share on LinkedIn</a>
+  <button onclick="navigator.clipboard.writeText('https://commit-issues.github.io/secure-your-ship/now-go-build/').then(() => { this.textContent = '✓ Copied!'; setTimeout(() => { this.textContent = '🔗 Copy Link'; }, 2000); })" class="share-btn copy">🔗 Copy Link</button>
 </div>
 
 ---
