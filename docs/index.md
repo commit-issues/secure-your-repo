@@ -9,7 +9,7 @@ hide:
 
 <div class="hero-section">
   <div class="hero-logo">
-    <svg viewBox="0 0 480 350" xmlns="http://www.w3.org/2000/svg" class="main-logo">
+    <svg viewBox="0 0 480 310" xmlns="http://www.w3.org/2000/svg" class="main-logo">
       <defs>
         <linearGradient id="ms1" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:#1e3a6e"/>
@@ -202,8 +202,8 @@ fetch('https://api.github.com/repos/commit-issues/secure-your-repo')
   gap: 48px;
   padding: 56px 0 48px;
 }
-.hero-logo { flex: 1.2; display: flex; justify-content: center; max-width: 440px; }
-.main-logo { width: 100%; max-width: 440px; }
+.hero-logo { flex: 1.2; display: flex; justify-content: center; max-width: 560px; }
+.main-logo { width: 100%; max-width: 560px; }
 .hero-sidebar {
   flex: 0.8;
   border-left: 2px solid rgba(124,58,237,0.4);
